@@ -1,6 +1,6 @@
 {
   "name": "@cobos/themes",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Per-brand themes for Cobos UI, generated from @cobos/tokens createTheme.",
   "author": "Ernesto Cobos <ernesto@cobos.io>",
   "license": "MIT",

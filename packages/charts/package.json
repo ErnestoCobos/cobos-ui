@@ -1,6 +1,6 @@
 {
   "name": "@cobos/charts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Cobos UI — dependency-free, theme-aware SVG charts for React.",
   "author": "Ernesto Cobos <ernesto@cobos.io>",
   "license": "MIT",

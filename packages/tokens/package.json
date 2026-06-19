@@ -1,6 +1,6 @@
 {
   "name": "@cobos/tokens",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Design tokens for Cobos UI — CSS variables and JSON.",
   "author": "Ernesto Cobos <ernesto@cobos.io>",
   "license": "MIT",

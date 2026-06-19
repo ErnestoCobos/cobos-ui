@@ -1,6 +1,6 @@
 {
   "name": "@cobos/mcp",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Model Context Protocol server that exposes the Cobos UI design system to AI agents.",
   "author": "Ernesto Cobos <ernesto@cobos.io>",
   "license": "MIT",
