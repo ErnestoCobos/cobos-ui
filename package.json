@@ -19,6 +19,7 @@
     "ci:build": "pnpm -F @cobos/tokens build && pnpm -F @cobos/themes build && pnpm -F @cobos/react build && pnpm build:registry && pnpm -F @cobos/mcp build",
     "build:tokens": "pnpm -F @cobos/tokens build",
     "build:registry": "node scripts/build-registry.mjs",
+    "build:ds-cards": "node scripts/build-ds-cards.mjs",
     "dev": "pnpm -F docs dev",
     "dev:docs": "pnpm -F docs dev",
     "typecheck": "pnpm -r typecheck",
