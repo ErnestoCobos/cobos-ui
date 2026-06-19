@@ -1,0 +1,40 @@
+.ec-statistic {
+  --ec-statistic-title-font-size: var(--ec-font-size-base);
+  --ec-statistic-title-color: var(--ec-text-color-regular);
+  --ec-statistic-content-font-size: 24px;
+  --ec-statistic-content-color: var(--ec-text-color-primary);
+
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.ec-statistic__head {
+  margin-bottom: 4px;
+  font-size: var(--ec-statistic-title-font-size);
+  font-weight: var(--ec-font-weight-primary);
+  line-height: 20px;
+  color: var(--ec-statistic-title-color);
+}
+
+.ec-statistic__content {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--ec-statistic-content-font-size);
+  color: var(--ec-statistic-content-color);
+}
+
+.ec-statistic__prefix {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 4px;
+}
+
+.ec-statistic__suffix {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.ec-statistic__number {
+  font-weight: var(--ec-font-weight-primary);
+}

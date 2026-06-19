@@ -1,0 +1,201 @@
+/*
+ * The shared `.ec-overlay` rules live in dialog.css. The Drawer reuses that
+ * fixed full-screen container and adds its own mask + edge-pinned panel.
+ */
+
+.ec-drawer__mask {
+  background-color: var(--ec-drawer-overlay-color, rgba(0, 0, 0, 0.5));
+  animation: ec-drawer-fade-in var(--ec-transition-duration) var(--ec-transition-function-fast-bezier);
+}
+
+/*
+ * Wrapper pins the panel to the relevant edge of the viewport. Each direction
+ * lays the panel out against one side using flexbox alignment.
+ */
+.ec-drawer__wrapper {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+.ec-drawer__wrapper.ec-drawer--rtl {
+  justify-content: flex-end;
+}
+.ec-drawer__wrapper.ec-drawer--ltr {
+  justify-content: flex-start;
+}
+.ec-drawer__wrapper.ec-drawer--ttb {
+  align-items: flex-start;
+}
+.ec-drawer__wrapper.ec-drawer--btt {
+  align-items: flex-end;
+}
+
+/*
+ * Non-modal wrapper: no masking layer is rendered, so the full-screen wrapper
+ * must let pointer events fall through to the page behind it. Only the drawer
+ * panel itself re-enables pointer events.
+ */
+.ec-drawer__wrapper.is-non-modal {
+  pointer-events: none;
+}
+.ec-drawer__wrapper.is-non-modal .ec-drawer {
+  pointer-events: auto;
+}
+
+.ec-drawer {
+  --ec-drawer-size: 30%;
+  --ec-drawer-padding-primary: 16px;
+  --ec-drawer-bg-color: var(--ec-bg-color);
+  --ec-drawer-title-font-size: var(--ec-font-size-large);
+  --ec-drawer-content-font-size: var(--ec-font-size-base);
+  --ec-drawer-font-line-height: 1.5;
+  --ec-drawer-box-shadow: var(--ec-box-shadow);
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: var(--ec-drawer-padding-primary);
+  background-color: var(--ec-drawer-bg-color);
+  box-shadow: var(--ec-drawer-box-shadow);
+  color: var(--ec-text-color-regular);
+  font-family: var(--ec-font-family);
+  font-size: var(--ec-drawer-content-font-size);
+  outline: none;
+}
+
+/* Horizontal drawers (rtl / ltr) fill the height; `size` controls the width. */
+.ec-drawer--rtl,
+.ec-drawer--ltr {
+  width: var(--ec-drawer-size);
+  max-width: 100%;
+  height: 100%;
+}
+
+/* Vertical drawers (ttb / btt) fill the width; `size` controls the height. */
+.ec-drawer--ttb,
+.ec-drawer--btt {
+  width: 100%;
+  height: var(--ec-drawer-size);
+  max-height: 100%;
+}
+
+/* ---- Slide-in transitions, one per edge ---- */
+.ec-drawer--rtl {
+  animation: ec-drawer-slide-rtl var(--ec-transition-duration) var(--ec-transition-function-fast-bezier);
+}
+.ec-drawer--ltr {
+  animation: ec-drawer-slide-ltr var(--ec-transition-duration) var(--ec-transition-function-fast-bezier);
+}
+.ec-drawer--ttb {
+  animation: ec-drawer-slide-ttb var(--ec-transition-duration) var(--ec-transition-function-fast-bezier);
+}
+.ec-drawer--btt {
+  animation: ec-drawer-slide-btt var(--ec-transition-duration) var(--ec-transition-function-fast-bezier);
+}
+
+.ec-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: var(--ec-drawer-padding-primary);
+}
+
+.ec-drawer__title {
+  flex: 1;
+  margin: 0;
+  font-size: var(--ec-drawer-title-font-size);
+  line-height: var(--ec-drawer-font-line-height);
+  color: var(--ec-text-color-primary);
+}
+
+.ec-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--ec-text-color-secondary);
+  transition: var(--ec-transition-color);
+}
+
+.ec-drawer__close:hover {
+  color: var(--ec-color-primary);
+}
+
+.ec-drawer__close:focus-visible {
+  outline: 2px solid var(--ec-color-primary-light-5);
+  outline-offset: 1px;
+}
+
+.ec-drawer__body {
+  flex: 1;
+  overflow: auto;
+  font-size: var(--ec-drawer-content-font-size);
+  line-height: var(--ec-drawer-font-line-height);
+  color: var(--ec-text-color-regular);
+}
+
+.ec-drawer__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: var(--ec-drawer-padding-primary);
+  box-sizing: border-box;
+}
+
+@keyframes ec-drawer-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ec-drawer-slide-rtl {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes ec-drawer-slide-ltr {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes ec-drawer-slide-ttb {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes ec-drawer-slide-btt {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

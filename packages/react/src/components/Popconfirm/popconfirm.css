@@ -1,0 +1,40 @@
+.ec-popconfirm {
+  --ec-popconfirm-padding: 12px;
+  --ec-popconfirm-font-size: var(--ec-font-size-base);
+
+  box-sizing: border-box;
+  min-width: 150px;
+  max-width: 320px;
+  padding: var(--ec-popconfirm-padding);
+  font-size: var(--ec-popconfirm-font-size);
+  line-height: 1.5;
+  color: var(--ec-text-color-regular);
+}
+
+.ec-popconfirm__main {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.ec-popconfirm__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--ec-color-warning);
+}
+
+.ec-popconfirm__title {
+  box-sizing: border-box;
+  color: var(--ec-text-color-primary);
+}
+
+.ec-popconfirm__action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}

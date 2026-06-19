@@ -1,0 +1,33 @@
+{
+  "key": "badge",
+  "name": "Badge",
+  "category": "Data",
+  "status": "stable",
+  "wave": 2,
+  "description": "Count or dot badge on an element.",
+  "export": "Badge",
+  "elementPlus": "https://element-plus.org/en-US/component/badge",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Badge } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Badge/Badge.tsx",
+      "type": "source",
+      "content": "import {\n  type CSSProperties,\n  forwardRef,\n  type HTMLAttributes,\n  type ReactNode,\n} from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport type BadgeType = 'primary' | 'success' | 'warning' | 'danger' | 'info';\n\nexport interface BadgeProps extends HTMLAttributes<HTMLDivElement> {\n  /** Displayed value. */\n  value?: number | string;\n  /** Maximum value; numbers above it render as `{max}+`. */\n  max?: number;\n  /** Render a small dot instead of the value. */\n  isDot?: boolean;\n  /** Hide the badge. */\n  hidden?: boolean;\n  /** Color variant. */\n  type?: BadgeType;\n  /** Show the badge even when the value is zero. */\n  showZero?: boolean;\n  /** Custom background color, overriding the type color. */\n  color?: string;\n  /** Offset of the badge, as `[x, y]` in pixels. */\n  offset?: [number, number];\n  children?: ReactNode;\n}\n\nexport const Badge = forwardRef<HTMLDivElement, BadgeProps>(function Badge(props, ref) {\n  const {\n    value,\n    max = 99,\n    isDot = false,\n    hidden = false,\n    type = 'danger',\n    showZero = false,\n    color,\n    offset,\n    className,\n    children,\n    ...rest\n  } = props;\n\n  const ns = useNamespace('badge');\n\n  // Numbers over `max` collapse to \"{max}+\".\n  const content: ReactNode = (() => {\n    if (isDot) return undefined;\n    if (typeof value === 'number' && typeof max === 'number' && value > max) {\n      return `${max}+`;\n    }\n    return value;\n  })();\n\n  // Hide when explicitly hidden, or when the value is an empty/zero number and\n  // showZero is not set (dots always show unless hidden).\n  const isZero = value === 0 || value === '0';\n  const isEmpty = value === undefined || value === null || value === '';\n  const shouldShow = !hidden && !isEmpty && (isDot || showZero || !isZero);\n\n  const badgeStyle: CSSProperties | undefined = (() => {\n    const style: CSSProperties = {};\n    if (color) style.backgroundColor = color;\n    if (offset) {\n      const [x, y] = offset;\n      style.transform = `translateY(-50%) translateX(100%) translate(${x}px, ${y}px)`;\n    }\n    return Object.keys(style).length ? style : undefined;\n  })();\n\n  const badge = shouldShow ? (\n    <sup\n      className={cls(\n        ns.e('content'),\n        ns.em('content', type),\n        ns.is('fixed', children != null),\n        ns.is('dot', isDot),\n      )}\n      style={badgeStyle}\n    >\n      {content}\n    </sup>\n  ) : null;\n\n  // Without children the badge renders inline (no positioned wrapper needed).\n  if (children == null) {\n    return (\n      <div ref={ref} className={cls(ns.b(), className)} {...rest}>\n        {badge}\n      </div>\n    );\n  }\n\n  return (\n    <div ref={ref} className={cls(ns.b(), className)} {...rest}>\n      {children}\n      {badge}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Badge/badge.css",
+      "type": "css",
+      "content": ".ec-badge {\n  --ec-badge-bg-color: var(--ec-color-danger);\n  --ec-badge-text-color: var(--ec-color-danger-contrast);\n  --ec-badge-size: 18px;\n  --ec-badge-padding: 6px;\n  --ec-badge-font-size: 12px;\n  --ec-badge-radius: 10px;\n  --ec-badge-dot-size: 8px;\n  --ec-badge-dot-radius: 50%;\n\n  position: relative;\n  display: inline-block;\n  box-sizing: border-box;\n  font-family: inherit;\n  line-height: 1;\n  vertical-align: middle;\n}\n\n.ec-badge__content {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  height: var(--ec-badge-size);\n  padding: 0 var(--ec-badge-padding);\n  font-size: var(--ec-badge-font-size);\n  font-weight: var(--ec-font-weight-primary);\n  line-height: 1;\n  white-space: nowrap;\n  text-align: center;\n  color: var(--ec-badge-text-color);\n  background-color: var(--ec-badge-bg-color);\n  border: 1px solid var(--ec-color-white);\n  border-radius: var(--ec-badge-radius);\n}\n\n/* When attached to children, the badge floats over the top-right corner. */\n.ec-badge__content.is-fixed {\n  position: absolute;\n  top: 0;\n  right: 0;\n  transform: translateY(-50%) translateX(100%);\n  transform-origin: 100% 0%;\n  z-index: 1;\n}\n\n.ec-badge__content.is-dot {\n  width: var(--ec-badge-dot-size);\n  height: var(--ec-badge-dot-size);\n  padding: 0;\n  border-radius: var(--ec-badge-dot-radius);\n}\n\n.ec-badge__content.is-fixed.is-dot {\n  right: 5px;\n}\n\n/* ---- Color variants: contrast text on the per-type fill ---- */\n.ec-badge__content--primary {\n  --ec-badge-bg-color: var(--ec-color-primary);\n  --ec-badge-text-color: var(--ec-color-primary-contrast);\n}\n.ec-badge__content--success {\n  --ec-badge-bg-color: var(--ec-color-success);\n  --ec-badge-text-color: var(--ec-color-success-contrast);\n}\n.ec-badge__content--warning {\n  --ec-badge-bg-color: var(--ec-color-warning);\n  --ec-badge-text-color: var(--ec-color-warning-contrast);\n}\n.ec-badge__content--danger {\n  --ec-badge-bg-color: var(--ec-color-danger);\n  --ec-badge-text-color: var(--ec-color-danger-contrast);\n}\n.ec-badge__content--info {\n  --ec-badge-bg-color: var(--ec-color-info);\n  --ec-badge-text-color: var(--ec-color-info-contrast);\n}\n"
+    },
+    {
+      "path": "@cobos/react/components/Badge/index.ts",
+      "type": "source",
+      "content": "export * from './Badge';\n"
+    }
+  ]
+}

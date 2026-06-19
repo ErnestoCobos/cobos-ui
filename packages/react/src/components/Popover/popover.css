@@ -1,0 +1,27 @@
+.ec-popover {
+  --ec-popover-padding: 12px;
+  --ec-popover-font-size: var(--ec-font-size-base);
+  --ec-popover-title-font-size: var(--ec-font-size-base);
+
+  box-sizing: border-box;
+  min-width: 150px;
+  max-width: 320px;
+  padding: var(--ec-popover-padding);
+  font-size: var(--ec-popover-font-size);
+  line-height: 1.5;
+  color: var(--ec-text-color-regular);
+}
+
+.ec-popover__title {
+  box-sizing: border-box;
+  margin: 0 0 8px;
+  font-size: var(--ec-popover-title-font-size);
+  font-weight: var(--ec-font-weight-primary);
+  color: var(--ec-text-color-primary);
+  line-height: 1.4;
+}
+
+.ec-popover__content {
+  box-sizing: border-box;
+  color: var(--ec-text-color-regular);
+}

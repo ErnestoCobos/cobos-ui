@@ -1,0 +1,78 @@
+.ec-badge {
+  --ec-badge-bg-color: var(--ec-color-danger);
+  --ec-badge-text-color: var(--ec-color-danger-contrast);
+  --ec-badge-size: 18px;
+  --ec-badge-padding: 6px;
+  --ec-badge-font-size: 12px;
+  --ec-badge-radius: 10px;
+  --ec-badge-dot-size: 8px;
+  --ec-badge-dot-radius: 50%;
+
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  font-family: inherit;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.ec-badge__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: var(--ec-badge-size);
+  padding: 0 var(--ec-badge-padding);
+  font-size: var(--ec-badge-font-size);
+  font-weight: var(--ec-font-weight-primary);
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--ec-badge-text-color);
+  background-color: var(--ec-badge-bg-color);
+  border: 1px solid var(--ec-color-white);
+  border-radius: var(--ec-badge-radius);
+}
+
+/* When attached to children, the badge floats over the top-right corner. */
+.ec-badge__content.is-fixed {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(-50%) translateX(100%);
+  transform-origin: 100% 0%;
+  z-index: 1;
+}
+
+.ec-badge__content.is-dot {
+  width: var(--ec-badge-dot-size);
+  height: var(--ec-badge-dot-size);
+  padding: 0;
+  border-radius: var(--ec-badge-dot-radius);
+}
+
+.ec-badge__content.is-fixed.is-dot {
+  right: 5px;
+}
+
+/* ---- Color variants: contrast text on the per-type fill ---- */
+.ec-badge__content--primary {
+  --ec-badge-bg-color: var(--ec-color-primary);
+  --ec-badge-text-color: var(--ec-color-primary-contrast);
+}
+.ec-badge__content--success {
+  --ec-badge-bg-color: var(--ec-color-success);
+  --ec-badge-text-color: var(--ec-color-success-contrast);
+}
+.ec-badge__content--warning {
+  --ec-badge-bg-color: var(--ec-color-warning);
+  --ec-badge-text-color: var(--ec-color-warning-contrast);
+}
+.ec-badge__content--danger {
+  --ec-badge-bg-color: var(--ec-color-danger);
+  --ec-badge-text-color: var(--ec-color-danger-contrast);
+}
+.ec-badge__content--info {
+  --ec-badge-bg-color: var(--ec-color-info);
+  --ec-badge-text-color: var(--ec-color-info-contrast);
+}

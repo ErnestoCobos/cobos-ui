@@ -1,0 +1,33 @@
+.ec-tooltip {
+  --ec-tooltip-padding: 6px 11px;
+  --ec-tooltip-font-size: var(--ec-font-size-small);
+
+  box-sizing: border-box;
+  max-width: 280px;
+  padding: var(--ec-tooltip-padding);
+  font-size: var(--ec-tooltip-font-size);
+  line-height: 1.4;
+}
+
+.ec-tooltip__content {
+  box-sizing: border-box;
+}
+
+/* ---- Light effect: the default popper surface ---- */
+.ec-tooltip--light {
+  background-color: var(--ec-bg-color-overlay);
+  border: 1px solid var(--ec-border-color-light);
+  color: var(--ec-text-color-regular);
+}
+
+/* ---- Dark effect: dark surface, light text ---- */
+.ec-tooltip--dark {
+  background-color: var(--ec-text-color-primary);
+  border: 1px solid var(--ec-text-color-primary);
+  color: var(--ec-bg-color-overlay);
+}
+
+.ec-tooltip--dark .ec-popper__arrow {
+  background-color: var(--ec-text-color-primary);
+  border-color: var(--ec-text-color-primary);
+}

@@ -1,0 +1,33 @@
+{
+  "key": "popconfirm",
+  "name": "Popconfirm",
+  "category": "Feedback",
+  "status": "stable",
+  "wave": 2,
+  "description": "Inline confirmation popover.",
+  "export": "Popconfirm",
+  "elementPlus": "https://element-plus.org/en-US/component/popconfirm",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Popconfirm } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Popconfirm/Popconfirm.tsx",
+      "type": "source",
+      "content": "import {\n  cloneElement,\n  forwardRef,\n  isValidElement,\n  type MouseEvent,\n  type ReactElement,\n  type ReactNode,\n  useState,\n} from 'react';\nimport { useNamespace } from '../../utils';\nimport { type Placement, Popper } from '../Overlay';\nimport { Button, type ButtonType } from '../Button';\n\n/** Default warning icon, colored via `currentColor`. */\nfunction WarningIcon() {\n  return (\n    <svg viewBox=\"0 0 1024 1024\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">\n      <path d=\"M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896zm0 832a384 384 0 1 0 0-768 384 384 0 0 0 0 768zm0-576a48 48 0 0 1 48 48v224a48 48 0 0 1-96 0V368a48 48 0 0 1 48-48zm0 432a48 48 0 1 1 0-96 48 48 0 0 1 0 96z\" />\n    </svg>\n  );\n}\n\nexport interface PopconfirmProps {\n  /** Confirmation prompt shown next to the icon. */\n  title: ReactNode;\n  /** Confirm button label. */\n  confirmButtonText?: string;\n  /** Cancel button label. */\n  cancelButtonText?: string;\n  /** Button type used for the confirm action. */\n  confirmButtonType?: ButtonType;\n  /** Leading icon; defaults to a warning mark colored with `--ec-color-warning`. */\n  icon?: ReactNode;\n  /** Hide the leading icon entirely. */\n  hideIcon?: boolean;\n  /** Placement of the confirm box relative to the trigger. */\n  placement?: Placement;\n  /** Fixed width of the confirm box. */\n  width?: number | string;\n  /** Gap between the trigger and the confirm box, in px. */\n  offset?: number;\n  /** Disable the confirm box; the trigger renders without one. */\n  disabled?: boolean;\n  /** Fired when the confirm button is clicked. */\n  onConfirm?: (event: MouseEvent<HTMLButtonElement>) => void;\n  /** Fired when the cancel button is clicked. */\n  onCancel?: (event: MouseEvent<HTMLButtonElement>) => void;\n  /** Trigger element. */\n  children: ReactElement;\n}\n\nexport const Popconfirm = forwardRef<HTMLDivElement, PopconfirmProps>(function Popconfirm(\n  props,\n  ref,\n) {\n  const {\n    title,\n    confirmButtonText = 'Yes',\n    cancelButtonText = 'No',\n    confirmButtonType = 'primary',\n    icon,\n    hideIcon = false,\n    placement = 'top',\n    width,\n    offset = 8,\n    disabled = false,\n    onConfirm,\n    onCancel,\n    children,\n  } = props;\n\n  const ns = useNamespace('popconfirm');\n  const [open, setOpen] = useState(false);\n\n  if (!isValidElement(children)) {\n    return <>{children}</>;\n  }\n\n  const reference = ref ? cloneElement(children, { ref } as Record<string, unknown>) : children;\n\n  const handleConfirm = (event: MouseEvent<HTMLButtonElement>) => {\n    setOpen(false);\n    onConfirm?.(event);\n  };\n\n  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {\n    setOpen(false);\n    onCancel?.(event);\n  };\n\n  return (\n    <Popper\n      reference={reference}\n      trigger=\"click\"\n      placement={placement}\n      offset={offset}\n      role=\"dialog\"\n      showArrow\n      disabled={disabled}\n      popperClass={ns.b()}\n      popperStyle={width != null ? { width } : undefined}\n      open={open}\n      onOpenChange={setOpen}\n    >\n      <div className={ns.e('main')}>\n        {!hideIcon && (\n          <span className={ns.e('icon')} aria-hidden=\"true\">\n            {icon ?? <WarningIcon />}\n          </span>\n        )}\n        <span className={ns.e('title')}>{title}</span>\n      </div>\n      <div className={ns.e('action')}>\n        <Button size=\"small\" text bg onClick={handleCancel}>\n          {cancelButtonText}\n        </Button>\n        <Button size=\"small\" type={confirmButtonType} onClick={handleConfirm}>\n          {confirmButtonText}\n        </Button>\n      </div>\n    </Popper>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Popconfirm/index.ts",
+      "type": "source",
+      "content": "export * from './Popconfirm';\n"
+    },
+    {
+      "path": "@cobos/react/components/Popconfirm/popconfirm.css",
+      "type": "css",
+      "content": ".ec-popconfirm {\n  --ec-popconfirm-padding: 12px;\n  --ec-popconfirm-font-size: var(--ec-font-size-base);\n\n  box-sizing: border-box;\n  min-width: 150px;\n  max-width: 320px;\n  padding: var(--ec-popconfirm-padding);\n  font-size: var(--ec-popconfirm-font-size);\n  line-height: 1.5;\n  color: var(--ec-text-color-regular);\n}\n\n.ec-popconfirm__main {\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  margin-bottom: 12px;\n}\n\n.ec-popconfirm__icon {\n  display: inline-flex;\n  flex-shrink: 0;\n  align-items: center;\n  font-size: 16px;\n  line-height: 1;\n  color: var(--ec-color-warning);\n}\n\n.ec-popconfirm__title {\n  box-sizing: border-box;\n  color: var(--ec-text-color-primary);\n}\n\n.ec-popconfirm__action {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 8px;\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+.ec-segmented {
+  --ec-segmented-bg-color: var(--ec-fill-color);
+  --ec-segmented-item-selected-bg-color: var(--ec-bg-color);
+  --ec-segmented-item-selected-color: var(--ec-text-color-primary);
+  --ec-segmented-item-color: var(--ec-text-color-regular);
+  --ec-segmented-item-hover-color: var(--ec-text-color-primary);
+  --ec-segmented-item-hover-bg-color: rgba(0, 0, 0, 0.06);
+  --ec-segmented-size: var(--ec-component-size);
+  --ec-segmented-padding: 2px;
+  --ec-segmented-item-padding: 0 11px;
+  --ec-segmented-font-size: var(--ec-font-size-base);
+  --ec-segmented-border-radius: var(--ec-border-radius-base);
+
+  display: inline-block;
+  box-sizing: border-box;
+  padding: var(--ec-segmented-padding);
+  font-size: var(--ec-segmented-font-size);
+  background-color: var(--ec-segmented-bg-color);
+  border-radius: var(--ec-segmented-border-radius);
+}
+
+.ec-segmented__group {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+}
+
+.ec-segmented__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 0;
+  height: calc(var(--ec-segmented-size) - var(--ec-segmented-padding) * 2);
+  padding: var(--ec-segmented-item-padding);
+  color: var(--ec-segmented-item-color);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  border-radius: calc(var(--ec-segmented-border-radius) - 1px);
+  transition: var(--ec-transition-all);
+}
+
+/* Visually hidden native input. */
+.ec-segmented__item-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: inherit;
+  appearance: none;
+}
+
+.ec-segmented__item-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.ec-segmented__item:not(.is-selected):not(.is-disabled):hover {
+  color: var(--ec-segmented-item-hover-color);
+  background-color: var(--ec-segmented-item-hover-bg-color);
+}
+
+.ec-segmented__item.is-selected {
+  color: var(--ec-segmented-item-selected-color);
+  background-color: var(--ec-segmented-item-selected-bg-color);
+  box-shadow: var(--ec-box-shadow-light);
+}
+
+.ec-segmented__item.is-disabled {
+  color: var(--ec-disabled-text-color);
+  cursor: not-allowed;
+}
+
+.ec-segmented__item-input:focus-visible + .ec-segmented__item-label {
+  outline: 2px solid var(--ec-color-primary-light-5);
+  outline-offset: 2px;
+  border-radius: var(--ec-border-radius-small);
+}
+
+/* ---- Block ---- */
+.ec-segmented.is-block {
+  display: flex;
+}
+
+.ec-segmented.is-block .ec-segmented__group {
+  flex: 1;
+}
+
+.ec-segmented.is-block .ec-segmented__item {
+  flex: 1;
+}
+
+/* ---- Disabled ---- */
+.ec-segmented.is-disabled .ec-segmented__item {
+  cursor: not-allowed;
+}
+
+/* ---- Sizes ---- */
+.ec-segmented--large {
+  --ec-segmented-size: var(--ec-component-size-large);
+  --ec-segmented-item-padding: 0 15px;
+}
+
+.ec-segmented--small {
+  --ec-segmented-size: var(--ec-component-size-small);
+  --ec-segmented-item-padding: 0 7px;
+  --ec-segmented-font-size: var(--ec-font-size-extra-small);
+}

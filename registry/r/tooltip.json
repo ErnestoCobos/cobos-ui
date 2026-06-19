@@ -1,0 +1,33 @@
+{
+  "key": "tooltip",
+  "name": "Tooltip",
+  "category": "Feedback",
+  "status": "stable",
+  "wave": 2,
+  "description": "Hover/focus tooltip.",
+  "export": "Tooltip",
+  "elementPlus": "https://element-plus.org/en-US/component/tooltip",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Tooltip } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Tooltip/Tooltip.tsx",
+      "type": "source",
+      "content": "import {\n  cloneElement,\n  forwardRef,\n  isValidElement,\n  type ReactElement,\n  type ReactNode,\n} from 'react';\nimport { cls, useNamespace } from '../../utils';\nimport { type Placement, Popper } from '../Overlay';\n\nexport type TooltipTrigger = 'hover' | 'click' | 'focus';\nexport type TooltipEffect = 'dark' | 'light';\n\nexport interface TooltipProps {\n  /** Tooltip content. */\n  content: ReactNode;\n  /** Placement of the tooltip relative to the trigger. */\n  placement?: Placement;\n  /** How the tooltip opens. */\n  trigger?: TooltipTrigger;\n  /** Disable the tooltip; the trigger renders without one. */\n  disabled?: boolean;\n  /** Visual theme of the tooltip surface. */\n  effect?: TooltipEffect;\n  /** Show the arrow pointing at the trigger. */\n  showArrow?: boolean;\n  /** Gap between the trigger and the tooltip, in px. */\n  offset?: number;\n  /** Controlled open state. */\n  open?: boolean;\n  /** Initial open state when uncontrolled. */\n  defaultOpen?: boolean;\n  /** Fired when the open state changes. */\n  onOpenChange?: (open: boolean) => void;\n  /** Trigger element. */\n  children: ReactElement;\n}\n\nexport const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(props, ref) {\n  const {\n    content,\n    placement = 'top',\n    trigger = 'hover',\n    disabled = false,\n    effect = 'dark',\n    showArrow = true,\n    offset = 8,\n    open,\n    defaultOpen,\n    onOpenChange,\n    children,\n  } = props;\n\n  const ns = useNamespace('tooltip');\n\n  if (!isValidElement(children)) {\n    return <>{children}</>;\n  }\n\n  // Hold the user-provided ref on the trigger; Popper merges in its own.\n  const reference = ref ? cloneElement(children, { ref } as Record<string, unknown>) : children;\n\n  return (\n    <Popper\n      reference={reference}\n      trigger={trigger}\n      placement={placement}\n      offset={offset}\n      role=\"tooltip\"\n      showArrow={showArrow}\n      disabled={disabled || content == null || content === ''}\n      popperClass={cls(ns.b(), ns.m(effect))}\n      open={open}\n      defaultOpen={defaultOpen}\n      onOpenChange={onOpenChange}\n    >\n      <div className={ns.e('content')}>{content}</div>\n    </Popper>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Tooltip/index.ts",
+      "type": "source",
+      "content": "export * from './Tooltip';\n"
+    },
+    {
+      "path": "@cobos/react/components/Tooltip/tooltip.css",
+      "type": "css",
+      "content": ".ec-tooltip {\n  --ec-tooltip-padding: 6px 11px;\n  --ec-tooltip-font-size: var(--ec-font-size-small);\n\n  box-sizing: border-box;\n  max-width: 280px;\n  padding: var(--ec-tooltip-padding);\n  font-size: var(--ec-tooltip-font-size);\n  line-height: 1.4;\n}\n\n.ec-tooltip__content {\n  box-sizing: border-box;\n}\n\n/* ---- Light effect: the default popper surface ---- */\n.ec-tooltip--light {\n  background-color: var(--ec-bg-color-overlay);\n  border: 1px solid var(--ec-border-color-light);\n  color: var(--ec-text-color-regular);\n}\n\n/* ---- Dark effect: dark surface, light text ---- */\n.ec-tooltip--dark {\n  background-color: var(--ec-text-color-primary);\n  border: 1px solid var(--ec-text-color-primary);\n  color: var(--ec-bg-color-overlay);\n}\n\n.ec-tooltip--dark .ec-popper__arrow {\n  background-color: var(--ec-text-color-primary);\n  border-color: var(--ec-text-color-primary);\n}\n"
+    }
+  ]
+}

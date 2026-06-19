@@ -1,0 +1,281 @@
+.ec-steps {
+  --ec-steps-icon-size: 28px;
+  --ec-steps-wait-color: var(--ec-text-color-placeholder);
+  --ec-steps-wait-border-color: var(--ec-border-color);
+  --ec-steps-process-color: var(--ec-color-primary);
+  --ec-steps-finish-color: var(--ec-color-primary);
+  --ec-steps-error-color: var(--ec-color-danger);
+  --ec-steps-success-color: var(--ec-color-success);
+  --ec-steps-title-color: var(--ec-text-color-primary);
+  --ec-steps-description-color: var(--ec-text-color-secondary);
+  --ec-steps-line-color: var(--ec-border-color-light);
+
+  display: flex;
+  box-sizing: border-box;
+  font-family: var(--ec-font-family);
+  font-size: var(--ec-font-size-base);
+  color: var(--ec-text-color-primary);
+}
+
+.ec-steps *,
+.ec-steps *::before,
+.ec-steps *::after {
+  box-sizing: border-box;
+}
+
+.ec-steps--horizontal {
+  flex-direction: row;
+}
+
+.ec-steps--vertical {
+  flex-direction: column;
+}
+
+.ec-steps--simple {
+  flex-direction: row;
+  align-items: center;
+  padding: 13px 8%;
+  border-radius: var(--ec-border-radius-base);
+  background-color: var(--ec-fill-color-light);
+}
+
+/* ---- Individual step ---- */
+.ec-step {
+  position: relative;
+  display: flex;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.ec-step.is-flex {
+  flex: 0 0 auto;
+}
+
+.ec-step--horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.ec-step--horizontal:last-of-type {
+  flex: 0 0 auto;
+}
+
+.ec-step--vertical {
+  flex-direction: row;
+  align-items: stretch;
+  padding-bottom: 0;
+}
+
+/* ---- Head: icon + connector ---- */
+.ec-step__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ec-step--vertical .ec-step__head {
+  flex-direction: column;
+  margin-right: 16px;
+}
+
+.ec-step__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--ec-steps-icon-size);
+  height: var(--ec-steps-icon-size);
+  flex-shrink: 0;
+  font-size: var(--ec-font-size-base);
+  font-weight: var(--ec-font-weight-primary);
+  line-height: 1;
+  color: var(--ec-steps-wait-color);
+  background-color: var(--ec-fill-color-blank);
+  border: 2px solid var(--ec-steps-wait-border-color);
+  border-radius: 50%;
+  transition: var(--ec-transition-all);
+}
+
+.ec-step__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* ---- Connector line ---- */
+.ec-step__line {
+  position: relative;
+  flex: 1;
+  background-color: var(--ec-steps-line-color);
+}
+
+.ec-step--horizontal .ec-step__line {
+  height: 2px;
+  margin: 0 8px;
+  min-width: 12px;
+}
+
+.ec-step--vertical .ec-step__line {
+  width: 2px;
+  margin: 8px 0;
+  min-height: 12px;
+}
+
+.ec-step__line-inner {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--ec-steps-finish-color);
+  transition: var(--ec-transition-all);
+}
+
+.ec-step--vertical .ec-step__line-inner {
+  width: 100%;
+  height: 0;
+}
+
+.ec-step__line.is-filled .ec-step__line-inner {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Main: title + description ---- */
+.ec-step__main {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  flex: 1;
+}
+
+.ec-step--vertical .ec-step__main {
+  padding-left: 0;
+  padding-bottom: 12px;
+}
+
+.ec-step__title {
+  font-size: var(--ec-font-size-medium);
+  font-weight: var(--ec-font-weight-primary);
+  line-height: var(--ec-steps-icon-size);
+  color: var(--ec-steps-title-color);
+}
+
+.ec-step__description {
+  margin-top: 2px;
+  font-size: var(--ec-font-size-small);
+  line-height: 1.4;
+  color: var(--ec-steps-description-color);
+}
+
+/* ---- Center alignment (horizontal) ---- */
+.ec-step.is-center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ec-step.is-center .ec-step__head {
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.ec-step.is-center .ec-step__line {
+  position: absolute;
+  top: calc(var(--ec-steps-icon-size) / 2 - 1px);
+  left: calc(50% + var(--ec-steps-icon-size) / 2 + 8px);
+  right: calc(-50% + var(--ec-steps-icon-size) / 2 + 8px);
+  flex: none;
+  margin: 0;
+}
+
+.ec-step.is-center .ec-step__main {
+  align-items: center;
+  padding-left: 0;
+  margin-top: 8px;
+}
+
+/* ---- Status colours ---- */
+.ec-step.is-process .ec-step__icon {
+  color: var(--ec-color-primary-contrast);
+  background-color: var(--ec-steps-process-color);
+  border-color: var(--ec-steps-process-color);
+}
+
+.ec-step.is-process .ec-step__title {
+  color: var(--ec-steps-process-color);
+  font-weight: var(--ec-font-weight-primary);
+}
+
+.ec-step.is-finish .ec-step__icon,
+.ec-step.is-success .ec-step__icon {
+  color: var(--ec-steps-finish-color);
+  background-color: var(--ec-fill-color-blank);
+  border-color: var(--ec-steps-finish-color);
+}
+
+.ec-step.is-success .ec-step__icon {
+  color: var(--ec-steps-success-color);
+  border-color: var(--ec-steps-success-color);
+}
+
+.ec-step.is-finish .ec-step__title,
+.ec-step.is-success .ec-step__title {
+  color: var(--ec-steps-title-color);
+}
+
+.ec-step.is-error .ec-step__icon {
+  color: var(--ec-color-danger-contrast);
+  background-color: var(--ec-steps-error-color);
+  border-color: var(--ec-steps-error-color);
+}
+
+.ec-step.is-error .ec-step__title {
+  color: var(--ec-steps-error-color);
+}
+
+.ec-step.is-wait .ec-step__icon {
+  color: var(--ec-steps-wait-color);
+  border-color: var(--ec-steps-wait-border-color);
+}
+
+.ec-step.is-wait .ec-step__title {
+  color: var(--ec-text-color-secondary);
+}
+
+/* ---- Simple variant ---- */
+.ec-step.is-simple {
+  flex-direction: row;
+  align-items: center;
+}
+
+.ec-step.is-simple .ec-step__head {
+  margin-right: 8px;
+}
+
+.ec-step.is-simple .ec-step__icon {
+  width: 16px;
+  height: 16px;
+  font-size: var(--ec-font-size-extra-small);
+  border-width: 1px;
+}
+
+.ec-step.is-simple .ec-step__main {
+  flex-direction: row;
+  align-items: center;
+  padding-left: 0;
+}
+
+.ec-step.is-simple .ec-step__title {
+  line-height: 1;
+  font-size: var(--ec-font-size-base);
+}
+
+.ec-step.is-simple:not(:last-of-type)::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  margin: 0 12px;
+  background-color: var(--ec-steps-line-color);
+}

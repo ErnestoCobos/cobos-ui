@@ -12,7 +12,7 @@
     "Others"
   ],
   "total": 80,
-  "stable": 25,
+  "stable": 41,
   "components": [
     {
       "key": "button",
@@ -407,36 +407,40 @@
       "key": "badge",
       "name": "Badge",
       "category": "Data",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Count or dot badge on an element.",
+      "export": "Badge",
       "elementPlus": "https://element-plus.org/en-US/component/badge"
     },
     {
       "key": "progress",
       "name": "Progress",
       "category": "Data",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Linear and circular progress.",
+      "export": "Progress",
       "elementPlus": "https://element-plus.org/en-US/component/progress"
     },
     {
       "key": "skeleton",
       "name": "Skeleton",
       "category": "Data",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Loading placeholder.",
+      "export": "Skeleton",
       "elementPlus": "https://element-plus.org/en-US/component/skeleton"
     },
     {
       "key": "empty",
       "name": "Empty",
       "category": "Data",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Empty-state placeholder.",
+      "export": "Empty",
       "elementPlus": "https://element-plus.org/en-US/component/empty"
     },
     {
@@ -452,9 +456,10 @@
       "key": "collapse",
       "name": "Collapse",
       "category": "Data",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Accordion collapse panels.",
+      "export": "Collapse",
       "elementPlus": "https://element-plus.org/en-US/component/collapse"
     },
     {
@@ -515,18 +520,20 @@
       "key": "statistic",
       "name": "Statistic",
       "category": "Data",
-      "status": "planned",
-      "wave": 3,
+      "status": "stable",
+      "wave": 2,
       "description": "Numeric statistic with countdown.",
+      "export": "Statistic",
       "elementPlus": "https://element-plus.org/en-US/component/statistic"
     },
     {
       "key": "segmented",
       "name": "Segmented",
       "category": "Data",
-      "status": "planned",
-      "wave": 3,
+      "status": "stable",
+      "wave": 2,
       "description": "Segmented control.",
+      "export": "Segmented",
       "elementPlus": "https://element-plus.org/en-US/component/segmented"
     },
     {
@@ -608,9 +615,10 @@
       "key": "steps",
       "name": "Steps",
       "category": "Navigation",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Step/wizard progress.",
+      "export": "Steps",
       "elementPlus": "https://element-plus.org/en-US/component/steps"
     },
     {
@@ -663,63 +671,70 @@
       "key": "alert",
       "name": "Alert",
       "category": "Feedback",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Inline alert banner.",
+      "export": "Alert",
       "elementPlus": "https://element-plus.org/en-US/component/alert"
     },
     {
       "key": "tooltip",
       "name": "Tooltip",
       "category": "Feedback",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Hover/focus tooltip.",
+      "export": "Tooltip",
       "elementPlus": "https://element-plus.org/en-US/component/tooltip"
     },
     {
       "key": "popover",
       "name": "Popover",
       "category": "Feedback",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Rich popover panel.",
+      "export": "Popover",
       "elementPlus": "https://element-plus.org/en-US/component/popover"
     },
     {
       "key": "popconfirm",
       "name": "Popconfirm",
       "category": "Feedback",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Inline confirmation popover.",
+      "export": "Popconfirm",
       "elementPlus": "https://element-plus.org/en-US/component/popconfirm"
     },
     {
       "key": "drawer",
       "name": "Drawer",
       "category": "Feedback",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Slide-in panel from an edge.",
+      "export": "Drawer",
       "elementPlus": "https://element-plus.org/en-US/component/drawer"
     },
     {
       "key": "message",
       "name": "Message",
       "category": "Feedback",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Imperative toast message.",
+      "export": "Message",
       "elementPlus": "https://element-plus.org/en-US/component/message"
     },
     {
       "key": "notification",
       "name": "Notification",
       "category": "Feedback",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Imperative corner notification.",
+      "export": "Notification",
       "elementPlus": "https://element-plus.org/en-US/component/notification"
     },
     {
@@ -735,9 +750,10 @@
       "key": "loading",
       "name": "Loading",
       "category": "Feedback",
-      "status": "planned",
+      "status": "stable",
       "wave": 2,
       "description": "Full-area loading mask via hook/component.",
+      "export": "Loading",
       "elementPlus": "https://element-plus.org/en-US/component/loading"
     },
     {

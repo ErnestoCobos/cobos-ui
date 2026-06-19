@@ -1,0 +1,33 @@
+{
+  "key": "statistic",
+  "name": "Statistic",
+  "category": "Data",
+  "status": "stable",
+  "wave": 2,
+  "description": "Numeric statistic with countdown.",
+  "export": "Statistic",
+  "elementPlus": "https://element-plus.org/en-US/component/statistic",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Statistic } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Statistic/Statistic.tsx",
+      "type": "source",
+      "content": "import {\n  type CSSProperties,\n  forwardRef,\n  type HTMLAttributes,\n  type ReactNode,\n} from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport interface StatisticProps\n  extends Omit<HTMLAttributes<HTMLDivElement>, 'prefix' | 'title'> {\n  /** The value to display. Numeric values are formatted; strings are shown as-is. */\n  value: number | string;\n  /** Title shown above the value. */\n  title?: ReactNode;\n  /** Content rendered before the value. */\n  prefix?: ReactNode;\n  /** Content rendered after the value. */\n  suffix?: ReactNode;\n  /** Number of decimal places to keep (numeric values only). */\n  precision?: number;\n  /** Thousands group separator. */\n  groupSeparator?: string;\n  /** Decimal separator. */\n  decimalSeparator?: string;\n  /** Inline style applied to the value element. */\n  valueStyle?: CSSProperties;\n  /** Custom formatter. When provided it overrides the built-in number formatting. */\n  formatter?: (value: number | string) => ReactNode;\n  children?: ReactNode;\n}\n\n/**\n * Format a numeric value applying precision and group/decimal separators.\n * Strings are returned untouched so callers can pass pre-formatted content.\n */\nfunction formatNumber(\n  value: number | string,\n  precision: number | undefined,\n  groupSeparator: string,\n  decimalSeparator: string,\n): string {\n  if (typeof value !== 'number' || !Number.isFinite(value)) {\n    return String(value);\n  }\n\n  const fixed = precision !== undefined ? value.toFixed(precision) : String(value);\n  const negative = fixed.startsWith('-');\n  const unsigned = negative ? fixed.slice(1) : fixed;\n  const [intPart, decimalPart] = unsigned.split('.');\n\n  const groupedInt = intPart.replace(/\\B(?=(\\d{3})+(?!\\d))/g, groupSeparator);\n  const body = decimalPart !== undefined ? `${groupedInt}${decimalSeparator}${decimalPart}` : groupedInt;\n\n  return negative ? `-${body}` : body;\n}\n\nexport const Statistic = forwardRef<HTMLDivElement, StatisticProps>(function Statistic(props, ref) {\n  const {\n    value,\n    title,\n    prefix,\n    suffix,\n    precision,\n    groupSeparator = ',',\n    decimalSeparator = '.',\n    valueStyle,\n    formatter,\n    className,\n    children,\n    ...rest\n  } = props;\n\n  const ns = useNamespace('statistic');\n\n  const displayValue: ReactNode = formatter\n    ? formatter(value)\n    : formatNumber(value, precision, groupSeparator, decimalSeparator);\n\n  return (\n    <div ref={ref} className={cls(ns.b(), className)} {...rest}>\n      {(title !== undefined && title !== null) && <div className={ns.e('head')}>{title}</div>}\n      <div className={ns.e('content')}>\n        {(prefix !== undefined && prefix !== null) && (\n          <span className={ns.e('prefix')}>{prefix}</span>\n        )}\n        <span className={ns.e('number')} style={valueStyle}>\n          {displayValue}\n        </span>\n        {(suffix !== undefined && suffix !== null) && (\n          <span className={ns.e('suffix')}>{suffix}</span>\n        )}\n      </div>\n      {children}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Statistic/index.ts",
+      "type": "source",
+      "content": "export * from './Statistic';\n"
+    },
+    {
+      "path": "@cobos/react/components/Statistic/statistic.css",
+      "type": "css",
+      "content": ".ec-statistic {\n  --ec-statistic-title-font-size: var(--ec-font-size-base);\n  --ec-statistic-title-color: var(--ec-text-color-regular);\n  --ec-statistic-content-font-size: 24px;\n  --ec-statistic-content-color: var(--ec-text-color-primary);\n\n  box-sizing: border-box;\n  font-family: inherit;\n}\n\n.ec-statistic__head {\n  margin-bottom: 4px;\n  font-size: var(--ec-statistic-title-font-size);\n  font-weight: var(--ec-font-weight-primary);\n  line-height: 20px;\n  color: var(--ec-statistic-title-color);\n}\n\n.ec-statistic__content {\n  display: inline-flex;\n  align-items: center;\n  font-size: var(--ec-statistic-content-font-size);\n  color: var(--ec-statistic-content-color);\n}\n\n.ec-statistic__prefix {\n  display: inline-flex;\n  align-items: center;\n  margin-right: 4px;\n}\n\n.ec-statistic__suffix {\n  display: inline-flex;\n  align-items: center;\n  margin-left: 4px;\n}\n\n.ec-statistic__number {\n  font-weight: var(--ec-font-weight-primary);\n}\n"
+    }
+  ]
+}

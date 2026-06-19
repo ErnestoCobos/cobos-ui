@@ -1,0 +1,48 @@
+.ec-loading {
+  position: relative;
+}
+
+.ec-loading-parent {
+  position: relative !important;
+}
+
+.ec-loading__mask {
+  --ec-loading-mask-bg: var(--ec-mask-color, rgba(255, 255, 255, 0.9));
+  --ec-loading-spinner-color: var(--ec-color-primary);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  z-index: var(--ec-index-popper);
+  background-color: var(--ec-loading-mask-bg);
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.ec-loading__mask.is-fullscreen {
+  position: fixed;
+}
+
+.ec-loading__spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.ec-loading__icon {
+  font-size: 28px;
+  color: var(--ec-loading-spinner-color);
+}
+
+.ec-loading__text {
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--ec-font-size-base);
+  line-height: 1;
+  color: var(--ec-loading-spinner-color);
+}

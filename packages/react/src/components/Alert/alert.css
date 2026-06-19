@@ -1,0 +1,159 @@
+.ec-alert {
+  --ec-alert-padding: 8px 16px;
+  --ec-alert-border-radius: var(--ec-border-radius-base);
+  --ec-alert-title-font-size: var(--ec-font-size-base);
+  --ec-alert-description-font-size: var(--ec-font-size-small);
+  --ec-alert-icon-size: 16px;
+  --ec-alert-bg-color: var(--ec-color-info-light-9);
+  --ec-alert-text-color: var(--ec-color-info);
+  --ec-alert-border-color: var(--ec-color-info-light-8);
+
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  gap: 8px;
+  padding: var(--ec-alert-padding);
+  margin: 0;
+  font-family: var(--ec-font-family);
+  color: var(--ec-alert-text-color);
+  background-color: var(--ec-alert-bg-color);
+  border: var(--ec-border-width) var(--ec-border-style) var(--ec-alert-border-color);
+  border-radius: var(--ec-alert-border-radius);
+  transition: var(--ec-transition-all);
+}
+
+.ec-alert.is-center {
+  justify-content: center;
+}
+
+.ec-alert__icon {
+  flex-shrink: 0;
+  font-size: var(--ec-alert-icon-size);
+  line-height: 1;
+}
+
+.ec-alert__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 2px;
+}
+
+.ec-alert.is-center .ec-alert__content {
+  flex: none;
+  text-align: center;
+}
+
+.ec-alert__title {
+  font-size: var(--ec-alert-title-font-size);
+  line-height: 1.5;
+  font-weight: var(--ec-font-weight-primary, 500);
+  color: var(--ec-alert-text-color);
+}
+
+.ec-alert__description {
+  margin: 0;
+  font-size: var(--ec-alert-description-font-size);
+  line-height: 1.5;
+  color: var(--ec-alert-text-color);
+}
+
+.ec-alert__close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1;
+  color: inherit;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: var(--ec-border-radius-small, 2px);
+  outline: none;
+  opacity: 0.85;
+  transition: var(--ec-transition-all);
+}
+
+.ec-alert__close-btn.is-customed {
+  font-size: var(--ec-alert-description-font-size);
+}
+
+.ec-alert__close-btn:hover {
+  opacity: 1;
+}
+
+.ec-alert__close-btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 1px;
+}
+
+/* =========================================================
+   Light effect (default): light-9 bg + accessible text + light-8 border
+
+   The brand base color does not reach the WCAG 2.1 AA 4.5:1 contrast ratio
+   against its own light-9 background. The component-scoped text tokens below
+   mirror the Tag light-effect tokens (mix(black, base, 0.4)) so they clear
+   4.5:1 on the corresponding light-9 background for every type. `error` shares
+   the danger base color, so it reuses the danger-derived text color.
+   ========================================================= */
+.ec-alert--light {
+  --ec-alert-light-text-success: #3e7423;
+  --ec-alert-light-text-info: #56585c;
+  --ec-alert-light-text-warning: #8a6124;
+  --ec-alert-light-text-error: #934141;
+}
+.ec-alert--success.ec-alert--light {
+  --ec-alert-bg-color: var(--ec-color-success-light-9);
+  --ec-alert-text-color: var(--ec-alert-light-text-success);
+  --ec-alert-border-color: var(--ec-color-success-light-8);
+}
+.ec-alert--info.ec-alert--light {
+  --ec-alert-bg-color: var(--ec-color-info-light-9);
+  --ec-alert-text-color: var(--ec-alert-light-text-info);
+  --ec-alert-border-color: var(--ec-color-info-light-8);
+}
+.ec-alert--warning.ec-alert--light {
+  --ec-alert-bg-color: var(--ec-color-warning-light-9);
+  --ec-alert-text-color: var(--ec-alert-light-text-warning);
+  --ec-alert-border-color: var(--ec-color-warning-light-8);
+}
+.ec-alert--error.ec-alert--light {
+  --ec-alert-bg-color: var(--ec-color-error-light-9);
+  --ec-alert-text-color: var(--ec-alert-light-text-error);
+  --ec-alert-border-color: var(--ec-color-error-light-8);
+}
+
+/* =========================================================
+   Dark effect: solid type bg + contrast text
+   ========================================================= */
+.ec-alert--success.ec-alert--dark {
+  --ec-alert-bg-color: var(--ec-color-success);
+  --ec-alert-text-color: var(--ec-color-success-contrast);
+  --ec-alert-border-color: var(--ec-color-success);
+}
+.ec-alert--info.ec-alert--dark {
+  --ec-alert-bg-color: var(--ec-color-info);
+  --ec-alert-text-color: var(--ec-color-info-contrast);
+  --ec-alert-border-color: var(--ec-color-info);
+}
+.ec-alert--warning.ec-alert--dark {
+  --ec-alert-bg-color: var(--ec-color-warning);
+  --ec-alert-text-color: var(--ec-color-warning-contrast);
+  --ec-alert-border-color: var(--ec-color-warning);
+}
+.ec-alert--error.ec-alert--dark {
+  --ec-alert-bg-color: var(--ec-color-error);
+  --ec-alert-text-color: var(--ec-color-error-contrast);
+  --ec-alert-border-color: var(--ec-color-error);
+}
+
+/* In the dark effect the title/description inherit the contrast text color. */
+.ec-alert--dark .ec-alert__title,
+.ec-alert--dark .ec-alert__description {
+  color: var(--ec-alert-text-color);
+}

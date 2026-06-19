@@ -1,0 +1,140 @@
+.ec-collapse {
+  --ec-collapse-border-color: var(--ec-border-color-light);
+  --ec-collapse-header-height: 48px;
+  --ec-collapse-header-bg-color: var(--ec-fill-color-blank);
+  --ec-collapse-header-text-color: var(--ec-text-color-primary);
+  --ec-collapse-header-font-size: var(--ec-font-size-base);
+  --ec-collapse-content-bg-color: var(--ec-fill-color-blank);
+  --ec-collapse-content-text-color: var(--ec-text-color-primary);
+  --ec-collapse-content-font-size: var(--ec-font-size-base);
+  --ec-collapse-disabled-text-color: var(--ec-disabled-text-color);
+
+  box-sizing: border-box;
+  font-family: var(--ec-font-family);
+  border-top: var(--ec-border-width) var(--ec-border-style) var(--ec-collapse-border-color);
+  border-bottom: var(--ec-border-width) var(--ec-border-style) var(--ec-collapse-border-color);
+}
+
+.ec-collapse *,
+.ec-collapse *::before,
+.ec-collapse *::after {
+  box-sizing: border-box;
+}
+
+/* ---- Item ---- */
+.ec-collapse-item {
+  border-bottom: var(--ec-border-width) var(--ec-border-style) var(--ec-collapse-border-color);
+}
+
+.ec-collapse-item:last-child {
+  border-bottom: none;
+}
+
+/* ---- Header ---- */
+.ec-collapse-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  height: var(--ec-collapse-header-height);
+  margin: 0;
+  padding: 0 12px;
+  font-family: inherit;
+  font-size: var(--ec-collapse-header-font-size);
+  font-weight: var(--ec-font-weight-primary);
+  line-height: var(--ec-collapse-header-height);
+  text-align: left;
+  color: var(--ec-collapse-header-text-color);
+  background-color: var(--ec-collapse-header-bg-color);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  transition: var(--ec-transition-color);
+}
+
+.ec-collapse-item__header:hover {
+  color: var(--ec-color-primary);
+}
+
+.ec-collapse-item__header:focus-visible {
+  outline: 2px solid var(--ec-color-primary-light-5);
+  outline-offset: -2px;
+}
+
+.ec-collapse-item__header:disabled,
+.ec-collapse-item.is-disabled > .ec-collapse-item__header {
+  color: var(--ec-collapse-disabled-text-color);
+  cursor: not-allowed;
+}
+
+.ec-collapse-item.is-disabled > .ec-collapse-item__header:hover {
+  color: var(--ec-collapse-disabled-text-color);
+}
+
+.ec-collapse-item__title {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ---- Arrow / chevron ---- */
+.ec-collapse-item__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  margin-left: 8px;
+  font-size: var(--ec-font-size-base);
+  color: var(--ec-text-color-secondary);
+  transition: transform var(--ec-transition-duration) var(--ec-transition-function-ease-in-out-bezier);
+  transform: rotate(0deg);
+}
+
+.ec-collapse-item__arrow svg {
+  width: 1em;
+  height: 1em;
+}
+
+.ec-collapse-item__arrow.is-active {
+  transform: rotate(90deg);
+}
+
+/* ---- Panel ---- */
+.ec-collapse-item__wrap {
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  background-color: var(--ec-collapse-content-bg-color);
+  transition:
+    grid-template-rows var(--ec-transition-duration) var(--ec-transition-function-ease-in-out-bezier),
+    opacity var(--ec-transition-duration) var(--ec-transition-function-ease-in-out-bezier);
+  will-change: grid-template-rows;
+}
+
+/* Override the `hidden` attribute's `display: none` so the panel can animate
+   closed; visibility/measurement is handled by the collapsed grid row. */
+.ec-collapse-item__wrap[hidden] {
+  display: grid;
+}
+
+.ec-collapse-item__wrap.is-active {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.ec-collapse-item__content {
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 12px;
+  font-size: var(--ec-collapse-content-font-size);
+  line-height: 1.6;
+  color: var(--ec-collapse-content-text-color);
+}
+
+.ec-collapse-item__wrap.is-active .ec-collapse-item__content {
+  padding: 16px 12px 20px;
+}

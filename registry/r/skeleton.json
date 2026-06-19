@@ -1,0 +1,38 @@
+{
+  "key": "skeleton",
+  "name": "Skeleton",
+  "category": "Data",
+  "status": "stable",
+  "wave": 2,
+  "description": "Loading placeholder.",
+  "export": "Skeleton",
+  "elementPlus": "https://element-plus.org/en-US/component/skeleton",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Skeleton } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Skeleton/Skeleton.tsx",
+      "type": "source",
+      "content": "import {\n  forwardRef,\n  Fragment,\n  type HTMLAttributes,\n  type ReactNode,\n  useEffect,\n  useRef,\n  useState,\n} from 'react';\nimport { cls, useNamespace } from '../../utils';\nimport { SkeletonItem } from './SkeletonItem';\n\nexport interface SkeletonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {\n  /** Whether to show the placeholder. When false, `children` are rendered. */\n  loading?: boolean;\n  /** Number of text rows in the default template. */\n  rows?: number;\n  /** Enable the shimmer animation. */\n  animated?: boolean;\n  /** Repeat the placeholder template this many times. */\n  count?: number;\n  /** Delay (ms) before the placeholder appears, avoiding flashes on fast loads. */\n  throttle?: number;\n  /** Real content, shown once `loading` is false. */\n  children?: ReactNode;\n}\n\nexport const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skeleton(props, ref) {\n  const {\n    loading = true,\n    rows = 3,\n    animated = false,\n    count = 1,\n    throttle,\n    className,\n    children,\n    ...rest\n  } = props;\n\n  const ns = useNamespace('skeleton');\n\n  // When `throttle` is set, defer showing the placeholder until the delay\n  // elapses so brief loads do not flash a skeleton.\n  const [throttled, setThrottled] = useState(throttle != null && throttle > 0);\n  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);\n\n  useEffect(() => {\n    if (throttle == null || throttle <= 0) {\n      setThrottled(false);\n      return;\n    }\n    if (loading) {\n      setThrottled(true);\n      timer.current = setTimeout(() => setThrottled(false), throttle);\n    }\n    return () => {\n      if (timer.current) clearTimeout(timer.current);\n    };\n  }, [throttle, loading]);\n\n  const showPlaceholder = loading && !throttled;\n\n  const classes = cls(ns.b(), ns.is('animated', animated), className);\n\n  if (!showPlaceholder) {\n    return (\n      <div ref={ref} className={classes} {...rest}>\n        {children}\n      </div>\n    );\n  }\n\n  const templates = Array.from({ length: Math.max(count, 1) }, (_, i) => (\n    <Fragment key={i}>\n      <div className={ns.e('template')}>\n        <SkeletonItem variant=\"h3\" style={{ width: '50%' }} />\n        {Array.from({ length: Math.max(rows, 0) }, (_, row) => (\n          <SkeletonItem\n            key={row}\n            variant=\"text\"\n            // The last row is intentionally shorter to mimic real prose.\n            style={row === rows - 1 ? { width: '60%' } : undefined}\n          />\n        ))}\n      </div>\n    </Fragment>\n  ));\n\n  return (\n    <div ref={ref} className={classes} aria-busy=\"true\" aria-live=\"polite\" {...rest}>\n      {templates}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Skeleton/SkeletonItem.tsx",
+      "type": "source",
+      "content": "import { forwardRef, type HTMLAttributes } from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport type SkeletonVariant =\n  | 'p'\n  | 'text'\n  | 'h1'\n  | 'h3'\n  | 'caption'\n  | 'button'\n  | 'image'\n  | 'circle'\n  | 'rect';\n\nexport interface SkeletonItemProps extends HTMLAttributes<HTMLDivElement> {\n  /** Shape of the placeholder. */\n  variant?: SkeletonVariant;\n}\n\nexport const SkeletonItem = forwardRef<HTMLDivElement, SkeletonItemProps>(function SkeletonItem(\n  props,\n  ref,\n) {\n  const { variant = 'text', className, ...rest } = props;\n  const ns = useNamespace('skeleton');\n\n  return (\n    <div ref={ref} className={cls(ns.e('item'), ns.m(variant), className)} {...rest} />\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Skeleton/index.ts",
+      "type": "source",
+      "content": "export * from './Skeleton';\nexport * from './SkeletonItem';\n"
+    },
+    {
+      "path": "@cobos/react/components/Skeleton/skeleton.css",
+      "type": "css",
+      "content": ".ec-skeleton {\n  --ec-skeleton-color: var(--ec-fill-color);\n  --ec-skeleton-to-color: var(--ec-fill-color-darker);\n\n  width: 100%;\n}\n\n.ec-skeleton__template {\n  display: flex;\n  flex-direction: column;\n  gap: 16px;\n}\n\n.ec-skeleton__template + .ec-skeleton__template {\n  margin-top: 16px;\n}\n\n.ec-skeleton__item {\n  display: inline-block;\n  box-sizing: border-box;\n  width: 100%;\n  height: 16px;\n  background: var(--ec-skeleton-color);\n  border-radius: var(--ec-border-radius-base);\n}\n\n/* ---- Variants ---- */\n.ec-skeleton__item.ec-skeleton--p,\n.ec-skeleton__item.ec-skeleton--text {\n  width: 100%;\n  height: 16px;\n}\n\n.ec-skeleton__item.ec-skeleton--h1 {\n  height: 28px;\n}\n\n.ec-skeleton__item.ec-skeleton--h3 {\n  height: 18px;\n}\n\n.ec-skeleton__item.ec-skeleton--caption {\n  height: 12px;\n}\n\n.ec-skeleton__item.ec-skeleton--button {\n  width: 64px;\n  height: var(--ec-component-size);\n  border-radius: var(--ec-border-radius-base);\n}\n\n.ec-skeleton__item.ec-skeleton--image {\n  width: 100%;\n  height: 100px;\n  border-radius: 0;\n}\n\n.ec-skeleton__item.ec-skeleton--rect {\n  width: 100%;\n  height: 100%;\n}\n\n.ec-skeleton__item.ec-skeleton--circle {\n  width: var(--ec-component-size);\n  height: var(--ec-component-size);\n  border-radius: var(--ec-border-radius-circle);\n}\n\n/* ---- Animation ---- */\n.ec-skeleton.is-animated .ec-skeleton__item {\n  background: linear-gradient(\n    90deg,\n    var(--ec-skeleton-color) 25%,\n    var(--ec-skeleton-to-color) 37%,\n    var(--ec-skeleton-color) 63%\n  );\n  background-size: 400% 100%;\n  animation: ec-skeleton-shimmer 1.4s ease infinite;\n}\n\n@keyframes ec-skeleton-shimmer {\n  0% {\n    background-position: 100% 50%;\n  }\n  100% {\n    background-position: 0 50%;\n  }\n}\n"
+    }
+  ]
+}

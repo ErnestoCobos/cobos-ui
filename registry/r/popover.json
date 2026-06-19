@@ -1,0 +1,33 @@
+{
+  "key": "popover",
+  "name": "Popover",
+  "category": "Feedback",
+  "status": "stable",
+  "wave": 2,
+  "description": "Rich popover panel.",
+  "export": "Popover",
+  "elementPlus": "https://element-plus.org/en-US/component/popover",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Popover } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Popover/Popover.tsx",
+      "type": "source",
+      "content": "import {\n  cloneElement,\n  forwardRef,\n  isValidElement,\n  type ReactElement,\n  type ReactNode,\n} from 'react';\nimport { useNamespace } from '../../utils';\nimport { type Placement, Popper } from '../Overlay';\n\nexport type PopoverTrigger = 'hover' | 'click' | 'focus';\n\nexport interface PopoverProps {\n  /** Popover body content. */\n  content: ReactNode;\n  /** Optional bold heading shown above the content. */\n  title?: ReactNode;\n  /** How the popover opens. */\n  trigger?: PopoverTrigger;\n  /** Placement of the popover relative to the trigger. */\n  placement?: Placement;\n  /** Fixed width of the popover surface. */\n  width?: number | string;\n  /** Show the arrow pointing at the trigger. */\n  showArrow?: boolean;\n  /** Gap between the trigger and the popover, in px. */\n  offset?: number;\n  /** Disable the popover; the trigger renders without one. */\n  disabled?: boolean;\n  /** Controlled open state. */\n  open?: boolean;\n  /** Initial open state when uncontrolled. */\n  defaultOpen?: boolean;\n  /** Fired when the open state changes. */\n  onOpenChange?: (open: boolean) => void;\n  /** Trigger element. */\n  children: ReactElement;\n}\n\nexport const Popover = forwardRef<HTMLDivElement, PopoverProps>(function Popover(props, ref) {\n  const {\n    content,\n    title,\n    trigger = 'click',\n    placement = 'bottom',\n    width,\n    showArrow = true,\n    offset = 8,\n    disabled = false,\n    open,\n    defaultOpen,\n    onOpenChange,\n    children,\n  } = props;\n\n  const ns = useNamespace('popover');\n\n  if (!isValidElement(children)) {\n    return <>{children}</>;\n  }\n\n  const reference = ref ? cloneElement(children, { ref } as Record<string, unknown>) : children;\n\n  return (\n    <Popper\n      reference={reference}\n      trigger={trigger}\n      placement={placement}\n      offset={offset}\n      role=\"dialog\"\n      showArrow={showArrow}\n      disabled={disabled}\n      popperClass={ns.b()}\n      popperStyle={width != null ? { width } : undefined}\n      open={open}\n      defaultOpen={defaultOpen}\n      onOpenChange={onOpenChange}\n    >\n      {title != null && title !== '' && <div className={ns.e('title')}>{title}</div>}\n      <div className={ns.e('content')}>{content}</div>\n    </Popper>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Popover/index.ts",
+      "type": "source",
+      "content": "export * from './Popover';\n"
+    },
+    {
+      "path": "@cobos/react/components/Popover/popover.css",
+      "type": "css",
+      "content": ".ec-popover {\n  --ec-popover-padding: 12px;\n  --ec-popover-font-size: var(--ec-font-size-base);\n  --ec-popover-title-font-size: var(--ec-font-size-base);\n\n  box-sizing: border-box;\n  min-width: 150px;\n  max-width: 320px;\n  padding: var(--ec-popover-padding);\n  font-size: var(--ec-popover-font-size);\n  line-height: 1.5;\n  color: var(--ec-text-color-regular);\n}\n\n.ec-popover__title {\n  box-sizing: border-box;\n  margin: 0 0 8px;\n  font-size: var(--ec-popover-title-font-size);\n  font-weight: var(--ec-font-weight-primary);\n  color: var(--ec-text-color-primary);\n  line-height: 1.4;\n}\n\n.ec-popover__content {\n  box-sizing: border-box;\n  color: var(--ec-text-color-regular);\n}\n"
+    }
+  ]
+}
