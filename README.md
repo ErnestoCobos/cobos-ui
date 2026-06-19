@@ -10,7 +10,7 @@ and yours too.
 [![npm](https://img.shields.io/npm/v/@cobos/react.svg)](https://www.npmjs.com/package/@cobos/react)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-[Documentation](https://ui.cobos.io) · [Storybook](https://ui.cobos.io/storybook) · [MCP server](#mcp-server)
+[Documentation](https://ernestocobos.github.io/cobos-ui/) · [Storybook](https://ernestocobos.github.io/cobos-ui/storybook/) · [MCP server](#mcp-server)
 
 </div>
 
