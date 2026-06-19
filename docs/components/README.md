@@ -64,20 +64,20 @@ Per-component reference for the Cobos UI design system — the full Element Plus
 | [Table](./table.md) | Stable | Data table with sorting, selection, border, stripe and fixed header. |
 | [Tag](./tag.md) | Stable | Label tag with types, effects, sizes and closable. |
 | [Pagination](./pagination.md) | Stable | Pager with sizes, jumper, total and background variants. |
-| [Badge](./badge.md) | Planned (Wave 2) | Count or dot badge on an element. |
-| [Progress](./progress.md) | Planned (Wave 2) | Linear and circular progress. |
-| [Skeleton](./skeleton.md) | Planned (Wave 2) | Loading placeholder. |
-| [Empty](./empty.md) | Planned (Wave 2) | Empty-state placeholder. |
+| [Badge](./badge.md) | Stable | Count or dot badge on an element. |
+| [Progress](./progress.md) | Stable | Linear and circular progress. |
+| [Skeleton](./skeleton.md) | Stable | Loading placeholder. |
+| [Empty](./empty.md) | Stable | Empty-state placeholder. |
 | [Descriptions](./descriptions.md) | Planned (Wave 2) | Key/value description list. |
-| [Collapse](./collapse.md) | Planned (Wave 2) | Accordion collapse panels. |
+| [Collapse](./collapse.md) | Stable | Accordion collapse panels. |
 | [Tree](./tree.md) | Planned (Wave 2) | Hierarchical tree view. |
 | [Calendar](./calendar.md) | Planned (Wave 3) | Month/date calendar. |
 | [Carousel](./carousel.md) | Planned (Wave 3) | Image/content carousel. |
 | [Image](./image.md) | Planned (Wave 3) | Image with lazy load and preview. |
 | [InfiniteScroll](./infinite-scroll.md) | Planned (Wave 3) | Load more on scroll. |
 | [Result](./result.md) | Planned (Wave 3) | Result/feedback page block. |
-| [Statistic](./statistic.md) | Planned (Wave 3) | Numeric statistic with countdown. |
-| [Segmented](./segmented.md) | Planned (Wave 3) | Segmented control. |
+| [Statistic](./statistic.md) | Stable | Numeric statistic with countdown. |
+| [Segmented](./segmented.md) | Stable | Segmented control. |
 | [Timeline](./timeline.md) | Planned (Wave 3) | Vertical timeline. |
 | [Tour](./tour.md) | Planned (Wave 3) | Guided product tour. |
 | [VirtualizedTable](./virtualized-table.md) | Planned (Wave 3) | Virtualized table for large datasets. |
@@ -91,7 +91,7 @@ Per-component reference for the Cobos UI design system — the full Element Plus
 | [Menu](./menu.md) | Stable | Vertical/horizontal menu with submenus, groups and collapse. |
 | [Dropdown](./dropdown.md) | Stable | Dropdown menu triggered by hover or click. |
 | [Breadcrumb](./breadcrumb.md) | Planned (Wave 2) | Breadcrumb trail. |
-| [Steps](./steps.md) | Planned (Wave 2) | Step/wizard progress. |
+| [Steps](./steps.md) | Stable | Step/wizard progress. |
 | [PageHeader](./page-header.md) | Planned (Wave 2) | Page header with back and breadcrumb. |
 | [Affix](./affix.md) | Planned (Wave 3) | Pin an element on scroll. |
 | [Anchor](./anchor.md) | Planned (Wave 3) | Scroll-spy anchor links. |
@@ -102,15 +102,15 @@ Per-component reference for the Cobos UI design system — the full Element Plus
 | Component | Status | Description |
 | --- | --- | --- |
 | [Dialog](./dialog.md) | Stable | Modal dialog with focus trap, scroll lock and dismissal. |
-| [Alert](./alert.md) | Planned (Wave 2) | Inline alert banner. |
-| [Tooltip](./tooltip.md) | Planned (Wave 2) | Hover/focus tooltip. |
-| [Popover](./popover.md) | Planned (Wave 2) | Rich popover panel. |
-| [Popconfirm](./popconfirm.md) | Planned (Wave 2) | Inline confirmation popover. |
-| [Drawer](./drawer.md) | Planned (Wave 2) | Slide-in panel from an edge. |
-| [Message](./message.md) | Planned (Wave 2) | Imperative toast message. |
-| [Notification](./notification.md) | Planned (Wave 2) | Imperative corner notification. |
+| [Alert](./alert.md) | Stable | Inline alert banner. |
+| [Tooltip](./tooltip.md) | Stable | Hover/focus tooltip. |
+| [Popover](./popover.md) | Stable | Rich popover panel. |
+| [Popconfirm](./popconfirm.md) | Stable | Inline confirmation popover. |
+| [Drawer](./drawer.md) | Stable | Slide-in panel from an edge. |
+| [Message](./message.md) | Stable | Imperative toast message. |
+| [Notification](./notification.md) | Stable | Imperative corner notification. |
 | [MessageBox](./message-box.md) | Planned (Wave 2) | Imperative alert/confirm/prompt dialog. |
-| [Loading](./loading.md) | Planned (Wave 2) | Full-area loading mask via hook/component. |
+| [Loading](./loading.md) | Stable | Full-area loading mask via hook/component. |
 
 ## Others
 
