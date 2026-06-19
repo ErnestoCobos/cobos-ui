@@ -1,0 +1,33 @@
+{
+  "key": "divider",
+  "name": "Divider",
+  "category": "Others",
+  "status": "stable",
+  "wave": 1,
+  "description": "Horizontal or vertical separator with optional label.",
+  "export": "Divider",
+  "elementPlus": "https://element-plus.org/en-US/component/divider",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Divider } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Divider/Divider.tsx",
+      "type": "source",
+      "content": "import { type CSSProperties, forwardRef, type HTMLAttributes, type ReactNode } from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport type DividerDirection = 'horizontal' | 'vertical';\n\nexport type DividerContentPosition = 'left' | 'center' | 'right';\n\nexport interface DividerProps extends HTMLAttributes<HTMLDivElement> {\n  /** Divider orientation. */\n  direction?: DividerDirection;\n  /** Position of the text label (horizontal direction only). */\n  contentPosition?: DividerContentPosition;\n  /** Border line style. */\n  borderStyle?: CSSProperties['borderStyle'];\n  children?: ReactNode;\n}\n\nexport const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider(props, ref) {\n  const {\n    direction = 'horizontal',\n    contentPosition = 'center',\n    borderStyle = 'solid',\n    className,\n    style,\n    children,\n    ...rest\n  } = props;\n\n  const ns = useNamespace('divider');\n\n  const classes = cls(\n    ns.b(),\n    ns.m(direction),\n    direction === 'horizontal' && ns.is(contentPosition),\n    className,\n  );\n\n  const dividerStyle = {\n    '--ec-divider-border-style': borderStyle,\n    ...style,\n  } as CSSProperties;\n\n  return (\n    <div\n      ref={ref}\n      className={classes}\n      style={dividerStyle}\n      role=\"separator\"\n      aria-orientation={direction}\n      {...rest}\n    >\n      {direction === 'horizontal' && children !== undefined && children !== null && (\n        <span className={ns.e('text')}>{children}</span>\n      )}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Divider/divider.css",
+      "type": "css",
+      "content": ".ec-divider {\n  --ec-divider-border-color: var(--ec-border-color);\n  --ec-divider-border-style: solid;\n  --ec-divider-text-bg-color: var(--ec-bg-color);\n  --ec-divider-text-color: var(--ec-text-color-primary);\n  --ec-divider-text-font-size: var(--ec-font-size-small);\n\n  box-sizing: border-box;\n  position: relative;\n}\n\n/* ---- Horizontal ---- */\n.ec-divider--horizontal {\n  display: block;\n  width: 100%;\n  margin: 24px 0;\n  border-top: var(--ec-border-width) var(--ec-divider-border-style) var(--ec-divider-border-color);\n}\n\n.ec-divider--horizontal .ec-divider__text {\n  position: absolute;\n  top: 50%;\n  box-sizing: border-box;\n  padding: 0 20px;\n  font-size: var(--ec-divider-text-font-size);\n  font-weight: var(--ec-font-weight-primary);\n  color: var(--ec-divider-text-color);\n  background-color: var(--ec-divider-text-bg-color);\n  transform: translateY(-50%);\n}\n\n.ec-divider--horizontal.is-left .ec-divider__text {\n  left: 20px;\n  transform: translateY(-50%);\n}\n\n.ec-divider--horizontal.is-center .ec-divider__text {\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.ec-divider--horizontal.is-right .ec-divider__text {\n  right: 20px;\n  left: auto;\n  transform: translateY(-50%);\n}\n\n/* ---- Vertical ---- */\n.ec-divider--vertical {\n  display: inline-block;\n  width: 0;\n  height: 1em;\n  margin: 0 8px;\n  vertical-align: middle;\n  border-left: var(--ec-border-width) var(--ec-divider-border-style) var(--ec-divider-border-color);\n}\n"
+    },
+    {
+      "path": "@cobos/react/components/Divider/index.ts",
+      "type": "source",
+      "content": "export * from './Divider';\n"
+    }
+  ]
+}

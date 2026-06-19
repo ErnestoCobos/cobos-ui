@@ -1,0 +1,194 @@
+.ec-tag {
+  --ec-tag-bg-color: var(--ec-color-primary-light-9);
+  --ec-tag-text-color: var(--ec-color-primary);
+  --ec-tag-border-color: var(--ec-color-primary-light-8);
+  --ec-tag-hover-color: var(--ec-color-primary);
+  --ec-tag-size: 24px;
+  --ec-tag-font-size: var(--ec-font-size-small);
+  --ec-tag-padding-horizontal: 9px;
+  --ec-tag-border-radius: var(--ec-border-radius-base);
+
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  gap: 6px;
+  height: var(--ec-tag-size);
+  padding: 0 var(--ec-tag-padding-horizontal);
+  font-family: inherit;
+  font-size: var(--ec-tag-font-size);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--ec-tag-text-color);
+  background-color: var(--ec-tag-bg-color);
+  border: var(--ec-border-width) var(--ec-border-style) var(--ec-tag-border-color);
+  border-radius: var(--ec-tag-border-radius);
+  transition: var(--ec-transition-all);
+}
+
+.ec-tag__content {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ec-tag__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  color: inherit;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: var(--ec-border-radius-circle);
+  outline: none;
+  transition: var(--ec-transition-all);
+}
+
+.ec-tag__close:hover {
+  color: var(--ec-color-white);
+  background-color: var(--ec-tag-hover-color);
+}
+
+.ec-tag__close:focus-visible {
+  outline: 2px solid var(--ec-color-primary-light-5);
+  outline-offset: 1px;
+}
+
+/* ---- Modifiers ---- */
+.ec-tag.is-disable-transitions,
+.ec-tag.is-disable-transitions .ec-tag__close {
+  transition: none;
+}
+
+.ec-tag.is-round {
+  --ec-tag-border-radius: var(--ec-border-radius-round);
+}
+
+.ec-tag.is-hit {
+  border-color: var(--ec-tag-text-color);
+}
+
+/* ---- Sizes ---- */
+.ec-tag--large {
+  --ec-tag-size: 32px;
+  --ec-tag-font-size: var(--ec-font-size-base);
+  --ec-tag-padding-horizontal: 11px;
+}
+
+.ec-tag--small {
+  --ec-tag-size: 20px;
+  --ec-tag-padding-horizontal: 7px;
+}
+
+.ec-tag--small .ec-tag__close {
+  width: 12px;
+  height: 12px;
+  font-size: 10px;
+}
+
+/* =========================================================
+   Light effect (default): light-9 bg + color text + light-8 border
+   ========================================================= */
+.ec-tag--primary.ec-tag--light {
+  --ec-tag-bg-color: var(--ec-color-primary-light-9);
+  --ec-tag-text-color: var(--ec-color-primary);
+  --ec-tag-border-color: var(--ec-color-primary-light-8);
+  --ec-tag-hover-color: var(--ec-color-primary);
+}
+.ec-tag--success.ec-tag--light {
+  --ec-tag-bg-color: var(--ec-color-success-light-9);
+  --ec-tag-text-color: var(--ec-color-success);
+  --ec-tag-border-color: var(--ec-color-success-light-8);
+  --ec-tag-hover-color: var(--ec-color-success);
+}
+.ec-tag--info.ec-tag--light {
+  --ec-tag-bg-color: var(--ec-color-info-light-9);
+  --ec-tag-text-color: var(--ec-color-info);
+  --ec-tag-border-color: var(--ec-color-info-light-8);
+  --ec-tag-hover-color: var(--ec-color-info);
+}
+.ec-tag--warning.ec-tag--light {
+  --ec-tag-bg-color: var(--ec-color-warning-light-9);
+  --ec-tag-text-color: var(--ec-color-warning);
+  --ec-tag-border-color: var(--ec-color-warning-light-8);
+  --ec-tag-hover-color: var(--ec-color-warning);
+}
+.ec-tag--danger.ec-tag--light {
+  --ec-tag-bg-color: var(--ec-color-danger-light-9);
+  --ec-tag-text-color: var(--ec-color-danger);
+  --ec-tag-border-color: var(--ec-color-danger-light-8);
+  --ec-tag-hover-color: var(--ec-color-danger);
+}
+
+/* =========================================================
+   Dark effect: solid color bg + white text
+   ========================================================= */
+.ec-tag--primary.ec-tag--dark {
+  --ec-tag-bg-color: var(--ec-color-primary);
+  --ec-tag-text-color: var(--ec-color-white);
+  --ec-tag-border-color: var(--ec-color-primary);
+  --ec-tag-hover-color: var(--ec-color-primary-light-3);
+}
+.ec-tag--success.ec-tag--dark {
+  --ec-tag-bg-color: var(--ec-color-success);
+  --ec-tag-text-color: var(--ec-color-white);
+  --ec-tag-border-color: var(--ec-color-success);
+  --ec-tag-hover-color: var(--ec-color-success-light-3);
+}
+.ec-tag--info.ec-tag--dark {
+  --ec-tag-bg-color: var(--ec-color-info);
+  --ec-tag-text-color: var(--ec-color-white);
+  --ec-tag-border-color: var(--ec-color-info);
+  --ec-tag-hover-color: var(--ec-color-info-light-3);
+}
+.ec-tag--warning.ec-tag--dark {
+  --ec-tag-bg-color: var(--ec-color-warning);
+  --ec-tag-text-color: var(--ec-color-white);
+  --ec-tag-border-color: var(--ec-color-warning);
+  --ec-tag-hover-color: var(--ec-color-warning-light-3);
+}
+.ec-tag--danger.ec-tag--dark {
+  --ec-tag-bg-color: var(--ec-color-danger);
+  --ec-tag-text-color: var(--ec-color-white);
+  --ec-tag-border-color: var(--ec-color-danger);
+  --ec-tag-hover-color: var(--ec-color-danger-light-3);
+}
+
+/* =========================================================
+   Plain effect: transparent bg + color text + light-5 border
+   ========================================================= */
+.ec-tag--primary.ec-tag--plain {
+  --ec-tag-bg-color: var(--ec-fill-color-blank);
+  --ec-tag-text-color: var(--ec-color-primary);
+  --ec-tag-border-color: var(--ec-color-primary-light-5);
+  --ec-tag-hover-color: var(--ec-color-primary);
+}
+.ec-tag--success.ec-tag--plain {
+  --ec-tag-bg-color: var(--ec-fill-color-blank);
+  --ec-tag-text-color: var(--ec-color-success);
+  --ec-tag-border-color: var(--ec-color-success-light-5);
+  --ec-tag-hover-color: var(--ec-color-success);
+}
+.ec-tag--info.ec-tag--plain {
+  --ec-tag-bg-color: var(--ec-fill-color-blank);
+  --ec-tag-text-color: var(--ec-color-info);
+  --ec-tag-border-color: var(--ec-color-info-light-5);
+  --ec-tag-hover-color: var(--ec-color-info);
+}
+.ec-tag--warning.ec-tag--plain {
+  --ec-tag-bg-color: var(--ec-fill-color-blank);
+  --ec-tag-text-color: var(--ec-color-warning);
+  --ec-tag-border-color: var(--ec-color-warning-light-5);
+  --ec-tag-hover-color: var(--ec-color-warning);
+}
+.ec-tag--danger.ec-tag--plain {
+  --ec-tag-bg-color: var(--ec-fill-color-blank);
+  --ec-tag-text-color: var(--ec-color-danger);
+  --ec-tag-border-color: var(--ec-color-danger-light-5);
+  --ec-tag-hover-color: var(--ec-color-danger);
+}

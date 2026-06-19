@@ -1,0 +1,56 @@
+.ec-container {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-basis: auto;
+  flex-direction: row;
+  min-width: 0;
+}
+
+.ec-container.is-vertical {
+  flex-direction: column;
+}
+
+.ec-header {
+  --ec-header-height: 60px;
+
+  box-sizing: border-box;
+  flex-shrink: 0;
+  padding: 0 20px;
+  height: var(--ec-header-height);
+  color: var(--ec-text-color-primary);
+  background-color: var(--ec-bg-color);
+}
+
+.ec-footer {
+  --ec-footer-height: 60px;
+
+  box-sizing: border-box;
+  flex-shrink: 0;
+  padding: 0 20px;
+  height: var(--ec-footer-height);
+  color: var(--ec-text-color-primary);
+  background-color: var(--ec-bg-color);
+}
+
+.ec-aside {
+  --ec-aside-width: 300px;
+
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow: auto;
+  width: var(--ec-aside-width);
+  color: var(--ec-text-color-primary);
+  background-color: var(--ec-bg-color);
+}
+
+.ec-main {
+  box-sizing: border-box;
+  display: block;
+  flex: 1;
+  flex-basis: auto;
+  padding: 20px;
+  overflow: auto;
+  color: var(--ec-text-color-primary);
+  background-color: var(--ec-bg-color);
+}

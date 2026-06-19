@@ -1,0 +1,33 @@
+{
+  "key": "link",
+  "name": "Link",
+  "category": "Basic",
+  "status": "stable",
+  "wave": 1,
+  "description": "Text hyperlink with semantic types, underline and disabled states.",
+  "export": "Link",
+  "elementPlus": "https://element-plus.org/en-US/component/link",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Link } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Link/Link.tsx",
+      "type": "source",
+      "content": "import {\n  type AnchorHTMLAttributes,\n  forwardRef,\n  type MouseEvent,\n  type ReactNode,\n} from 'react';\nimport { cls, useNamespace } from '../../utils';\nimport { Icon } from '../Icon';\n\nexport type LinkType = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info';\n\nexport interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {\n  /** Visual variant. */\n  type?: LinkType;\n  /** Show an underline on hover. */\n  underline?: boolean;\n  /** Disable the link (removes `href` and blocks interaction). */\n  disabled?: boolean;\n  /** Destination URL. Ignored when disabled. */\n  href?: string;\n  /** Where to open the linked document. */\n  target?: string;\n  /** Leading icon. */\n  icon?: ReactNode;\n  children?: ReactNode;\n}\n\nexport const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(props, ref) {\n  const {\n    type = 'default',\n    underline = true,\n    disabled = false,\n    href,\n    target,\n    icon,\n    className,\n    style,\n    children,\n    onClick,\n    ...rest\n  } = props;\n\n  const ns = useNamespace('link');\n\n  // An anchor has no native `disabled` attribute, so when disabled we must\n  // guard the click ourselves: block default navigation and suppress the\n  // consumer's handler. Stripping `href` only prevents navigation, not the\n  // firing of `onClick`/other handlers.\n  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {\n    if (disabled) {\n      event.preventDefault();\n      return;\n    }\n    onClick?.(event);\n  };\n\n  const classes = cls(\n    ns.b(),\n    type && type !== 'default' && ns.m(type),\n    ns.is('underline', underline && !disabled),\n    ns.is('disabled', disabled),\n    className,\n  );\n\n  return (\n    <a\n      ref={ref}\n      className={classes}\n      href={disabled ? undefined : href}\n      target={disabled ? undefined : target}\n      aria-disabled={disabled || undefined}\n      style={style}\n      onClick={handleClick}\n      {...rest}\n    >\n      {icon && <Icon className={ns.e('icon')}>{icon}</Icon>}\n      {children !== undefined && children !== null && (\n        <span className={ns.e('inner')}>{children}</span>\n      )}\n    </a>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Link/index.ts",
+      "type": "source",
+      "content": "export * from './Link';\n"
+    },
+    {
+      "path": "@cobos/react/components/Link/link.css",
+      "type": "css",
+      "content": ".ec-link {\n  --ec-link-text-color: var(--ec-text-color-regular);\n  --ec-link-hover-text-color: var(--ec-color-primary);\n  --ec-link-disabled-text-color: var(--ec-disabled-text-color);\n\n  display: inline-flex;\n  align-items: center;\n  box-sizing: border-box;\n  gap: 4px;\n  padding: 0;\n  font-family: inherit;\n  font-size: var(--ec-font-size-base);\n  font-weight: var(--ec-font-weight-primary);\n  line-height: 1;\n  cursor: pointer;\n  text-decoration: none;\n  color: var(--ec-link-text-color);\n  background: none;\n  border: none;\n  outline: none;\n  transition: var(--ec-transition-color);\n}\n\n.ec-link:hover {\n  color: var(--ec-link-hover-text-color);\n}\n\n.ec-link:focus-visible {\n  outline: 2px solid var(--ec-color-primary-light-5);\n  outline-offset: 2px;\n  border-radius: var(--ec-border-radius-small);\n}\n\n.ec-link__inner {\n  display: inline-flex;\n  align-items: center;\n}\n\n/* The underline sits under the inner text only, shown on hover. */\n.ec-link.is-underline:hover .ec-link__inner::after {\n  content: '';\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  height: 0;\n  border-bottom: 1px solid var(--ec-link-hover-text-color);\n}\n\n.ec-link.is-underline:hover .ec-link__inner {\n  position: relative;\n}\n\n/* ---- Type variants ---- */\n.ec-link--primary {\n  --ec-link-text-color: var(--ec-color-primary);\n  --ec-link-hover-text-color: var(--ec-color-primary-light-3);\n}\n\n.ec-link--success {\n  --ec-link-text-color: var(--ec-color-success);\n  --ec-link-hover-text-color: var(--ec-color-success-light-3);\n}\n\n.ec-link--warning {\n  --ec-link-text-color: var(--ec-color-warning);\n  --ec-link-hover-text-color: var(--ec-color-warning-light-3);\n}\n\n.ec-link--danger {\n  --ec-link-text-color: var(--ec-color-danger);\n  --ec-link-hover-text-color: var(--ec-color-danger-light-3);\n}\n\n.ec-link--info {\n  --ec-link-text-color: var(--ec-color-info);\n  --ec-link-hover-text-color: var(--ec-color-info-light-3);\n}\n\n/* ---- Disabled ---- */\n.ec-link.is-disabled,\n.ec-link.is-disabled:hover {\n  color: var(--ec-link-disabled-text-color);\n  cursor: not-allowed;\n}\n"
+    }
+  ]
+}

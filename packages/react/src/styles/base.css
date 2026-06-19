@@ -1,0 +1,17 @@
+/* Cobos UI base styles. */
+
+@keyframes ec-rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ec-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ec-index-popper);
+  background-color: rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,49 @@
+.ec-card {
+  --ec-card-bg-color: var(--ec-bg-color);
+  --ec-card-text-color: var(--ec-text-color-primary);
+  --ec-card-border-color: var(--ec-border-color-light);
+  --ec-card-border-radius: var(--ec-border-radius-base);
+  --ec-card-padding: 20px;
+
+  box-sizing: border-box;
+  overflow: hidden;
+  color: var(--ec-card-text-color);
+  background-color: var(--ec-card-bg-color);
+  border: var(--ec-border-width) var(--ec-border-style) var(--ec-card-border-color);
+  border-radius: var(--ec-card-border-radius);
+  transition: var(--ec-transition-all);
+}
+
+.ec-card__header {
+  box-sizing: border-box;
+  padding: calc(var(--ec-card-padding) - 2px) var(--ec-card-padding);
+  border-bottom: var(--ec-border-width) var(--ec-border-style) var(--ec-card-border-color);
+}
+
+.ec-card__body {
+  box-sizing: border-box;
+  padding: var(--ec-card-padding);
+}
+
+.ec-card__footer {
+  box-sizing: border-box;
+  padding: calc(var(--ec-card-padding) - 2px) var(--ec-card-padding);
+  border-top: var(--ec-border-width) var(--ec-border-style) var(--ec-card-border-color);
+}
+
+/* ---- Shadow ---- */
+.ec-card.is-always-shadow {
+  box-shadow: var(--ec-box-shadow-light);
+}
+
+.ec-card.is-hover-shadow {
+  box-shadow: none;
+}
+
+.ec-card.is-hover-shadow:hover {
+  box-shadow: var(--ec-box-shadow-light);
+}
+
+.ec-card.is-never-shadow {
+  box-shadow: none;
+}

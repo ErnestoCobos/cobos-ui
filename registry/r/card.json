@@ -1,0 +1,33 @@
+{
+  "key": "card",
+  "name": "Card",
+  "category": "Data",
+  "status": "stable",
+  "wave": 1,
+  "description": "Content container with header, body, footer and shadow modes.",
+  "export": "Card",
+  "elementPlus": "https://element-plus.org/en-US/component/card",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Card } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Card/Card.tsx",
+      "type": "source",
+      "content": "import {\n  type CSSProperties,\n  forwardRef,\n  type HTMLAttributes,\n  type ReactNode,\n} from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport type CardShadow = 'always' | 'hover' | 'never';\n\nexport interface CardProps extends HTMLAttributes<HTMLDivElement> {\n  /** Header content. Renders the header section when set. */\n  header?: ReactNode;\n  /** Footer content. Renders the footer section when set. */\n  footer?: ReactNode;\n  /** Inline styles applied to the body section. */\n  bodyStyle?: CSSProperties;\n  /** Extra class applied to the body section. */\n  bodyClass?: string;\n  /** When the drop shadow is shown. */\n  shadow?: CardShadow;\n  children?: ReactNode;\n}\n\nexport const Card = forwardRef<HTMLDivElement, CardProps>(function Card(props, ref) {\n  const {\n    header,\n    footer,\n    bodyStyle,\n    bodyClass,\n    shadow = 'always',\n    className,\n    style,\n    children,\n    ...rest\n  } = props;\n\n  const ns = useNamespace('card');\n\n  const classes = cls(ns.b(), ns.is(`${shadow}-shadow`), className);\n\n  return (\n    <div ref={ref} className={classes} style={style} {...rest}>\n      {header !== undefined && header !== null && (\n        <div className={ns.e('header')}>{header}</div>\n      )}\n      <div className={cls(ns.e('body'), bodyClass)} style={bodyStyle}>\n        {children}\n      </div>\n      {footer !== undefined && footer !== null && (\n        <div className={ns.e('footer')}>{footer}</div>\n      )}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Card/card.css",
+      "type": "css",
+      "content": ".ec-card {\n  --ec-card-bg-color: var(--ec-bg-color);\n  --ec-card-text-color: var(--ec-text-color-primary);\n  --ec-card-border-color: var(--ec-border-color-light);\n  --ec-card-border-radius: var(--ec-border-radius-base);\n  --ec-card-padding: 20px;\n\n  box-sizing: border-box;\n  overflow: hidden;\n  color: var(--ec-card-text-color);\n  background-color: var(--ec-card-bg-color);\n  border: var(--ec-border-width) var(--ec-border-style) var(--ec-card-border-color);\n  border-radius: var(--ec-card-border-radius);\n  transition: var(--ec-transition-all);\n}\n\n.ec-card__header {\n  box-sizing: border-box;\n  padding: calc(var(--ec-card-padding) - 2px) var(--ec-card-padding);\n  border-bottom: var(--ec-border-width) var(--ec-border-style) var(--ec-card-border-color);\n}\n\n.ec-card__body {\n  box-sizing: border-box;\n  padding: var(--ec-card-padding);\n}\n\n.ec-card__footer {\n  box-sizing: border-box;\n  padding: calc(var(--ec-card-padding) - 2px) var(--ec-card-padding);\n  border-top: var(--ec-border-width) var(--ec-border-style) var(--ec-card-border-color);\n}\n\n/* ---- Shadow ---- */\n.ec-card.is-always-shadow {\n  box-shadow: var(--ec-box-shadow-light);\n}\n\n.ec-card.is-hover-shadow {\n  box-shadow: none;\n}\n\n.ec-card.is-hover-shadow:hover {\n  box-shadow: var(--ec-box-shadow-light);\n}\n\n.ec-card.is-never-shadow {\n  box-shadow: none;\n}\n"
+    },
+    {
+      "path": "@cobos/react/components/Card/index.ts",
+      "type": "source",
+      "content": "export * from './Card';\n"
+    }
+  ]
+}

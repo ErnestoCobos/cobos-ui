@@ -1,0 +1,273 @@
+.ec-select {
+  --ec-select-text-color: var(--ec-text-color-regular);
+  --ec-select-border-color: var(--ec-border-color);
+  --ec-select-hover-border-color: var(--ec-border-color-hover);
+  --ec-select-focus-border-color: var(--ec-color-primary);
+  --ec-select-bg-color: var(--ec-fill-color-blank);
+  --ec-select-icon-color: var(--ec-text-color-placeholder);
+  --ec-select-placeholder-color: var(--ec-text-color-placeholder);
+  --ec-select-border-radius: var(--ec-border-radius-base);
+  --ec-select-height: var(--ec-component-size);
+  --ec-select-font-size: var(--ec-font-size-base);
+
+  display: inline-flex;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: var(--ec-select-font-size);
+  cursor: pointer;
+  outline: none;
+}
+
+.ec-select__wrapper {
+  display: inline-flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: 6px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--ec-select-height);
+  padding: 1px 11px;
+  background-color: var(--ec-select-bg-color);
+  border-radius: var(--ec-select-border-radius);
+  transition: var(--ec-transition-box-shadow, var(--ec-transition-all));
+  box-shadow: 0 0 0 1px var(--ec-select-border-color) inset;
+}
+
+.ec-select__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--ec-select-hover-border-color) inset;
+}
+
+.ec-select:focus-visible .ec-select__wrapper,
+.ec-select__wrapper.is-focus {
+  box-shadow: 0 0 0 1px var(--ec-select-focus-border-color) inset;
+}
+
+.ec-select__selected,
+.ec-select__placeholder {
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+  line-height: calc(var(--ec-select-height) - 2px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ec-select__selected {
+  color: var(--ec-select-text-color);
+}
+
+.ec-select__placeholder {
+  color: var(--ec-select-placeholder-color);
+}
+
+.ec-select__input {
+  flex-grow: 1;
+  width: 100%;
+  min-width: 30px;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: calc(var(--ec-select-height) - 2px);
+  color: var(--ec-select-text-color);
+  background: none;
+  border: none;
+  outline: none;
+  appearance: none;
+}
+
+.ec-select__input::placeholder {
+  color: var(--ec-select-placeholder-color);
+}
+
+.ec-select__suffix {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  color: var(--ec-select-icon-color);
+}
+
+.ec-select__icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--ec-font-size-base);
+  color: var(--ec-select-icon-color);
+}
+
+.ec-select__caret {
+  transition: transform var(--ec-transition-duration);
+}
+
+.ec-select__caret.is-reverse {
+  transform: rotate(180deg);
+}
+
+.ec-select__clear {
+  cursor: pointer;
+  transition: var(--ec-transition-color);
+}
+
+.ec-select__clear:hover {
+  color: var(--ec-text-color-secondary);
+}
+
+/* ---- Multiple tags ---- */
+.ec-select__tags {
+  display: inline-flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 3px 0;
+}
+
+.ec-select__tag {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  gap: 6px;
+  height: 24px;
+  padding: 0 9px;
+  font-size: var(--ec-font-size-small);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--ec-color-primary);
+  background-color: var(--ec-color-primary-light-9);
+  border: var(--ec-border-width) var(--ec-border-style) var(--ec-color-primary-light-8);
+  border-radius: var(--ec-border-radius-base);
+}
+
+.ec-select__tag-text {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ec-select__tag-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  color: inherit;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: var(--ec-border-radius-circle);
+  outline: none;
+  transition: var(--ec-transition-all);
+}
+
+.ec-select__tag-close:hover {
+  color: var(--ec-color-white);
+  background-color: var(--ec-color-primary);
+}
+
+.ec-select__tags .ec-select__input {
+  width: auto;
+  flex-grow: 1;
+}
+
+/* ---- Disabled ---- */
+.ec-select.is-disabled {
+  cursor: not-allowed;
+}
+
+.ec-select.is-disabled .ec-select__wrapper {
+  background-color: var(--ec-disabled-bg-color);
+  box-shadow: 0 0 0 1px var(--ec-disabled-border-color) inset;
+  cursor: not-allowed;
+}
+
+.ec-select.is-disabled .ec-select__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--ec-disabled-border-color) inset;
+}
+
+.ec-select.is-disabled .ec-select__selected,
+.ec-select.is-disabled .ec-select__placeholder,
+.ec-select.is-disabled .ec-select__input {
+  color: var(--ec-disabled-text-color);
+}
+
+.ec-select.is-disabled .ec-select__input {
+  cursor: not-allowed;
+}
+
+/* ---- Sizes ---- */
+.ec-select--large {
+  --ec-select-height: var(--ec-component-size-large);
+  --ec-select-font-size: var(--ec-font-size-medium);
+}
+
+.ec-select--small {
+  --ec-select-height: var(--ec-component-size-small);
+  --ec-select-font-size: var(--ec-font-size-extra-small);
+}
+
+/* =========================================================
+   Dropdown (rendered inside the shared ec-popper surface)
+   ========================================================= */
+.ec-select__popper {
+  padding: 5px 0;
+}
+
+.ec-select-dropdown__list {
+  box-sizing: border-box;
+  max-height: 274px;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.ec-select-dropdown__item {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 34px;
+  padding: 0 20px;
+  overflow: hidden;
+  font-size: var(--ec-font-size-base);
+  font-weight: var(--ec-font-weight-primary);
+  line-height: 34px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--ec-text-color-regular);
+  cursor: pointer;
+  transition: var(--ec-transition-color);
+}
+
+.ec-select-dropdown__item:hover,
+.ec-select-dropdown__item.is-hovering {
+  background-color: var(--ec-fill-color-light);
+}
+
+.ec-select-dropdown__item.is-selected {
+  font-weight: var(--ec-font-weight-primary);
+  color: var(--ec-color-primary);
+}
+
+.ec-select-dropdown__item.is-disabled {
+  color: var(--ec-text-color-placeholder);
+  cursor: not-allowed;
+}
+
+.ec-select-dropdown__item.is-disabled:hover {
+  background-color: transparent;
+}
+
+.ec-select-dropdown__empty {
+  box-sizing: border-box;
+  padding: 10px 0;
+  margin: 0;
+  font-size: var(--ec-font-size-base);
+  text-align: center;
+  color: var(--ec-text-color-secondary);
+  list-style: none;
+}

@@ -1,0 +1,60 @@
+.ec-text {
+  --ec-text-color: var(--ec-text-color-regular);
+  --ec-text-font-size: var(--ec-font-size-base);
+  --ec-text-line-clamp: 1;
+
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: var(--ec-text-font-size);
+  font-weight: var(--ec-font-weight-primary);
+  line-height: 1.5;
+  color: var(--ec-text-color);
+}
+
+/* ---- Type variants ---- */
+.ec-text--primary {
+  --ec-text-color: var(--ec-color-primary);
+}
+
+.ec-text--success {
+  --ec-text-color: var(--ec-color-success);
+}
+
+.ec-text--warning {
+  --ec-text-color: var(--ec-color-warning);
+}
+
+.ec-text--danger {
+  --ec-text-color: var(--ec-color-danger);
+}
+
+.ec-text--info {
+  --ec-text-color: var(--ec-color-info);
+}
+
+/* ---- Sizes ---- */
+.ec-text--large {
+  --ec-text-font-size: var(--ec-font-size-large);
+}
+
+.ec-text--small {
+  --ec-text-font-size: var(--ec-font-size-small);
+}
+
+/* ---- Truncation ---- */
+.ec-text.is-truncated {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ec-text.is-line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--ec-text-line-clamp);
+  line-clamp: var(--ec-text-line-clamp);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

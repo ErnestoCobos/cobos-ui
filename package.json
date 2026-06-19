@@ -1,0 +1,40 @@
+{
+  "name": "cobos-ui",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Cobos UI — a token-first React design system by Ernesto Cobos.",
+  "author": "Ernesto Cobos <ernesto@cobos.io>",
+  "license": "MIT",
+  "homepage": "https://ui.cobos.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ErnestoCobos/cobos-ui.git"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm ci:build && pnpm -F docs build",
+    "ci:build": "pnpm -F @cobos/tokens build && pnpm -F @cobos/react build && pnpm build:registry && pnpm -F @cobos/mcp build",
+    "build:tokens": "pnpm -F @cobos/tokens build",
+    "build:registry": "node scripts/build-registry.mjs",
+    "dev": "pnpm -F docs dev",
+    "dev:docs": "pnpm -F docs dev",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,json,css,md}\"",
+    "release": "pnpm ci:build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.11",
+    "@eslint/js": "^9.18.0",
+    "@types/node": "^22.10.6",
+    "eslint": "^9.18.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0"
+  }
+}

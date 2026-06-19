@@ -1,0 +1,56 @@
+.ec-divider {
+  --ec-divider-border-color: var(--ec-border-color);
+  --ec-divider-border-style: solid;
+  --ec-divider-text-bg-color: var(--ec-bg-color);
+  --ec-divider-text-color: var(--ec-text-color-primary);
+  --ec-divider-text-font-size: var(--ec-font-size-small);
+
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ---- Horizontal ---- */
+.ec-divider--horizontal {
+  display: block;
+  width: 100%;
+  margin: 24px 0;
+  border-top: var(--ec-border-width) var(--ec-divider-border-style) var(--ec-divider-border-color);
+}
+
+.ec-divider--horizontal .ec-divider__text {
+  position: absolute;
+  top: 50%;
+  box-sizing: border-box;
+  padding: 0 20px;
+  font-size: var(--ec-divider-text-font-size);
+  font-weight: var(--ec-font-weight-primary);
+  color: var(--ec-divider-text-color);
+  background-color: var(--ec-divider-text-bg-color);
+  transform: translateY(-50%);
+}
+
+.ec-divider--horizontal.is-left .ec-divider__text {
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+.ec-divider--horizontal.is-center .ec-divider__text {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ec-divider--horizontal.is-right .ec-divider__text {
+  right: 20px;
+  left: auto;
+  transform: translateY(-50%);
+}
+
+/* ---- Vertical ---- */
+.ec-divider--vertical {
+  display: inline-block;
+  width: 0;
+  height: 1em;
+  margin: 0 8px;
+  vertical-align: middle;
+  border-left: var(--ec-border-width) var(--ec-divider-border-style) var(--ec-divider-border-color);
+}

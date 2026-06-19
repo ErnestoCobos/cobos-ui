@@ -1,0 +1,270 @@
+.ec-pagination {
+  --ec-pagination-font-size: var(--ec-font-size-base);
+  --ec-pagination-bg-color: var(--ec-fill-color-blank);
+  --ec-pagination-text-color: var(--ec-text-color-primary);
+  --ec-pagination-border-radius: var(--ec-border-radius-base);
+  --ec-pagination-button-color: var(--ec-text-color-primary);
+  --ec-pagination-button-bg-color: var(--ec-fill-color-blank);
+  --ec-pagination-button-disabled-color: var(--ec-text-color-placeholder);
+  --ec-pagination-button-disabled-bg-color: var(--ec-fill-color-blank);
+  --ec-pagination-hover-color: var(--ec-color-primary);
+  --ec-pagination-height: var(--ec-component-size);
+  --ec-pagination-button-width: var(--ec-component-size);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  font-family: var(--ec-font-family);
+  font-size: var(--ec-pagination-font-size);
+  font-weight: var(--ec-font-weight-primary);
+  color: var(--ec-pagination-text-color);
+}
+
+.ec-pagination *,
+.ec-pagination *::before,
+.ec-pagination *::after {
+  box-sizing: border-box;
+}
+
+/* ---- Prev / next buttons ---- */
+.ec-pagination__prev,
+.ec-pagination__next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: var(--ec-pagination-button-width);
+  height: var(--ec-pagination-height);
+  padding: 0 6px;
+  margin: 0;
+  font-size: var(--ec-pagination-font-size);
+  color: var(--ec-pagination-button-color);
+  background-color: var(--ec-pagination-button-bg-color);
+  border: none;
+  border-radius: var(--ec-pagination-border-radius);
+  cursor: pointer;
+  outline: none;
+  transition: var(--ec-transition-color);
+}
+
+.ec-pagination__prev:hover,
+.ec-pagination__next:hover {
+  color: var(--ec-pagination-hover-color);
+}
+
+.ec-pagination__prev:disabled,
+.ec-pagination__next:disabled {
+  color: var(--ec-pagination-button-disabled-color);
+  background-color: var(--ec-pagination-button-disabled-bg-color);
+  cursor: not-allowed;
+}
+
+.ec-pagination__prev:focus-visible,
+.ec-pagination__next:focus-visible {
+  outline: 2px solid var(--ec-color-primary-light-5);
+  outline-offset: 1px;
+}
+
+/* ---- Pager ---- */
+.ec-pager {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.ec-pager__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: var(--ec-pagination-button-width);
+  height: var(--ec-pagination-height);
+  padding: 0 4px;
+  font-size: var(--ec-pagination-font-size);
+  color: var(--ec-pagination-button-color);
+  background-color: var(--ec-pagination-button-bg-color);
+  border-radius: var(--ec-pagination-border-radius);
+  cursor: pointer;
+  outline: none;
+  transition: var(--ec-transition-all);
+}
+
+.ec-pager__item:hover {
+  color: var(--ec-pagination-hover-color);
+}
+
+.ec-pager__item:focus-visible {
+  outline: 2px solid var(--ec-color-primary-light-5);
+  outline-offset: 1px;
+}
+
+.ec-pager__item.is-active {
+  color: var(--ec-color-primary);
+  font-weight: bold;
+  cursor: default;
+}
+
+.ec-pager__item.is-more {
+  color: var(--ec-pagination-button-color);
+}
+
+.ec-pager__item.is-more:hover {
+  color: var(--ec-pagination-hover-color);
+}
+
+.ec-pager.is-disabled .ec-pager__item,
+.ec-pager.is-disabled .ec-pager__item:hover {
+  color: var(--ec-pagination-button-disabled-color);
+  cursor: not-allowed;
+}
+
+/* ---- Total ---- */
+.ec-pagination__total {
+  display: inline-flex;
+  align-items: center;
+  height: var(--ec-pagination-height);
+  color: var(--ec-text-color-regular);
+}
+
+/* ---- Size select ---- */
+.ec-pagination__sizes {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/*
+ * Theme-aware dropdown caret: a masked pseudo-element whose background-color is
+ * the placeholder token, so the arrow follows light/dark mode. A data URI fill
+ * cannot reference a CSS variable, so the SVG is used as a mask instead.
+ */
+.ec-pagination__sizes::after {
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  background-color: var(--ec-text-color-placeholder);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Cpath d='M831.872 340.864 512 652.672 192.128 340.864a30.592 30.592 0 0 0-42.752 0 29.12 29.12 0 0 0 0 41.6L489.6 714.24a32 32 0 0 0 44.8 0l340.224-331.776a29.12 29.12 0 0 0 0-41.6 30.592 30.592 0 0 0-42.752 0z'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Cpath d='M831.872 340.864 512 652.672 192.128 340.864a30.592 30.592 0 0 0-42.752 0 29.12 29.12 0 0 0 0 41.6L489.6 714.24a32 32 0 0 0 44.8 0l340.224-331.776a29.12 29.12 0 0 0 0-41.6 30.592 30.592 0 0 0-42.752 0z'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+}
+
+.ec-pagination__size-select {
+  box-sizing: border-box;
+  height: var(--ec-pagination-height);
+  padding: 0 25px 0 10px;
+  font-family: inherit;
+  font-size: var(--ec-pagination-font-size);
+  color: var(--ec-text-color-regular);
+  background-color: var(--ec-fill-color-blank);
+  border: var(--ec-border-width) var(--ec-border-style) var(--ec-border-color);
+  border-radius: var(--ec-pagination-border-radius);
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  transition: var(--ec-transition-border);
+}
+
+.ec-pagination__size-select:hover {
+  border-color: var(--ec-border-color-dark);
+}
+
+.ec-pagination__size-select:focus-visible {
+  border-color: var(--ec-color-primary);
+}
+
+.ec-pagination__size-select:disabled {
+  color: var(--ec-disabled-text-color);
+  cursor: not-allowed;
+}
+
+/* ---- Jumper ---- */
+.ec-pagination__jumper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--ec-pagination-height);
+  color: var(--ec-text-color-regular);
+}
+
+.ec-pagination__jumper-input {
+  box-sizing: border-box;
+  width: 50px;
+  height: var(--ec-pagination-height);
+  padding: 0 6px;
+  font-family: inherit;
+  font-size: var(--ec-pagination-font-size);
+  text-align: center;
+  color: var(--ec-text-color-regular);
+  background-color: var(--ec-fill-color-blank);
+  border: var(--ec-border-width) var(--ec-border-style) var(--ec-border-color);
+  border-radius: var(--ec-pagination-border-radius);
+  outline: none;
+  transition: var(--ec-transition-border);
+}
+
+.ec-pagination__jumper-input:hover {
+  border-color: var(--ec-border-color-dark);
+}
+
+.ec-pagination__jumper-input:focus-visible {
+  border-color: var(--ec-color-primary);
+}
+
+.ec-pagination__jumper-input:disabled {
+  color: var(--ec-disabled-text-color);
+  cursor: not-allowed;
+}
+
+/* ---- Background style ---- */
+.ec-pagination.is-background .ec-pagination__prev,
+.ec-pagination.is-background .ec-pagination__next,
+.ec-pagination.is-background .ec-pager__item {
+  background-color: var(--ec-fill-color);
+  margin: 0;
+}
+
+.ec-pagination.is-background .ec-pagination__prev:hover:not(:disabled),
+.ec-pagination.is-background .ec-pagination__next:hover:not(:disabled),
+.ec-pagination.is-background .ec-pager__item:not(.is-active):not(.is-more):hover {
+  color: var(--ec-color-primary);
+}
+
+.ec-pagination.is-background .ec-pager__item.is-active {
+  color: var(--ec-color-white);
+  background-color: var(--ec-color-primary);
+}
+
+.ec-pagination.is-background .ec-pagination__prev:disabled,
+.ec-pagination.is-background .ec-pagination__next:disabled {
+  color: var(--ec-pagination-button-disabled-color);
+  background-color: var(--ec-fill-color);
+}
+
+/* ---- Small variant ---- */
+.ec-pagination.is-small {
+  --ec-pagination-font-size: var(--ec-font-size-extra-small);
+  --ec-pagination-height: var(--ec-component-size-small);
+  --ec-pagination-button-width: var(--ec-component-size-small);
+  gap: 6px;
+}
+
+.ec-pagination.is-small .ec-pagination__size-select,
+.ec-pagination.is-small .ec-pagination__jumper-input {
+  height: var(--ec-pagination-height);
+}
+
+/* ---- Disabled ---- */
+.ec-pagination.is-disabled {
+  color: var(--ec-disabled-text-color);
+  cursor: not-allowed;
+}

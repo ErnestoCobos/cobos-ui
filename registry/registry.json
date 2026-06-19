@@ -1,0 +1,763 @@
+{
+  "name": "cobos-ui",
+  "homepage": "https://ui.cobos.io",
+  "description": "Cobos UI component catalog — the full Element Plus surface ported to React, by wave.",
+  "categories": [
+    "Basic",
+    "Configuration",
+    "Form",
+    "Data",
+    "Navigation",
+    "Feedback",
+    "Others"
+  ],
+  "total": 80,
+  "stable": 25,
+  "components": [
+    {
+      "key": "button",
+      "name": "Button",
+      "category": "Basic",
+      "status": "stable",
+      "wave": 1,
+      "description": "Commonly used button with types, sizes, plain/text/link variants, loading and icons.",
+      "export": "Button",
+      "elementPlus": "https://element-plus.org/en-US/component/button"
+    },
+    {
+      "key": "icon",
+      "name": "Icon",
+      "category": "Basic",
+      "status": "stable",
+      "wave": 1,
+      "description": "Wrapper that renders an SVG glyph with size, color and spin support.",
+      "export": "Icon",
+      "elementPlus": "https://element-plus.org/en-US/component/icon"
+    },
+    {
+      "key": "layout",
+      "name": "Layout",
+      "category": "Basic",
+      "status": "stable",
+      "wave": 1,
+      "description": "24-column responsive flexbox grid with Row and Col.",
+      "export": "Row",
+      "elementPlus": "https://element-plus.org/en-US/component/layout"
+    },
+    {
+      "key": "container",
+      "name": "Container",
+      "category": "Basic",
+      "status": "stable",
+      "wave": 1,
+      "description": "Page scaffolding: Container, Header, Aside, Main, Footer.",
+      "export": "Container",
+      "elementPlus": "https://element-plus.org/en-US/component/container"
+    },
+    {
+      "key": "link",
+      "name": "Link",
+      "category": "Basic",
+      "status": "stable",
+      "wave": 1,
+      "description": "Text hyperlink with semantic types, underline and disabled states.",
+      "export": "Link",
+      "elementPlus": "https://element-plus.org/en-US/component/link"
+    },
+    {
+      "key": "text",
+      "name": "Text",
+      "category": "Basic",
+      "status": "stable",
+      "wave": 1,
+      "description": "Typographic text with types, sizes, truncation and line clamping.",
+      "export": "Text",
+      "elementPlus": "https://element-plus.org/en-US/component/text"
+    },
+    {
+      "key": "space",
+      "name": "Space",
+      "category": "Basic",
+      "status": "stable",
+      "wave": 1,
+      "description": "Set consistent spacing between inline or stacked children.",
+      "export": "Space",
+      "elementPlus": "https://element-plus.org/en-US/component/space"
+    },
+    {
+      "key": "scrollbar",
+      "name": "Scrollbar",
+      "category": "Basic",
+      "status": "planned",
+      "wave": 3,
+      "description": "Custom themed scrollbar container.",
+      "elementPlus": "https://element-plus.org/en-US/component/scrollbar"
+    },
+    {
+      "key": "splitter",
+      "name": "Splitter",
+      "category": "Basic",
+      "status": "planned",
+      "wave": 3,
+      "description": "Resizable split panes.",
+      "elementPlus": "https://element-plus.org/en-US/component/splitter"
+    },
+    {
+      "key": "typography",
+      "name": "Typography",
+      "category": "Basic",
+      "status": "planned",
+      "wave": 3,
+      "description": "Typography scale documentation (covered by Text).",
+      "elementPlus": "https://element-plus.org/en-US/component/typography"
+    },
+    {
+      "key": "border",
+      "name": "Border",
+      "category": "Basic",
+      "status": "planned",
+      "wave": 3,
+      "description": "Border token reference.",
+      "elementPlus": "https://element-plus.org/en-US/component/border"
+    },
+    {
+      "key": "color",
+      "name": "Color",
+      "category": "Basic",
+      "status": "planned",
+      "wave": 3,
+      "description": "Color token reference.",
+      "elementPlus": "https://element-plus.org/en-US/component/color"
+    },
+    {
+      "key": "config-provider",
+      "name": "ConfigProvider",
+      "category": "Configuration",
+      "status": "stable",
+      "wave": 1,
+      "description": "Provides global size, disabled and direction context to descendants.",
+      "export": "ConfigProvider",
+      "elementPlus": "https://element-plus.org/en-US/component/config-provider"
+    },
+    {
+      "key": "input",
+      "name": "Input",
+      "category": "Form",
+      "status": "stable",
+      "wave": 1,
+      "description": "Text input with prefix/suffix, clearable, password, textarea and word limit.",
+      "export": "Input",
+      "elementPlus": "https://element-plus.org/en-US/component/input"
+    },
+    {
+      "key": "input-number",
+      "name": "InputNumber",
+      "category": "Form",
+      "status": "stable",
+      "wave": 1,
+      "description": "Numeric input with steppers, min/max, step and precision.",
+      "export": "InputNumber",
+      "elementPlus": "https://element-plus.org/en-US/component/input-number"
+    },
+    {
+      "key": "select",
+      "name": "Select",
+      "category": "Form",
+      "status": "stable",
+      "wave": 1,
+      "description": "Dropdown selector with multiple, filterable and clearable modes.",
+      "export": "Select",
+      "elementPlus": "https://element-plus.org/en-US/component/select"
+    },
+    {
+      "key": "checkbox",
+      "name": "Checkbox",
+      "category": "Form",
+      "status": "stable",
+      "wave": 1,
+      "description": "Checkbox with group, indeterminate, min/max and bordered styles.",
+      "export": "Checkbox",
+      "elementPlus": "https://element-plus.org/en-US/component/checkbox"
+    },
+    {
+      "key": "radio",
+      "name": "Radio",
+      "category": "Form",
+      "status": "stable",
+      "wave": 1,
+      "description": "Radio button with group and bordered styles.",
+      "export": "Radio",
+      "elementPlus": "https://element-plus.org/en-US/component/radio"
+    },
+    {
+      "key": "switch",
+      "name": "Switch",
+      "category": "Form",
+      "status": "stable",
+      "wave": 1,
+      "description": "On/off toggle with text, icons and loading.",
+      "export": "Switch",
+      "elementPlus": "https://element-plus.org/en-US/component/switch"
+    },
+    {
+      "key": "form",
+      "name": "Form",
+      "category": "Form",
+      "status": "stable",
+      "wave": 1,
+      "description": "Form layout and validation with rules and imperative methods.",
+      "export": "Form",
+      "elementPlus": "https://element-plus.org/en-US/component/form"
+    },
+    {
+      "key": "rate",
+      "name": "Rate",
+      "category": "Form",
+      "status": "planned",
+      "wave": 2,
+      "description": "Star rating input.",
+      "elementPlus": "https://element-plus.org/en-US/component/rate"
+    },
+    {
+      "key": "slider",
+      "name": "Slider",
+      "category": "Form",
+      "status": "planned",
+      "wave": 2,
+      "description": "Range slider input.",
+      "elementPlus": "https://element-plus.org/en-US/component/slider"
+    },
+    {
+      "key": "time-picker",
+      "name": "TimePicker",
+      "category": "Form",
+      "status": "planned",
+      "wave": 2,
+      "description": "Time selection input.",
+      "elementPlus": "https://element-plus.org/en-US/component/time-picker"
+    },
+    {
+      "key": "date-picker",
+      "name": "DatePicker",
+      "category": "Form",
+      "status": "planned",
+      "wave": 2,
+      "description": "Date and date-range selection.",
+      "elementPlus": "https://element-plus.org/en-US/component/date-picker"
+    },
+    {
+      "key": "upload",
+      "name": "Upload",
+      "category": "Form",
+      "status": "planned",
+      "wave": 2,
+      "description": "File upload with drag, preview and list.",
+      "elementPlus": "https://element-plus.org/en-US/component/upload"
+    },
+    {
+      "key": "autocomplete",
+      "name": "Autocomplete",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "Input with suggestion dropdown.",
+      "elementPlus": "https://element-plus.org/en-US/component/autocomplete"
+    },
+    {
+      "key": "cascader",
+      "name": "Cascader",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "Cascading multi-level selector.",
+      "elementPlus": "https://element-plus.org/en-US/component/cascader"
+    },
+    {
+      "key": "color-picker",
+      "name": "ColorPicker",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "Color selection control.",
+      "elementPlus": "https://element-plus.org/en-US/component/color-picker"
+    },
+    {
+      "key": "datetime-picker",
+      "name": "DateTimePicker",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "Combined date and time selection.",
+      "elementPlus": "https://element-plus.org/en-US/component/datetime-picker"
+    },
+    {
+      "key": "input-tag",
+      "name": "InputTag",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "Tokenized tag input.",
+      "elementPlus": "https://element-plus.org/en-US/component/input-tag"
+    },
+    {
+      "key": "input-otp",
+      "name": "InputOTP",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "One-time-passcode input.",
+      "elementPlus": "https://element-plus.org/en-US/component/input-otp"
+    },
+    {
+      "key": "mention",
+      "name": "Mention",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "Inline @mention suggestions.",
+      "elementPlus": "https://element-plus.org/en-US/component/mention"
+    },
+    {
+      "key": "time-select",
+      "name": "TimeSelect",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "Fixed-interval time selector.",
+      "elementPlus": "https://element-plus.org/en-US/component/time-select"
+    },
+    {
+      "key": "transfer",
+      "name": "Transfer",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "Dual-list transfer control.",
+      "elementPlus": "https://element-plus.org/en-US/component/transfer"
+    },
+    {
+      "key": "tree-select",
+      "name": "TreeSelect",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "Tree-structured selector.",
+      "elementPlus": "https://element-plus.org/en-US/component/tree-select"
+    },
+    {
+      "key": "virtualized-select",
+      "name": "VirtualizedSelect",
+      "category": "Form",
+      "status": "planned",
+      "wave": 3,
+      "description": "Virtualized select for large option sets.",
+      "elementPlus": "https://element-plus.org/en-US/component/select-v2"
+    },
+    {
+      "key": "avatar",
+      "name": "Avatar",
+      "category": "Data",
+      "status": "stable",
+      "wave": 1,
+      "description": "Image, icon or text avatar in circle or square.",
+      "export": "Avatar",
+      "elementPlus": "https://element-plus.org/en-US/component/avatar"
+    },
+    {
+      "key": "card",
+      "name": "Card",
+      "category": "Data",
+      "status": "stable",
+      "wave": 1,
+      "description": "Content container with header, body, footer and shadow modes.",
+      "export": "Card",
+      "elementPlus": "https://element-plus.org/en-US/component/card"
+    },
+    {
+      "key": "table",
+      "name": "Table",
+      "category": "Data",
+      "status": "stable",
+      "wave": 1,
+      "description": "Data table with sorting, selection, border, stripe and fixed header.",
+      "export": "Table",
+      "elementPlus": "https://element-plus.org/en-US/component/table"
+    },
+    {
+      "key": "tag",
+      "name": "Tag",
+      "category": "Data",
+      "status": "stable",
+      "wave": 1,
+      "description": "Label tag with types, effects, sizes and closable.",
+      "export": "Tag",
+      "elementPlus": "https://element-plus.org/en-US/component/tag"
+    },
+    {
+      "key": "pagination",
+      "name": "Pagination",
+      "category": "Data",
+      "status": "stable",
+      "wave": 1,
+      "description": "Pager with sizes, jumper, total and background variants.",
+      "export": "Pagination",
+      "elementPlus": "https://element-plus.org/en-US/component/pagination"
+    },
+    {
+      "key": "badge",
+      "name": "Badge",
+      "category": "Data",
+      "status": "planned",
+      "wave": 2,
+      "description": "Count or dot badge on an element.",
+      "elementPlus": "https://element-plus.org/en-US/component/badge"
+    },
+    {
+      "key": "progress",
+      "name": "Progress",
+      "category": "Data",
+      "status": "planned",
+      "wave": 2,
+      "description": "Linear and circular progress.",
+      "elementPlus": "https://element-plus.org/en-US/component/progress"
+    },
+    {
+      "key": "skeleton",
+      "name": "Skeleton",
+      "category": "Data",
+      "status": "planned",
+      "wave": 2,
+      "description": "Loading placeholder.",
+      "elementPlus": "https://element-plus.org/en-US/component/skeleton"
+    },
+    {
+      "key": "empty",
+      "name": "Empty",
+      "category": "Data",
+      "status": "planned",
+      "wave": 2,
+      "description": "Empty-state placeholder.",
+      "elementPlus": "https://element-plus.org/en-US/component/empty"
+    },
+    {
+      "key": "descriptions",
+      "name": "Descriptions",
+      "category": "Data",
+      "status": "planned",
+      "wave": 2,
+      "description": "Key/value description list.",
+      "elementPlus": "https://element-plus.org/en-US/component/descriptions"
+    },
+    {
+      "key": "collapse",
+      "name": "Collapse",
+      "category": "Data",
+      "status": "planned",
+      "wave": 2,
+      "description": "Accordion collapse panels.",
+      "elementPlus": "https://element-plus.org/en-US/component/collapse"
+    },
+    {
+      "key": "tree",
+      "name": "Tree",
+      "category": "Data",
+      "status": "planned",
+      "wave": 2,
+      "description": "Hierarchical tree view.",
+      "elementPlus": "https://element-plus.org/en-US/component/tree"
+    },
+    {
+      "key": "calendar",
+      "name": "Calendar",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Month/date calendar.",
+      "elementPlus": "https://element-plus.org/en-US/component/calendar"
+    },
+    {
+      "key": "carousel",
+      "name": "Carousel",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Image/content carousel.",
+      "elementPlus": "https://element-plus.org/en-US/component/carousel"
+    },
+    {
+      "key": "image",
+      "name": "Image",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Image with lazy load and preview.",
+      "elementPlus": "https://element-plus.org/en-US/component/image"
+    },
+    {
+      "key": "infinite-scroll",
+      "name": "InfiniteScroll",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Load more on scroll.",
+      "elementPlus": "https://element-plus.org/en-US/component/infinite-scroll"
+    },
+    {
+      "key": "result",
+      "name": "Result",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Result/feedback page block.",
+      "elementPlus": "https://element-plus.org/en-US/component/result"
+    },
+    {
+      "key": "statistic",
+      "name": "Statistic",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Numeric statistic with countdown.",
+      "elementPlus": "https://element-plus.org/en-US/component/statistic"
+    },
+    {
+      "key": "segmented",
+      "name": "Segmented",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Segmented control.",
+      "elementPlus": "https://element-plus.org/en-US/component/segmented"
+    },
+    {
+      "key": "timeline",
+      "name": "Timeline",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Vertical timeline.",
+      "elementPlus": "https://element-plus.org/en-US/component/timeline"
+    },
+    {
+      "key": "tour",
+      "name": "Tour",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Guided product tour.",
+      "elementPlus": "https://element-plus.org/en-US/component/tour"
+    },
+    {
+      "key": "virtualized-table",
+      "name": "VirtualizedTable",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Virtualized table for large datasets.",
+      "elementPlus": "https://element-plus.org/en-US/component/table-v2"
+    },
+    {
+      "key": "virtualized-tree",
+      "name": "VirtualizedTree",
+      "category": "Data",
+      "status": "planned",
+      "wave": 3,
+      "description": "Virtualized tree for large datasets.",
+      "elementPlus": "https://element-plus.org/en-US/component/tree-v2"
+    },
+    {
+      "key": "tabs",
+      "name": "Tabs",
+      "category": "Navigation",
+      "status": "stable",
+      "wave": 1,
+      "description": "Tabbed navigation with line, card and border-card types and 4 positions.",
+      "export": "Tabs",
+      "elementPlus": "https://element-plus.org/en-US/component/tabs"
+    },
+    {
+      "key": "menu",
+      "name": "Menu",
+      "category": "Navigation",
+      "status": "stable",
+      "wave": 1,
+      "description": "Vertical/horizontal menu with submenus, groups and collapse.",
+      "export": "Menu",
+      "elementPlus": "https://element-plus.org/en-US/component/menu"
+    },
+    {
+      "key": "dropdown",
+      "name": "Dropdown",
+      "category": "Navigation",
+      "status": "stable",
+      "wave": 1,
+      "description": "Dropdown menu triggered by hover or click.",
+      "export": "Dropdown",
+      "elementPlus": "https://element-plus.org/en-US/component/dropdown"
+    },
+    {
+      "key": "breadcrumb",
+      "name": "Breadcrumb",
+      "category": "Navigation",
+      "status": "planned",
+      "wave": 2,
+      "description": "Breadcrumb trail.",
+      "elementPlus": "https://element-plus.org/en-US/component/breadcrumb"
+    },
+    {
+      "key": "steps",
+      "name": "Steps",
+      "category": "Navigation",
+      "status": "planned",
+      "wave": 2,
+      "description": "Step/wizard progress.",
+      "elementPlus": "https://element-plus.org/en-US/component/steps"
+    },
+    {
+      "key": "page-header",
+      "name": "PageHeader",
+      "category": "Navigation",
+      "status": "planned",
+      "wave": 2,
+      "description": "Page header with back and breadcrumb.",
+      "elementPlus": "https://element-plus.org/en-US/component/page-header"
+    },
+    {
+      "key": "affix",
+      "name": "Affix",
+      "category": "Navigation",
+      "status": "planned",
+      "wave": 3,
+      "description": "Pin an element on scroll.",
+      "elementPlus": "https://element-plus.org/en-US/component/affix"
+    },
+    {
+      "key": "anchor",
+      "name": "Anchor",
+      "category": "Navigation",
+      "status": "planned",
+      "wave": 3,
+      "description": "Scroll-spy anchor links.",
+      "elementPlus": "https://element-plus.org/en-US/component/anchor"
+    },
+    {
+      "key": "backtop",
+      "name": "Backtop",
+      "category": "Navigation",
+      "status": "planned",
+      "wave": 3,
+      "description": "Back-to-top button.",
+      "elementPlus": "https://element-plus.org/en-US/component/backtop"
+    },
+    {
+      "key": "dialog",
+      "name": "Dialog",
+      "category": "Feedback",
+      "status": "stable",
+      "wave": 1,
+      "description": "Modal dialog with focus trap, scroll lock and dismissal.",
+      "export": "Dialog",
+      "elementPlus": "https://element-plus.org/en-US/component/dialog"
+    },
+    {
+      "key": "alert",
+      "name": "Alert",
+      "category": "Feedback",
+      "status": "planned",
+      "wave": 2,
+      "description": "Inline alert banner.",
+      "elementPlus": "https://element-plus.org/en-US/component/alert"
+    },
+    {
+      "key": "tooltip",
+      "name": "Tooltip",
+      "category": "Feedback",
+      "status": "planned",
+      "wave": 2,
+      "description": "Hover/focus tooltip.",
+      "elementPlus": "https://element-plus.org/en-US/component/tooltip"
+    },
+    {
+      "key": "popover",
+      "name": "Popover",
+      "category": "Feedback",
+      "status": "planned",
+      "wave": 2,
+      "description": "Rich popover panel.",
+      "elementPlus": "https://element-plus.org/en-US/component/popover"
+    },
+    {
+      "key": "popconfirm",
+      "name": "Popconfirm",
+      "category": "Feedback",
+      "status": "planned",
+      "wave": 2,
+      "description": "Inline confirmation popover.",
+      "elementPlus": "https://element-plus.org/en-US/component/popconfirm"
+    },
+    {
+      "key": "drawer",
+      "name": "Drawer",
+      "category": "Feedback",
+      "status": "planned",
+      "wave": 2,
+      "description": "Slide-in panel from an edge.",
+      "elementPlus": "https://element-plus.org/en-US/component/drawer"
+    },
+    {
+      "key": "message",
+      "name": "Message",
+      "category": "Feedback",
+      "status": "planned",
+      "wave": 2,
+      "description": "Imperative toast message.",
+      "elementPlus": "https://element-plus.org/en-US/component/message"
+    },
+    {
+      "key": "notification",
+      "name": "Notification",
+      "category": "Feedback",
+      "status": "planned",
+      "wave": 2,
+      "description": "Imperative corner notification.",
+      "elementPlus": "https://element-plus.org/en-US/component/notification"
+    },
+    {
+      "key": "message-box",
+      "name": "MessageBox",
+      "category": "Feedback",
+      "status": "planned",
+      "wave": 2,
+      "description": "Imperative alert/confirm/prompt dialog.",
+      "elementPlus": "https://element-plus.org/en-US/component/message-box"
+    },
+    {
+      "key": "loading",
+      "name": "Loading",
+      "category": "Feedback",
+      "status": "planned",
+      "wave": 2,
+      "description": "Full-area loading mask via hook/component.",
+      "elementPlus": "https://element-plus.org/en-US/component/loading"
+    },
+    {
+      "key": "divider",
+      "name": "Divider",
+      "category": "Others",
+      "status": "stable",
+      "wave": 1,
+      "description": "Horizontal or vertical separator with optional label.",
+      "export": "Divider",
+      "elementPlus": "https://element-plus.org/en-US/component/divider"
+    },
+    {
+      "key": "watermark",
+      "name": "Watermark",
+      "category": "Others",
+      "status": "planned",
+      "wave": 3,
+      "description": "Repeating watermark overlay.",
+      "elementPlus": "https://element-plus.org/en-US/component/watermark"
+    }
+  ]
+}

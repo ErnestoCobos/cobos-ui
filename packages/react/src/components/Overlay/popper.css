@@ -1,0 +1,20 @@
+.ec-popper {
+  box-sizing: border-box;
+  z-index: var(--ec-index-popper);
+  background-color: var(--ec-bg-color-overlay);
+  border: 1px solid var(--ec-border-color-light);
+  border-radius: var(--ec-border-radius-base);
+  box-shadow: var(--ec-box-shadow-light);
+  color: var(--ec-text-color-regular);
+  font-family: var(--ec-font-family);
+  font-size: var(--ec-font-size-base);
+}
+
+.ec-popper__arrow {
+  width: 10px;
+  height: 10px;
+  background-color: inherit;
+  border: inherit;
+  transform: rotate(45deg);
+  z-index: -1;
+}

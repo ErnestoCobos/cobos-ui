@@ -1,0 +1,169 @@
+.ec-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ec-index-popper);
+  overflow: auto;
+}
+
+.ec-dialog__mask {
+  background-color: var(--ec-dialog-overlay-color);
+  animation: ec-dialog-fade-in var(--ec-transition-duration) var(--ec-transition-function-fast-bezier);
+}
+
+.ec-dialog__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 100%;
+  padding-bottom: 4vh;
+}
+
+.ec-dialog__wrapper.is-align-center {
+  justify-content: center;
+  padding-bottom: 0;
+}
+
+/*
+ * Non-modal dialog: no masking layer is rendered, so the full-screen wrapper
+ * must let pointer events fall through to the page behind it. Only the dialog
+ * panel itself re-enables pointer events.
+ */
+.ec-dialog__wrapper.is-non-modal {
+  pointer-events: none;
+}
+
+.ec-dialog__wrapper.is-non-modal .ec-dialog {
+  pointer-events: auto;
+}
+
+.ec-dialog {
+  --ec-dialog-width: 50%;
+  --ec-dialog-padding-primary: 16px;
+  --ec-dialog-overlay-color: rgba(0, 0, 0, 0.5);
+  --ec-dialog-bg-color: var(--ec-bg-color);
+  --ec-dialog-title-font-size: var(--ec-font-size-large);
+  --ec-dialog-content-font-size: var(--ec-font-size-base);
+  --ec-dialog-font-line-height: 1.5;
+  --ec-dialog-box-shadow: var(--ec-box-shadow);
+
+  position: relative;
+  box-sizing: border-box;
+  width: var(--ec-dialog-width);
+  max-width: calc(100% - 32px);
+  padding: var(--ec-dialog-padding-primary);
+  background-color: var(--ec-dialog-bg-color);
+  border-radius: var(--ec-border-radius-base);
+  box-shadow: var(--ec-dialog-box-shadow);
+  color: var(--ec-text-color-regular);
+  font-family: var(--ec-font-family);
+  font-size: var(--ec-dialog-content-font-size);
+  word-break: break-all;
+  outline: none;
+  animation: ec-dialog-zoom-in var(--ec-transition-duration) var(--ec-transition-function-fast-bezier);
+}
+
+.ec-dialog.is-fullscreen {
+  --ec-dialog-width: 100%;
+
+  margin: 0;
+  max-width: 100%;
+  min-height: 100%;
+  border-radius: 0;
+  overflow: auto;
+}
+
+.ec-dialog.is-align-center {
+  margin: 0;
+}
+
+.ec-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: var(--ec-dialog-padding-primary);
+  padding-right: 0;
+}
+
+.ec-dialog.is-center .ec-dialog__header {
+  justify-content: center;
+  text-align: center;
+}
+
+.ec-dialog__title {
+  flex: 1;
+  font-size: var(--ec-dialog-title-font-size);
+  line-height: var(--ec-dialog-font-line-height);
+  color: var(--ec-text-color-primary);
+}
+
+.ec-dialog.is-center .ec-dialog__title {
+  flex: none;
+}
+
+.ec-dialog__headerbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--ec-text-color-secondary);
+  transition: var(--ec-transition-color);
+}
+
+.ec-dialog__headerbtn:hover {
+  color: var(--ec-color-primary);
+}
+
+.ec-dialog__headerbtn:focus-visible {
+  outline: 2px solid var(--ec-color-primary-light-5);
+  outline-offset: 1px;
+}
+
+.ec-dialog__body {
+  font-size: var(--ec-dialog-content-font-size);
+  line-height: var(--ec-dialog-font-line-height);
+  color: var(--ec-text-color-regular);
+}
+
+.ec-dialog__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: var(--ec-dialog-padding-primary);
+  box-sizing: border-box;
+}
+
+.ec-dialog.is-center .ec-dialog__footer {
+  justify-content: center;
+}
+
+@keyframes ec-dialog-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ec-dialog-zoom-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "key": "space",
+  "name": "Space",
+  "category": "Basic",
+  "status": "stable",
+  "wave": 1,
+  "description": "Set consistent spacing between inline or stacked children.",
+  "export": "Space",
+  "elementPlus": "https://element-plus.org/en-US/component/space",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Space } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Space/Space.tsx",
+      "type": "source",
+      "content": "import { type CSSProperties, forwardRef, type HTMLAttributes, type ReactNode } from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport type SpaceDirection = 'horizontal' | 'vertical';\n\nexport type SpaceSize = 'small' | 'default' | 'large' | number;\n\nexport type SpaceAlign = 'start' | 'end' | 'center' | 'baseline';\n\nexport interface SpaceProps extends HTMLAttributes<HTMLDivElement> {\n  /** Layout direction. */\n  direction?: SpaceDirection;\n  /** Spacing between items. Named sizes map to small=8, default=12, large=16. */\n  size?: SpaceSize;\n  /** Cross-axis alignment of items. Defaults to `center`. */\n  alignment?: SpaceAlign;\n  /**\n   * Cross-axis alignment of items.\n   * @deprecated Use `alignment` to match the Element Plus API. Kept as an alias.\n   */\n  align?: SpaceAlign;\n  /** Whether items wrap onto multiple lines. */\n  wrap?: boolean;\n  /** Whether items stretch to fill the available space. */\n  fill?: boolean;\n  children?: ReactNode;\n}\n\nconst sizeMap: Record<Exclude<SpaceSize, number>, number> = {\n  small: 8,\n  default: 12,\n  large: 16,\n};\n\nconst alignMap: Record<SpaceAlign, CSSProperties['alignItems']> = {\n  start: 'flex-start',\n  end: 'flex-end',\n  center: 'center',\n  baseline: 'baseline',\n};\n\nexport const Space = forwardRef<HTMLDivElement, SpaceProps>(function Space(props, ref) {\n  const {\n    direction = 'horizontal',\n    size = 'small',\n    alignment,\n    align,\n    wrap = false,\n    fill = false,\n    className,\n    style,\n    children,\n    ...rest\n  } = props;\n\n  const ns = useNamespace('space');\n\n  const gap = typeof size === 'number' ? size : sizeMap[size];\n\n  // `alignment` is the canonical prop; `align` is kept as a deprecated alias.\n  const resolvedAlign: SpaceAlign = alignment ?? align ?? 'center';\n\n  const classes = cls(\n    ns.b(),\n    ns.m(direction),\n    ns.is('wrap', wrap),\n    ns.is('fill', fill),\n    className,\n  );\n\n  const spaceStyle: CSSProperties = {\n    gap,\n    alignItems: alignMap[resolvedAlign],\n  };\n\n  return (\n    <div ref={ref} className={classes} style={{ ...spaceStyle, ...style }} {...rest}>\n      {children}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Space/index.ts",
+      "type": "source",
+      "content": "export * from './Space';\n"
+    },
+    {
+      "path": "@cobos/react/components/Space/space.css",
+      "type": "css",
+      "content": ".ec-space {\n  box-sizing: border-box;\n  display: inline-flex;\n  flex-direction: row;\n}\n\n.ec-space--vertical {\n  flex-direction: column;\n}\n\n.ec-space.is-wrap {\n  flex-wrap: wrap;\n}\n\n.ec-space.is-fill {\n  display: flex;\n  width: 100%;\n}\n\n.ec-space.is-fill > * {\n  flex: 1;\n}\n"
+    }
+  ]
+}

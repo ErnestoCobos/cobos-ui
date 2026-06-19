@@ -1,0 +1,85 @@
+.ec-link {
+  --ec-link-text-color: var(--ec-text-color-regular);
+  --ec-link-hover-text-color: var(--ec-color-primary);
+  --ec-link-disabled-text-color: var(--ec-disabled-text-color);
+
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  gap: 4px;
+  padding: 0;
+  font-family: inherit;
+  font-size: var(--ec-font-size-base);
+  font-weight: var(--ec-font-weight-primary);
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--ec-link-text-color);
+  background: none;
+  border: none;
+  outline: none;
+  transition: var(--ec-transition-color);
+}
+
+.ec-link:hover {
+  color: var(--ec-link-hover-text-color);
+}
+
+.ec-link:focus-visible {
+  outline: 2px solid var(--ec-color-primary-light-5);
+  outline-offset: 2px;
+  border-radius: var(--ec-border-radius-small);
+}
+
+.ec-link__inner {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* The underline sits under the inner text only, shown on hover. */
+.ec-link.is-underline:hover .ec-link__inner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  border-bottom: 1px solid var(--ec-link-hover-text-color);
+}
+
+.ec-link.is-underline:hover .ec-link__inner {
+  position: relative;
+}
+
+/* ---- Type variants ---- */
+.ec-link--primary {
+  --ec-link-text-color: var(--ec-color-primary);
+  --ec-link-hover-text-color: var(--ec-color-primary-light-3);
+}
+
+.ec-link--success {
+  --ec-link-text-color: var(--ec-color-success);
+  --ec-link-hover-text-color: var(--ec-color-success-light-3);
+}
+
+.ec-link--warning {
+  --ec-link-text-color: var(--ec-color-warning);
+  --ec-link-hover-text-color: var(--ec-color-warning-light-3);
+}
+
+.ec-link--danger {
+  --ec-link-text-color: var(--ec-color-danger);
+  --ec-link-hover-text-color: var(--ec-color-danger-light-3);
+}
+
+.ec-link--info {
+  --ec-link-text-color: var(--ec-color-info);
+  --ec-link-hover-text-color: var(--ec-color-info-light-3);
+}
+
+/* ---- Disabled ---- */
+.ec-link.is-disabled,
+.ec-link.is-disabled:hover {
+  color: var(--ec-link-disabled-text-color);
+  cursor: not-allowed;
+}

@@ -1,0 +1,33 @@
+{
+  "key": "avatar",
+  "name": "Avatar",
+  "category": "Data",
+  "status": "stable",
+  "wave": 1,
+  "description": "Image, icon or text avatar in circle or square.",
+  "export": "Avatar",
+  "elementPlus": "https://element-plus.org/en-US/component/avatar",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Avatar } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Avatar/Avatar.tsx",
+      "type": "source",
+      "content": "import {\n  type CSSProperties,\n  forwardRef,\n  type HTMLAttributes,\n  type ReactNode,\n  type SyntheticEvent,\n  useEffect,\n  useState,\n} from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport type AvatarSize = 'large' | 'default' | 'small' | number;\n\nexport type AvatarShape = 'circle' | 'square';\n\nexport type AvatarFit = 'fill' | 'contain' | 'cover' | 'none' | 'scale-down';\n\nexport interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {\n  /** Size token or explicit pixel size. */\n  size?: AvatarSize;\n  /** Shape of the avatar. */\n  shape?: AvatarShape;\n  /** Image source. */\n  src?: string;\n  /** Image `srcset`. */\n  srcSet?: string;\n  /** Image alternative text. */\n  alt?: string;\n  /** How the image fits its box. */\n  fit?: AvatarFit;\n  /** Fallback icon when no image is available. */\n  icon?: ReactNode;\n  /** Fired when the image fails to load. Return `false` to keep showing it. */\n  onError?: (e: SyntheticEvent<HTMLImageElement>) => boolean | void;\n  children?: ReactNode;\n}\n\nexport const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(props, ref) {\n  const {\n    size = 'default',\n    shape = 'circle',\n    src,\n    srcSet,\n    alt,\n    fit = 'cover',\n    icon,\n    onError,\n    className,\n    style,\n    children,\n    ...rest\n  } = props;\n\n  const ns = useNamespace('avatar');\n  const [hasLoadError, setHasLoadError] = useState(false);\n\n  // Reset the error state whenever the source changes.\n  useEffect(() => {\n    setHasLoadError(false);\n  }, [src, srcSet]);\n\n  const handleError = (e: SyntheticEvent<HTMLImageElement>) => {\n    const keep = onError?.(e);\n    if (keep !== false) {\n      setHasLoadError(true);\n    }\n  };\n\n  const isImageSize = typeof size === 'number';\n\n  const classes = cls(\n    ns.b(),\n    ns.m(shape),\n    !isImageSize && size !== 'default' && ns.m(size),\n    Boolean(icon) && ns.m('icon'),\n    className,\n  );\n\n  const sizeStyle: CSSProperties = isImageSize\n    ? { width: `${size}px`, height: `${size}px`, fontSize: `${size / 2}px` }\n    : {};\n\n  const showImage = Boolean(src || srcSet) && !hasLoadError;\n\n  return (\n    <span ref={ref} className={classes} style={{ ...sizeStyle, ...style }} {...rest}>\n      {showImage ? (\n        <img\n          className={ns.e('image')}\n          src={src}\n          srcSet={srcSet}\n          alt={alt}\n          style={{ objectFit: fit }}\n          onError={handleError}\n        />\n      ) : icon ? (\n        <span className={ns.e('icon')}>{icon}</span>\n      ) : (\n        children\n      )}\n    </span>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Avatar/avatar.css",
+      "type": "css",
+      "content": ".ec-avatar {\n  --ec-avatar-size: 40px;\n  --ec-avatar-font-size: var(--ec-font-size-base);\n  --ec-avatar-icon-size: 18px;\n  --ec-avatar-bg-color: var(--ec-text-color-disabled);\n  --ec-avatar-text-color: var(--ec-color-white);\n  --ec-avatar-border-radius: var(--ec-border-radius-circle);\n\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  width: var(--ec-avatar-size);\n  height: var(--ec-avatar-size);\n  overflow: hidden;\n  font-family: inherit;\n  font-size: var(--ec-avatar-font-size);\n  line-height: 1;\n  white-space: nowrap;\n  color: var(--ec-avatar-text-color);\n  background-color: var(--ec-avatar-bg-color);\n  border-radius: var(--ec-avatar-border-radius);\n  user-select: none;\n}\n\n.ec-avatar__image {\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n}\n\n.ec-avatar__icon {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n}\n\n/* ---- Shapes ---- */\n.ec-avatar--circle {\n  --ec-avatar-border-radius: var(--ec-border-radius-circle);\n}\n\n.ec-avatar--square {\n  --ec-avatar-border-radius: var(--ec-border-radius-base);\n}\n\n/* ---- Icon ---- */\n.ec-avatar--icon {\n  font-size: var(--ec-avatar-icon-size);\n}\n\n/* ---- Sizes ---- */\n.ec-avatar--large {\n  --ec-avatar-size: 56px;\n  --ec-avatar-font-size: var(--ec-font-size-extra-large);\n}\n\n.ec-avatar--small {\n  --ec-avatar-size: 24px;\n  --ec-avatar-font-size: var(--ec-font-size-small);\n}\n"
+    },
+    {
+      "path": "@cobos/react/components/Avatar/index.ts",
+      "type": "source",
+      "content": "export * from './Avatar';\n"
+    }
+  ]
+}

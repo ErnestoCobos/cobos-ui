@@ -1,0 +1,38 @@
+{
+  "key": "icon",
+  "name": "Icon",
+  "category": "Basic",
+  "status": "stable",
+  "wave": 1,
+  "description": "Wrapper that renders an SVG glyph with size, color and spin support.",
+  "export": "Icon",
+  "elementPlus": "https://element-plus.org/en-US/component/icon",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Icon } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Icon/Icon.tsx",
+      "type": "source",
+      "content": "import {\n  forwardRef,\n  type CSSProperties,\n  type HTMLAttributes,\n  type KeyboardEvent,\n  type MouseEvent,\n  type ReactNode,\n} from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport interface IconProps extends HTMLAttributes<HTMLElement> {\n  /** Icon size in px (number) or any CSS length. */\n  size?: number | string;\n  /** Icon color (defaults to currentColor). */\n  color?: string;\n  /** Continuously rotate the icon. */\n  spin?: boolean;\n  children?: ReactNode;\n}\n\nexport const Icon = forwardRef<HTMLElement, IconProps>(function Icon(\n  { size, color, spin = false, className, style, children, onClick, onKeyDown, role, tabIndex, ...rest },\n  ref,\n) {\n  const ns = useNamespace('icon');\n  const mergedStyle: CSSProperties = {\n    fontSize: size === undefined ? undefined : typeof size === 'number' ? `${size}px` : size,\n    color,\n    ...style,\n  };\n\n  const ariaLabel = rest['aria-label'];\n  const ariaLabelledBy = rest['aria-labelledby'];\n\n  // The Icon primitive is also used as an interactive control (e.g. Input's\n  // clear/password toggle, Tabs' close affordance). When a click handler or an\n  // interactive role is supplied, expose it to the keyboard: make it focusable\n  // and translate Enter/Space into the click handler.\n  const interactive = role === 'button' || typeof onClick === 'function';\n\n  const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {\n    onKeyDown?.(event);\n    if (interactive && onClick && !event.defaultPrevented) {\n      if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {\n        event.preventDefault();\n        onClick(event as unknown as MouseEvent<HTMLElement>);\n      }\n    }\n  };\n\n  // Default to role=\"img\" for labelled, non-interactive icons so assistive tech\n  // announces them as images rather than ignoring them.\n  const resolvedRole =\n    role ?? (!interactive && (ariaLabel || ariaLabelledBy) ? 'img' : undefined);\n\n  // Keep focusability when the icon is interactive, unless a tabIndex was\n  // explicitly provided by the caller.\n  const resolvedTabIndex = tabIndex !== undefined ? tabIndex : interactive ? 0 : undefined;\n\n  return (\n    <i\n      ref={ref}\n      className={cls(ns.b(), spin && ns.is('loading'), className)}\n      style={mergedStyle}\n      role={resolvedRole}\n      tabIndex={resolvedTabIndex}\n      aria-hidden={ariaLabel || ariaLabelledBy || interactive ? undefined : true}\n      onClick={onClick}\n      onKeyDown={interactive ? handleKeyDown : onKeyDown}\n      {...rest}\n    >\n      {children}\n    </i>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Icon/LoadingIcon.tsx",
+      "type": "source",
+      "content": "import type { SVGProps } from 'react';\n\n/** Default loading spinner glyph (matches the Element Plus loading icon shape). */\nexport function LoadingIcon(props: SVGProps<SVGSVGElement>) {\n  return (\n    <svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\" {...props}>\n      <path\n        fill=\"currentColor\"\n        d=\"M512 64a32 32 0 0 1 32 32v192a32 32 0 0 1-64 0V96a32 32 0 0 1 32-32m0 640a32 32 0 0 1 32 32v192a32 32 0 1 1-64 0V736a32 32 0 0 1 32-32m448-192a32 32 0 0 1-32 32H736a32 32 0 1 1 0-64h192a32 32 0 0 1 32 32m-640 0a32 32 0 0 1-32 32H96a32 32 0 0 1 0-64h192a32 32 0 0 1 32 32M195.2 195.2a32 32 0 0 1 45.248 0L376.32 331.008a32 32 0 0 1-45.248 45.248L195.2 240.448a32 32 0 0 1 0-45.248zm452.544 452.544a32 32 0 0 1 45.248 0L828.8 783.552a32 32 0 0 1-45.248 45.248L647.744 692.992a32 32 0 0 1 0-45.248zM828.8 195.264a32 32 0 0 1 0 45.184L692.992 376.32a32 32 0 0 1-45.248-45.248l135.808-135.808a32 32 0 0 1 45.248 0zm-452.544 452.48a32 32 0 0 1 0 45.248L240.448 828.8a32 32 0 0 1-45.248-45.248l135.808-135.808a32 32 0 0 1 45.248 0z\"\n      />\n    </svg>\n  );\n}\n"
+    },
+    {
+      "path": "@cobos/react/components/Icon/icon.css",
+      "type": "css",
+      "content": ".ec-icon {\n  --ec-icon-size: 1em;\n  --ec-icon-color: inherit;\n\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  box-sizing: border-box;\n  width: 1em;\n  height: 1em;\n  font-size: inherit;\n  line-height: 1em;\n  color: var(--ec-icon-color);\n  fill: currentColor;\n  vertical-align: middle;\n}\n\n.ec-icon svg {\n  width: 1em;\n  height: 1em;\n}\n\n.ec-icon.is-loading {\n  animation: ec-rotating 2s linear infinite;\n}\n"
+    },
+    {
+      "path": "@cobos/react/components/Icon/index.ts",
+      "type": "source",
+      "content": "export * from './Icon';\nexport * from './LoadingIcon';\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+.ec-icon {
+  --ec-icon-size: 1em;
+  --ec-icon-color: inherit;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  width: 1em;
+  height: 1em;
+  font-size: inherit;
+  line-height: 1em;
+  color: var(--ec-icon-color);
+  fill: currentColor;
+  vertical-align: middle;
+}
+
+.ec-icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.ec-icon.is-loading {
+  animation: ec-rotating 2s linear infinite;
+}

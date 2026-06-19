@@ -1,0 +1,259 @@
+.ec-input {
+  --ec-input-text-color: var(--ec-text-color-regular);
+  --ec-input-border-color: var(--ec-border-color);
+  --ec-input-hover-border-color: var(--ec-border-color-hover);
+  --ec-input-focus-border-color: var(--ec-color-primary);
+  --ec-input-bg-color: var(--ec-fill-color-blank);
+  --ec-input-icon-color: var(--ec-text-color-placeholder);
+  --ec-input-placeholder-color: var(--ec-text-color-placeholder);
+  --ec-input-border-radius: var(--ec-border-radius-base);
+  --ec-input-height: var(--ec-component-size);
+  --ec-input-font-size: var(--ec-font-size-base);
+
+  display: inline-flex;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: var(--ec-input-font-size);
+  line-height: var(--ec-input-height);
+}
+
+.ec-input__wrapper {
+  display: inline-flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: 6px;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--ec-input-height);
+  padding: 1px 11px;
+  background-color: var(--ec-input-bg-color);
+  background-image: none;
+  border-radius: var(--ec-input-border-radius);
+  cursor: text;
+  transition: var(--ec-transition-box-shadow, var(--ec-transition-all));
+  box-shadow: 0 0 0 1px var(--ec-input-border-color) inset;
+}
+
+.ec-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--ec-input-hover-border-color) inset;
+}
+
+.ec-input.is-focus .ec-input__wrapper,
+.ec-input__wrapper:focus-within {
+  box-shadow: 0 0 0 1px var(--ec-input-focus-border-color) inset;
+}
+
+.ec-input__inner {
+  flex-grow: 1;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: var(--ec-input-height);
+  color: var(--ec-input-text-color);
+  background: none;
+  border: none;
+  outline: none;
+  appearance: none;
+}
+
+.ec-input__inner::placeholder {
+  color: var(--ec-input-placeholder-color);
+}
+
+.ec-input__prefix,
+.ec-input__suffix {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  color: var(--ec-input-icon-color);
+}
+
+.ec-input__icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ec-input-icon-color);
+}
+
+.ec-input__clear,
+.ec-input__password {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  color: var(--ec-input-icon-color);
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  transition: var(--ec-transition-color);
+}
+
+.ec-input__clear:hover,
+.ec-input__password:hover {
+  color: var(--ec-text-color-secondary);
+}
+
+.ec-input__clear:focus-visible,
+.ec-input__password:focus-visible {
+  outline: 2px solid var(--ec-color-primary-light-5);
+  outline-offset: 1px;
+  border-radius: var(--ec-border-radius-base);
+}
+
+.ec-input__count {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--ec-font-size-extra-small);
+  line-height: 1;
+  color: var(--ec-text-color-placeholder);
+}
+
+/* ---- Disabled ---- */
+.ec-input.is-disabled .ec-input__wrapper {
+  background-color: var(--ec-disabled-bg-color);
+  box-shadow: 0 0 0 1px var(--ec-disabled-border-color) inset;
+  cursor: not-allowed;
+}
+
+.ec-input.is-disabled .ec-input__inner {
+  color: var(--ec-disabled-text-color);
+  -webkit-text-fill-color: var(--ec-disabled-text-color);
+  cursor: not-allowed;
+}
+
+.ec-input.is-disabled .ec-input__inner::placeholder {
+  color: var(--ec-disabled-text-color);
+}
+
+.ec-input.is-disabled .ec-input__clear,
+.ec-input.is-disabled .ec-input__password {
+  cursor: not-allowed;
+}
+
+/* ---- Group (prepend / append) ---- */
+.ec-input-group__prepend,
+.ec-input-group__append {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20px;
+  white-space: nowrap;
+  color: var(--ec-text-color-regular);
+  background-color: var(--ec-fill-color-light);
+  border-radius: var(--ec-input-border-radius);
+}
+
+.ec-input-group__prepend {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ec-input-group__append {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ec-input.is-prepend .ec-input__wrapper {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ec-input.is-append .ec-input__wrapper {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* ---- Sizes ---- */
+.ec-input--large {
+  --ec-input-height: var(--ec-component-size-large);
+  --ec-input-font-size: var(--ec-font-size-medium);
+}
+
+.ec-input--small {
+  --ec-input-height: var(--ec-component-size-small);
+  --ec-input-font-size: var(--ec-font-size-extra-small);
+}
+
+/* ---- Textarea ---- */
+.ec-textarea {
+  --ec-input-text-color: var(--ec-text-color-regular);
+  --ec-input-border-color: var(--ec-border-color);
+  --ec-input-hover-border-color: var(--ec-border-color-hover);
+  --ec-input-focus-border-color: var(--ec-color-primary);
+  --ec-input-bg-color: var(--ec-fill-color-blank);
+  --ec-input-placeholder-color: var(--ec-text-color-placeholder);
+  --ec-input-border-radius: var(--ec-border-radius-base);
+  --ec-input-font-size: var(--ec-font-size-base);
+
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: var(--ec-input-font-size);
+  vertical-align: bottom;
+}
+
+.ec-textarea__inner {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px 11px;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+  color: var(--ec-input-text-color);
+  background-color: var(--ec-input-bg-color);
+  border: none;
+  border-radius: var(--ec-input-border-radius);
+  outline: none;
+  resize: vertical;
+  appearance: none;
+  box-shadow: 0 0 0 1px var(--ec-input-border-color) inset;
+  transition: var(--ec-transition-box-shadow, var(--ec-transition-all));
+}
+
+.ec-textarea__inner::placeholder {
+  color: var(--ec-input-placeholder-color);
+}
+
+.ec-textarea__inner:hover {
+  box-shadow: 0 0 0 1px var(--ec-input-hover-border-color) inset;
+}
+
+.ec-textarea__inner:focus {
+  box-shadow: 0 0 0 1px var(--ec-input-focus-border-color) inset;
+}
+
+.ec-textarea .ec-input__count {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  background-color: var(--ec-input-bg-color);
+}
+
+.ec-textarea.is-disabled .ec-textarea__inner {
+  color: var(--ec-disabled-text-color);
+  background-color: var(--ec-disabled-bg-color);
+  box-shadow: 0 0 0 1px var(--ec-disabled-border-color) inset;
+  cursor: not-allowed;
+}
+
+.ec-textarea.is-disabled .ec-textarea__inner::placeholder {
+  color: var(--ec-disabled-text-color);
+}
+
+.ec-textarea--large {
+  --ec-input-font-size: var(--ec-font-size-medium);
+}
+
+.ec-textarea--small {
+  --ec-input-font-size: var(--ec-font-size-extra-small);
+}

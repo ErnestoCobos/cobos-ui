@@ -1,0 +1,121 @@
+.ec-form {
+  --ec-form-label-width: auto;
+  --ec-form-label-font-size: var(--ec-font-size-base);
+  --ec-form-label-color: var(--ec-text-color-regular);
+  --ec-form-item-spacing: 22px;
+  --ec-form-error-color: var(--ec-color-danger);
+
+  box-sizing: border-box;
+}
+
+/* ---- Form item ---- */
+.ec-form-item {
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: var(--ec-form-item-spacing);
+}
+
+.ec-form-item:last-child {
+  margin-bottom: 0;
+}
+
+.ec-form-item__label {
+  display: inline-flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: var(--ec-form-label-width);
+  padding-right: 12px;
+  font-size: var(--ec-form-label-font-size);
+  font-weight: var(--ec-font-weight-primary);
+  line-height: var(--ec-component-size);
+  color: var(--ec-form-label-color);
+}
+
+.ec-form-item__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ec-form-item__error {
+  margin-top: 2px;
+  font-size: var(--ec-font-size-small);
+  line-height: 1.4;
+  color: var(--ec-form-error-color);
+}
+
+/* ---- Required asterisk ---- */
+.ec-form-item.is-required:not(.is-no-asterisk) .ec-form-item__label::before {
+  content: '*';
+  margin-right: 4px;
+  color: var(--ec-form-error-color);
+}
+
+.ec-form.is-asterisk-right
+  .ec-form-item.is-required:not(.is-no-asterisk)
+  .ec-form-item__label::before {
+  content: '';
+  margin-right: 0;
+}
+
+.ec-form.is-asterisk-right
+  .ec-form-item.is-required:not(.is-no-asterisk)
+  .ec-form-item__label::after {
+  content: '*';
+  margin-left: 4px;
+  color: var(--ec-form-error-color);
+}
+
+/* ---- Label position ---- */
+.ec-form--label-left .ec-form-item__label {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.ec-form--label-right .ec-form-item__label {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.ec-form--label-top .ec-form-item {
+  display: block;
+}
+
+.ec-form--label-top .ec-form-item__label {
+  width: auto;
+  padding: 0 0 4px;
+  line-height: 1.4;
+}
+
+/* ---- Inline ---- */
+.ec-form.is-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.ec-form.is-inline .ec-form-item {
+  margin-right: var(--ec-form-item-spacing);
+  margin-bottom: 0;
+}
+
+.ec-form.is-inline .ec-form-item__content {
+  flex: 0 0 auto;
+}
+
+/* ---- Validation state ---- */
+.ec-form-item.is-error .ec-input .ec-input__wrapper {
+  box-shadow: 0 0 0 1px var(--ec-color-danger) inset;
+}
+
+/* ---- Sizes ---- */
+.ec-form-item--large .ec-form-item__label {
+  line-height: var(--ec-component-size-large);
+}
+
+.ec-form-item--small .ec-form-item__label {
+  font-size: var(--ec-font-size-small);
+  line-height: var(--ec-component-size-small);
+}

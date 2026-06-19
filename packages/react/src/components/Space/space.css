@@ -1,0 +1,22 @@
+.ec-space {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.ec-space--vertical {
+  flex-direction: column;
+}
+
+.ec-space.is-wrap {
+  flex-wrap: wrap;
+}
+
+.ec-space.is-fill {
+  display: flex;
+  width: 100%;
+}
+
+.ec-space.is-fill > * {
+  flex: 1;
+}

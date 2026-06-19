@@ -1,0 +1,33 @@
+{
+  "key": "text",
+  "name": "Text",
+  "category": "Basic",
+  "status": "stable",
+  "wave": 1,
+  "description": "Typographic text with types, sizes, truncation and line clamping.",
+  "export": "Text",
+  "elementPlus": "https://element-plus.org/en-US/component/text",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Text } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Text/Text.tsx",
+      "type": "source",
+      "content": "import {\n  type CSSProperties,\n  createElement,\n  type ElementType,\n  forwardRef,\n  type HTMLAttributes,\n  type ReactNode,\n} from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport type TextType = 'primary' | 'success' | 'warning' | 'danger' | 'info';\n\nexport type TextSize = 'large' | 'default' | 'small';\n\nexport interface TextProps extends HTMLAttributes<HTMLElement> {\n  /** Visual variant. */\n  type?: TextType;\n  /** Size. */\n  size?: TextSize;\n  /** Rendered host element. */\n  tag?: ElementType;\n  /** Truncate to a single line with an ellipsis. */\n  truncated?: boolean;\n  /** Clamp to a number of lines with an ellipsis. */\n  lineClamp?: number | string;\n  children?: ReactNode;\n}\n\nexport const Text = forwardRef<HTMLElement, TextProps>(function Text(props, ref) {\n  const {\n    type,\n    size = 'default',\n    tag = 'span',\n    truncated = false,\n    lineClamp,\n    className,\n    style,\n    children,\n    ...rest\n  } = props;\n\n  const ns = useNamespace('text');\n  const hasClamp = lineClamp !== undefined && lineClamp !== null;\n\n  const classes = cls(\n    ns.b(),\n    type && ns.m(type),\n    size !== 'default' && ns.m(size),\n    ns.is('truncated', truncated && !hasClamp),\n    ns.is('line-clamp', hasClamp),\n    className,\n  );\n\n  const mergedStyle: CSSProperties = hasClamp\n    ? { ...style, [ns.cssVar('line-clamp')]: String(lineClamp) }\n    : (style as CSSProperties);\n\n  return createElement(\n    tag,\n    { ref, className: classes, style: mergedStyle, ...rest },\n    children,\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Text/index.ts",
+      "type": "source",
+      "content": "export * from './Text';\n"
+    },
+    {
+      "path": "@cobos/react/components/Text/text.css",
+      "type": "css",
+      "content": ".ec-text {\n  --ec-text-color: var(--ec-text-color-regular);\n  --ec-text-font-size: var(--ec-font-size-base);\n  --ec-text-line-clamp: 1;\n\n  box-sizing: border-box;\n  font-family: inherit;\n  font-size: var(--ec-text-font-size);\n  font-weight: var(--ec-font-weight-primary);\n  line-height: 1.5;\n  color: var(--ec-text-color);\n}\n\n/* ---- Type variants ---- */\n.ec-text--primary {\n  --ec-text-color: var(--ec-color-primary);\n}\n\n.ec-text--success {\n  --ec-text-color: var(--ec-color-success);\n}\n\n.ec-text--warning {\n  --ec-text-color: var(--ec-color-warning);\n}\n\n.ec-text--danger {\n  --ec-text-color: var(--ec-color-danger);\n}\n\n.ec-text--info {\n  --ec-text-color: var(--ec-color-info);\n}\n\n/* ---- Sizes ---- */\n.ec-text--large {\n  --ec-text-font-size: var(--ec-font-size-large);\n}\n\n.ec-text--small {\n  --ec-text-font-size: var(--ec-font-size-small);\n}\n\n/* ---- Truncation ---- */\n.ec-text.is-truncated {\n  display: inline-block;\n  max-width: 100%;\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n\n.ec-text.is-line-clamp {\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: var(--ec-text-line-clamp);\n  line-clamp: var(--ec-text-line-clamp);\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n"
+    }
+  ]
+}

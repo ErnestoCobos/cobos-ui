@@ -1,0 +1,53 @@
+{
+  "key": "container",
+  "name": "Container",
+  "category": "Basic",
+  "status": "stable",
+  "wave": 1,
+  "description": "Page scaffolding: Container, Header, Aside, Main, Footer.",
+  "export": "Container",
+  "elementPlus": "https://element-plus.org/en-US/component/container",
+  "dependencies": [
+    "@cobos/react",
+    "@cobos/tokens"
+  ],
+  "registryDependencies": [],
+  "usage": "import { Container } from '@cobos/react';\nimport '@cobos/react/styles.css';",
+  "files": [
+    {
+      "path": "@cobos/react/components/Container/Aside.tsx",
+      "type": "source",
+      "content": "import { type CSSProperties, forwardRef, type HTMLAttributes, type ReactNode } from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport interface AsideProps extends HTMLAttributes<HTMLElement> {\n  /** Aside width. */\n  width?: string;\n  children?: ReactNode;\n}\n\nexport const Aside = forwardRef<HTMLElement, AsideProps>(function Aside(props, ref) {\n  const { width = '300px', className, style, children, ...rest } = props;\n  const ns = useNamespace('aside');\n\n  const asideStyle = { '--ec-aside-width': width } as CSSProperties;\n\n  return (\n    <aside ref={ref} className={cls(ns.b(), className)} style={{ ...asideStyle, ...style }} {...rest}>\n      {children}\n    </aside>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Container/Container.tsx",
+      "type": "source",
+      "content": "import {\n  Children,\n  forwardRef,\n  type HTMLAttributes,\n  isValidElement,\n  type ReactNode,\n  useMemo,\n} from 'react';\nimport { cls, useNamespace } from '../../utils';\nimport { Footer } from './Footer';\nimport { Header } from './Header';\n\nexport type ContainerDirection = 'horizontal' | 'vertical';\n\nexport interface ContainerProps extends HTMLAttributes<HTMLElement> {\n  /**\n   * Layout direction. When omitted, defaults to `vertical` if any direct child\n   * is a Header or Footer, otherwise `horizontal`.\n   */\n  direction?: ContainerDirection;\n  children?: ReactNode;\n}\n\nfunction hasVerticalChild(children: ReactNode): boolean {\n  return Children.toArray(children).some(\n    (child) => isValidElement(child) && (child.type === Header || child.type === Footer),\n  );\n}\n\nexport const Container = forwardRef<HTMLElement, ContainerProps>(function Container(props, ref) {\n  const { direction, className, children, ...rest } = props;\n  const ns = useNamespace('container');\n\n  const isVertical = useMemo(() => {\n    if (direction) {\n      return direction === 'vertical';\n    }\n    return hasVerticalChild(children);\n  }, [direction, children]);\n\n  const classes = cls(ns.b(), ns.is('vertical', isVertical), className);\n\n  return (\n    <section ref={ref} className={classes} {...rest}>\n      {children}\n    </section>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Container/Footer.tsx",
+      "type": "source",
+      "content": "import { type CSSProperties, forwardRef, type HTMLAttributes, type ReactNode } from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport interface FooterProps extends HTMLAttributes<HTMLElement> {\n  /** Footer height. */\n  height?: string;\n  children?: ReactNode;\n}\n\nexport const Footer = forwardRef<HTMLElement, FooterProps>(function Footer(props, ref) {\n  const { height = '60px', className, style, children, ...rest } = props;\n  const ns = useNamespace('footer');\n\n  const footerStyle = { '--ec-footer-height': height } as CSSProperties;\n\n  return (\n    <footer ref={ref} className={cls(ns.b(), className)} style={{ ...footerStyle, ...style }} {...rest}>\n      {children}\n    </footer>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Container/Header.tsx",
+      "type": "source",
+      "content": "import { type CSSProperties, forwardRef, type HTMLAttributes, type ReactNode } from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport interface HeaderProps extends HTMLAttributes<HTMLElement> {\n  /** Header height. */\n  height?: string;\n  children?: ReactNode;\n}\n\nexport const Header = forwardRef<HTMLElement, HeaderProps>(function Header(props, ref) {\n  const { height = '60px', className, style, children, ...rest } = props;\n  const ns = useNamespace('header');\n\n  const headerStyle = { '--ec-header-height': height } as CSSProperties;\n\n  return (\n    <header ref={ref} className={cls(ns.b(), className)} style={{ ...headerStyle, ...style }} {...rest}>\n      {children}\n    </header>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Container/Main.tsx",
+      "type": "source",
+      "content": "import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';\nimport { cls, useNamespace } from '../../utils';\n\nexport interface MainProps extends HTMLAttributes<HTMLElement> {\n  children?: ReactNode;\n}\n\nexport const Main = forwardRef<HTMLElement, MainProps>(function Main(props, ref) {\n  const { className, children, ...rest } = props;\n  const ns = useNamespace('main');\n\n  return (\n    <main ref={ref} className={cls(ns.b(), className)} {...rest}>\n      {children}\n    </main>\n  );\n});\n"
+    },
+    {
+      "path": "@cobos/react/components/Container/container.css",
+      "type": "css",
+      "content": ".ec-container {\n  box-sizing: border-box;\n  display: flex;\n  flex: 1;\n  flex-basis: auto;\n  flex-direction: row;\n  min-width: 0;\n}\n\n.ec-container.is-vertical {\n  flex-direction: column;\n}\n\n.ec-header {\n  --ec-header-height: 60px;\n\n  box-sizing: border-box;\n  flex-shrink: 0;\n  padding: 0 20px;\n  height: var(--ec-header-height);\n  color: var(--ec-text-color-primary);\n  background-color: var(--ec-bg-color);\n}\n\n.ec-footer {\n  --ec-footer-height: 60px;\n\n  box-sizing: border-box;\n  flex-shrink: 0;\n  padding: 0 20px;\n  height: var(--ec-footer-height);\n  color: var(--ec-text-color-primary);\n  background-color: var(--ec-bg-color);\n}\n\n.ec-aside {\n  --ec-aside-width: 300px;\n\n  box-sizing: border-box;\n  flex-shrink: 0;\n  overflow: auto;\n  width: var(--ec-aside-width);\n  color: var(--ec-text-color-primary);\n  background-color: var(--ec-bg-color);\n}\n\n.ec-main {\n  box-sizing: border-box;\n  display: block;\n  flex: 1;\n  flex-basis: auto;\n  padding: 20px;\n  overflow: auto;\n  color: var(--ec-text-color-primary);\n  background-color: var(--ec-bg-color);\n}\n"
+    },
+    {
+      "path": "@cobos/react/components/Container/index.ts",
+      "type": "source",
+      "content": "export * from './Container';\nexport * from './Header';\nexport * from './Aside';\nexport * from './Main';\nexport * from './Footer';\n"
+    }
+  ]
+}

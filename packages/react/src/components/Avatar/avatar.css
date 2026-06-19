@@ -1,0 +1,62 @@
+.ec-avatar {
+  --ec-avatar-size: 40px;
+  --ec-avatar-font-size: var(--ec-font-size-base);
+  --ec-avatar-icon-size: 18px;
+  --ec-avatar-bg-color: var(--ec-text-color-disabled);
+  --ec-avatar-text-color: var(--ec-color-white);
+  --ec-avatar-border-radius: var(--ec-border-radius-circle);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--ec-avatar-size);
+  height: var(--ec-avatar-size);
+  overflow: hidden;
+  font-family: inherit;
+  font-size: var(--ec-avatar-font-size);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--ec-avatar-text-color);
+  background-color: var(--ec-avatar-bg-color);
+  border-radius: var(--ec-avatar-border-radius);
+  user-select: none;
+}
+
+.ec-avatar__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ec-avatar__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Shapes ---- */
+.ec-avatar--circle {
+  --ec-avatar-border-radius: var(--ec-border-radius-circle);
+}
+
+.ec-avatar--square {
+  --ec-avatar-border-radius: var(--ec-border-radius-base);
+}
+
+/* ---- Icon ---- */
+.ec-avatar--icon {
+  font-size: var(--ec-avatar-icon-size);
+}
+
+/* ---- Sizes ---- */
+.ec-avatar--large {
+  --ec-avatar-size: 56px;
+  --ec-avatar-font-size: var(--ec-font-size-extra-large);
+}
+
+.ec-avatar--small {
+  --ec-avatar-size: 24px;
+  --ec-avatar-font-size: var(--ec-font-size-small);
+}
