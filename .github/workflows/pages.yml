@@ -35,8 +35,13 @@ jobs:
       - name: Build docs site
         run: pnpm -F docs build
 
-      - name: Publish registry alongside docs
-        run: cp -r registry apps/docs/dist/registry
+      - name: Build Storybook
+        run: pnpm -F @cobos/react storybook:build
+
+      - name: Publish registry and Storybook alongside docs
+        run: |
+          cp -r registry apps/docs/dist/registry
+          cp -r packages/react/storybook-static apps/docs/dist/storybook
 
       - uses: actions/upload-pages-artifact@v3
         with:

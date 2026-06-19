@@ -31,3 +31,6 @@ jobs:
 
       - name: Build docs
         run: pnpm -F docs build
+
+      - name: Build Storybook
+        run: pnpm -F @cobos/react storybook:build
