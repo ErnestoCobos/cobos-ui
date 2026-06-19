@@ -11,10 +11,9 @@ export const themeSeeds = {
   cobos: { primary: '#00d4ff', info: '#7c3aed' },
   enkiflow: { primary: '#a3e635' },
   getdecant: { primary: '#4a4239' },
-  // Voltaflow's new design-led identity: a violet accent with a warm peach
-  // secondary (approximated from the Claude Design landing; exact hex to be
-  // locked from the source file once design access is authorized).
-  voltaflow: { primary: '#7c5cff', info: '#f4a07a' },
+  // Voltaflow's design-led identity, taken from the Claude Design landing:
+  // violet-700 primary with a warm orange and a fresh green.
+  voltaflow: { primary: '#6d28d9', success: '#1fb57a', warning: '#ff8a3d' },
 } satisfies Record<string, ThemeSeeds>;
 
 /** Identifier of a built-in Cobos UI theme. */

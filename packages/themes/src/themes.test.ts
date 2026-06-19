@@ -23,8 +23,9 @@ describe('theme metadata', () => {
     }
   });
 
-  it('keeps the cobos and voltaflow info accents alongside their primaries', () => {
+  it('keeps the cobos info accent and the voltaflow brand accents', () => {
     expect(themeSeeds.cobos.info).toBe('#7c3aed');
-    expect(themeSeeds.voltaflow.info).toBe('#f4a07a');
+    expect(themeSeeds.voltaflow.warning).toBe('#ff8a3d');
+    expect(themeSeeds.voltaflow.success).toBe('#1fb57a');
   });
 });
