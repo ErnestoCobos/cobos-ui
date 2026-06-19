@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 // Design tokens and component styles for the whole library.
 import '@cobos/tokens/tokens.css';
 import '@cobos/react/styles.css';
+import '@cobos/charts/styles.css';
 
 // Per-brand theme palettes. Each scopes its --ec-* vars to
 // :root[data-theme="<name>"] (light) and html.dark[data-theme="<name>"] (dark),

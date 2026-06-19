@@ -2,7 +2,11 @@ import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
   framework: '@storybook/react-vite',
-  stories: ['../src/**/*.stories.@(ts|tsx)'],
+  stories: [
+    '../src/**/*.stories.@(ts|tsx)',
+    // Also surface the @cobos/charts package stories in the shared Storybook.
+    '../../charts/src/**/*.stories.@(ts|tsx)',
+  ],
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
   docs: {
     // Generate an autodocs page for every story file tagged with `autodocs`.

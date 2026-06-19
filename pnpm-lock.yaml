@@ -35,6 +35,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@cobos/charts':
+        specifier: workspace:*
+        version: link:../../packages/charts
       '@cobos/react':
         specifier: workspace:*
         version: link:../../packages/react
@@ -67,6 +70,36 @@ importers:
         specifier: ^6.0.7
         version: 6.4.3(@types/node@22.19.21)
 
+  packages/charts:
+    devDependencies:
+      '@testing-library/react':
+        specifier: ^16.2.0
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@types/react':
+        specifier: ^19.0.7
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: ^19.0.3
+        version: 19.2.3(@types/react@19.2.17)
+      jsdom:
+        specifier: ^25.0.1
+        version: 25.0.1
+      react:
+        specifier: ^19.0.0
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.7(react@19.2.7)
+      tsup:
+        specifier: ^8.3.5
+        version: 8.5.1(postcss@8.5.15)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.8
+        version: 2.1.9(@types/node@22.19.21)(jsdom@25.0.1)
+
   packages/mcp:
     dependencies:
       '@modelcontextprotocol/sdk':
@@ -98,6 +131,9 @@ importers:
         specifier: ^0.27.4
         version: 0.27.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     devDependencies:
+      '@cobos/charts':
+        specifier: workspace:*
+        version: link:../charts
       '@storybook/addon-a11y':
         specifier: 10.4.6
         version: 10.4.6(storybook@10.4.6(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))

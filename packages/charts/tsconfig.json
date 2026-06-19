@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "jsx": "react-jsx",
+    "types": ["vitest/globals"]
+  },
+  "include": ["src"],
+  "comment": "Stories live here but are type-checked and bundled by the Storybook project in packages/react (which owns the @storybook/* deps).",
+  "exclude": ["src/**/*.stories.tsx"]
+}

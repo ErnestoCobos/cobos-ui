@@ -6,6 +6,7 @@ import type { ThemeName } from '@cobos/themes';
 
 import { COMPONENTS, STABLE_COMPONENTS, groupByCategory, findComponent, elementPlusUrl } from './catalog';
 import { demos } from './demos';
+import ChartsDemo from './demos/charts';
 import {
   MoonGlyph,
   SunGlyph,
@@ -38,12 +39,16 @@ function ordinal(i: number): string {
   return String(i + 1).padStart(2, '0');
 }
 
-type Route = { kind: 'home' } | { kind: 'component'; key: string };
+type Route = { kind: 'home' } | { kind: 'component'; key: string } | { kind: 'charts' };
+
+/** Standalone page (not catalog-driven): the @cobos/charts showcase. */
+const CHARTS_ROUTE = 'charts';
 
 /** Read the active route from the URL hash. Defaults to the landing page. */
 function readHash(): Route {
   const raw = window.location.hash.replace(/^#\/?/, '').trim();
   if (!raw || raw === 'overview' || raw === 'home') return { kind: 'home' };
+  if (raw === CHARTS_ROUTE) return { kind: 'charts' };
   if (demos[raw]) return { kind: 'component', key: raw };
   return { kind: 'home' };
 }
@@ -58,7 +63,8 @@ function useHashRoute(): [Route, (next: Route) => void] {
   }, []);
 
   const navigate = useCallback((next: Route) => {
-    const hash = next.kind === 'home' ? '#/' : `#/${next.key}`;
+    const hash =
+      next.kind === 'home' ? '#/' : next.kind === 'charts' ? `#/${CHARTS_ROUTE}` : `#/${next.key}`;
     if (window.location.hash !== hash) {
       window.location.hash = hash;
     }
@@ -127,7 +133,7 @@ const FACTS: { value: string; label: string }[] = [
 ];
 
 /** The landing / overview page — the default route. */
-function Landing({ onBrowse }: { onBrowse: (key: string) => void }) {
+function Landing({ onBrowse, onCharts }: { onBrowse: (key: string) => void; onCharts: () => void }) {
   const groups = useMemo(() => groupByCategory(COMPONENTS), []);
   const firstStable = STABLE_COMPONENTS[0]?.key ?? 'button';
 
@@ -233,6 +239,21 @@ function Landing({ onBrowse }: { onBrowse: (key: string) => void }) {
               </div>
             );
           })}
+
+          {/* Standalone, non-catalog area: the charts companion package. */}
+          <div className="cat-card">
+            <header className="cat-card__head">
+              <h3 className="cat-card__title">Data visualization</h3>
+              <span className="cat-card__count">6</span>
+            </header>
+            <ul className="cat-card__list">
+              <li>
+                <button type="button" className="chip" onClick={onCharts}>
+                  Charts
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -314,6 +335,7 @@ export default function App() {
 
   const groups = useMemo(() => groupByCategory(COMPONENTS), []);
   const isHome = route.kind === 'home';
+  const isCharts = route.kind === 'charts';
   const activeKey = route.kind === 'component' ? route.key : '';
   const current = activeKey ? findComponent(activeKey) : undefined;
   const ActiveDemo = activeKey ? demos[activeKey] : undefined;
@@ -321,6 +343,7 @@ export default function App() {
 
   const goHome = useCallback(() => navigate({ kind: 'home' }), [navigate]);
   const goComponent = useCallback((key: string) => navigate({ kind: 'component', key }), [navigate]);
+  const goCharts = useCallback(() => navigate({ kind: 'charts' }), [navigate]);
 
   return (
     <div className={`app${isHome ? ' app--home' : ''}`}>
@@ -363,7 +386,9 @@ export default function App() {
               <span className="crumbs__sep" aria-hidden>
                 /
               </span>
-              <span className="crumbs__current">{current?.category ?? 'Components'}</span>
+              <span className="crumbs__current">
+                {isCharts ? 'Data visualization' : current?.category ?? 'Components'}
+              </span>
             </nav>
           ) : (
             <Tag size="small" effect="plain" className="topbar__badge">
@@ -441,7 +466,7 @@ export default function App() {
 
       {isHome ? (
         <main id="main" className="home-main">
-          <Landing onBrowse={goComponent} />
+          <Landing onBrowse={goComponent} onCharts={goCharts} />
           <SiteFooter />
         </main>
       ) : (
@@ -493,11 +518,64 @@ export default function App() {
                   </ul>
                 </div>
               ))}
+
+              {/* Standalone section — not catalog-driven. The @cobos/charts
+                  package lives in its own dedicated page. */}
+              <div
+                className="nav-group reveal"
+                style={{ '--d': `${groups.length * 45}ms` } as React.CSSProperties}
+              >
+                <h2 className="nav-group__title">
+                  <span className="nav-group__num">{ordinal(groups.length)}</span>
+                  Data visualization
+                </h2>
+                <ul className="nav-list">
+                  <li>
+                    <button
+                      type="button"
+                      className={`nav-item${isCharts ? ' is-active' : ''}`}
+                      onClick={goCharts}
+                      aria-current={isCharts ? 'page' : undefined}
+                    >
+                      Charts
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </nav>
           </aside>
 
           <main id="main" className="content">
-            {current && ActiveDemo ? (
+            {isCharts ? (
+              <article className="page">
+                <header className="page__head">
+                  <p className="page__eyebrow">Data visualization</p>
+                  <div className="page__title-row">
+                    <h1 className="page__title">Charts</h1>
+                    <Tag type="success" effect="light" size="small">
+                      Stable
+                    </Tag>
+                  </div>
+                  <p className="page__desc">
+                    Dependency-free, theme-aware SVG charts — the data-visualization companion to
+                    Cobos UI. Series, grid and label colors reference the same <code>--ec-*</code>{' '}
+                    tokens, so every chart follows the active brand theme and light/dark mode with no
+                    extra configuration.
+                  </p>
+                  <p className="page__meta">
+                    <code className="page__import">
+                      import {'{ '}LineChart, BarChart, DonutChart, Sparkline{' }'} from '@cobos/charts'
+                    </code>
+                  </p>
+                </header>
+
+                <ConfigProvider size={size}>
+                  <div className="page__demo">
+                    <ChartsDemo />
+                  </div>
+                </ConfigProvider>
+              </article>
+            ) : current && ActiveDemo ? (
               <article className="page">
                 <header className="page__head">
                   <p className="page__eyebrow">{current.category}</p>

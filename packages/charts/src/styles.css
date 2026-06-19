@@ -1,0 +1,136 @@
+/*
+ * @cobos/charts — theme-aware chart styles.
+ *
+ * Every color references a `--ec-*` design token, so charts automatically
+ * follow the active light/dark mode and brand theme. The tokens ship with
+ * `@cobos/tokens` and are loaded for you via `@cobos/react/styles.css`.
+ */
+
+.ec-chart {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  font-family: var(--ec-font-family);
+  color: var(--ec-text-color-primary);
+}
+
+/* Axis tick / label text. */
+.ec-chart [class$='__label'] {
+  font-size: var(--ec-font-size-extra-small);
+  fill: var(--ec-text-color-secondary);
+}
+
+/* Gridlines. */
+.ec-chart [class$='__gridline'] {
+  stroke: var(--ec-border-color-lighter);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+/* ---- Line / Area ---- */
+.ec-chart-line__path {
+  transition: opacity var(--ec-transition-duration-fast) ease;
+}
+
+.ec-chart-line__dot {
+  stroke: var(--ec-bg-color);
+  stroke-width: 1.5;
+}
+
+/* ---- Bar ---- */
+.ec-chart-bar__bar {
+  transition: opacity var(--ec-transition-duration-fast) ease;
+}
+
+.ec-chart-bar__bar:hover {
+  opacity: 0.85;
+}
+
+/* ---- Donut / Pie ---- */
+.ec-chart-donut {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.ec-chart-donut__figure {
+  position: relative;
+  flex: none;
+}
+
+.ec-chart-donut__slice {
+  transition: opacity var(--ec-transition-duration-fast) ease;
+}
+
+.ec-chart-donut__slice:hover {
+  opacity: 0.85;
+}
+
+.ec-chart-donut__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: var(--ec-font-size-large);
+  font-weight: var(--ec-font-weight-primary);
+  color: var(--ec-text-color-primary);
+  pointer-events: none;
+}
+
+.ec-chart-donut__legend {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ec-chart-donut__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--ec-font-size-small);
+  color: var(--ec-text-color-regular);
+}
+
+.ec-chart-donut__swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--ec-border-radius-small);
+  flex: none;
+}
+
+.ec-chart-donut__legend-label {
+  color: var(--ec-text-color-regular);
+}
+
+.ec-chart-donut__legend-value {
+  margin-left: auto;
+  font-weight: var(--ec-font-weight-primary);
+  color: var(--ec-text-color-primary);
+}
+
+/* ---- Sparkline ---- */
+.ec-chart-sparkline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ---- Empty state ---- */
+.ec-chart__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  border: var(--ec-border-width) dashed var(--ec-border-color-lighter);
+  border-radius: var(--ec-border-radius-base);
+  background: var(--ec-fill-color-lighter);
+  color: var(--ec-text-color-secondary);
+  font-family: var(--ec-font-family);
+  font-size: var(--ec-font-size-base);
+}

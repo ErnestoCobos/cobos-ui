@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@cobos/charts": "workspace:*",
     "@cobos/react": "workspace:*",
     "@cobos/themes": "workspace:*",
     "@cobos/tokens": "workspace:*",

@@ -33,7 +33,9 @@ and yours too.
 | --- | --- |
 | [`@cobos/react`](./packages/react) | React component library |
 | [`@cobos/tokens`](./packages/tokens) | Design tokens → CSS variables + JSON |
-| `@cobos/icons` | SVG icon set as React components _(Wave 2 — planned)_ |
+| [`@cobos/themes`](./packages/themes) | Per-brand themes (cobos · enkiflow · getdecant · voltaflow) |
+| [`@cobos/charts`](./packages/charts) | Dependency-free, theme-aware SVG charts |
+| `@cobos/icons` | SVG icon set as React components _(planned)_ |
 | [`@cobos/mcp`](./packages/mcp) | Model Context Protocol server for AI agents |
 
 ## Installation
