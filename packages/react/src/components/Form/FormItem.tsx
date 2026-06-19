@@ -231,7 +231,12 @@ export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(function FormI
   // Stable ids used to associate the label and error message with the control.
   const generatedId = useId();
   const errorId = `${generatedId}-error`;
+  const labelId = `${generatedId}-label`;
   const showError = showMessage && hasError && displayError;
+
+  // Whether a label with content is rendered. A label shown only to carry the
+  // required asterisk has no text, so it cannot name the control.
+  const hasLabel = label !== undefined && label !== null;
 
   // Resolve the id the control will actually carry, preferring (in order) the
   // child's own `id`, an explicit `for`, then a generated id. The label's
@@ -246,19 +251,26 @@ export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(function FormI
 
   // Associate the single element child with this item's label and error so that
   // clicking the label focuses the field and screen readers announce the name
-  // and validation message. Falls back to rendering children untouched when
-  // there is no single bindable element (e.g. multiple/text children).
+  // and validation message. Custom widgets (Select's `role="combobox"`,
+  // Switch's `role="switch"`, etc.) are not named by `htmlFor`/`id` the way
+  // native labelable controls are, so the label id is also forwarded via
+  // `aria-labelledby` (composed with any the child already has). Falls back to
+  // rendering children untouched when there is no single bindable element
+  // (e.g. multiple/text children).
   const boundChildren = useMemo<ReactNode>(() => {
     if (!singleChild) return children;
     const childProps = singleChild.props;
     return cloneElement(singleChild, {
       id: controlId,
+      'aria-labelledby': hasLabel
+        ? [childProps['aria-labelledby'], labelId].filter(Boolean).join(' ')
+        : (childProps['aria-labelledby'] as string | undefined),
       'aria-invalid': hasError ? true : (childProps['aria-invalid'] as boolean | undefined),
       'aria-describedby': showError
         ? [childProps['aria-describedby'], errorId].filter(Boolean).join(' ')
         : (childProps['aria-describedby'] as string | undefined),
     });
-  }, [singleChild, children, controlId, errorId, hasError, showError]);
+  }, [singleChild, children, controlId, labelId, errorId, hasLabel, hasError, showError]);
 
   const classes = cls(
     ns.b(),
@@ -281,8 +293,8 @@ export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(function FormI
 
   return (
     <div ref={ref} className={classes} style={style} data-form-prop={prop || undefined}>
-      {(label !== undefined && label !== null) || isRequired ? (
-        <label className={ns.e('label')} style={labelStyle} htmlFor={controlId}>
+      {hasLabel || isRequired ? (
+        <label id={labelId} className={ns.e('label')} style={labelStyle} htmlFor={controlId}>
           {labelText}
         </label>
       ) : null}

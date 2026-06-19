@@ -18,7 +18,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  list-style: none;
   font-family: var(--ec-font-family);
   font-size: var(--ec-menu-item-font-size);
   background-color: var(--ec-menu-bg-color);
@@ -56,6 +55,10 @@
   padding-right: 0;
 }
 
+.ec-menu--vertical.is-collapse .ec-sub-menu__icon {
+  width: auto;
+}
+
 .ec-menu--vertical.is-collapse .ec-sub-menu__content {
   display: none;
 }
@@ -69,20 +72,26 @@
 }
 
 .ec-menu--horizontal > .ec-menu-item,
-.ec-menu--horizontal > .ec-sub-menu > .ec-sub-menu__title,
 .ec-menu--horizontal > .ec-sub-menu {
   height: var(--ec-menu-horizontal-item-height);
-}
-
-.ec-menu--horizontal > .ec-menu-item,
-.ec-menu--horizontal > .ec-sub-menu > .ec-sub-menu__title {
   border-bottom: 2px solid transparent;
 }
 
 .ec-menu--horizontal > .ec-menu-item.is-active,
-.ec-menu--horizontal > .ec-sub-menu.is-active > .ec-sub-menu__title {
+.ec-menu--horizontal > .ec-sub-menu.is-active {
   color: var(--ec-menu-active-color);
   border-bottom-color: var(--ec-menu-active-color);
+}
+
+/* In horizontal mode the sub-menu trigger has no inline content of its own;
+   its title row fills the trigger height. */
+.ec-menu--horizontal > .ec-sub-menu {
+  display: flex;
+  align-items: stretch;
+}
+
+.ec-menu--horizontal > .ec-sub-menu > .ec-sub-menu__title {
+  align-items: center;
 }
 
 /* ---- Menu item ---- */
@@ -97,7 +106,6 @@
   font-size: var(--ec-menu-item-font-size);
   line-height: var(--ec-menu-item-height);
   white-space: nowrap;
-  list-style: none;
   color: var(--ec-menu-text-color);
   cursor: pointer;
   outline: none;
@@ -110,6 +118,8 @@
   background-color: var(--ec-menu-hover-bg-color);
 }
 
+/* The `<div>` itself is the focusable `menuitem`; the focus ring is drawn
+   directly on it. */
 .ec-menu-item:focus-visible {
   outline: 2px solid var(--ec-color-primary-light-5);
   outline-offset: -2px;
@@ -145,11 +155,15 @@
 }
 
 /* ---- Sub-menu ---- */
+/* The `<div role="menuitem">` is the `.ec-sub-menu` trigger; it owns the inline
+   (vertical) `<div role="menu">` content as a child. The `.ec-sub-menu__title`
+   span is the flex row that holds the icon, label and arrow. */
 .ec-sub-menu {
   box-sizing: border-box;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  color: var(--ec-menu-text-color);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
 }
 
 .ec-sub-menu__title {
@@ -157,24 +171,18 @@
   align-items: center;
   gap: 6px;
   box-sizing: border-box;
-  height: var(--ec-menu-item-height);
   padding: 0 var(--ec-menu-padding-horizontal);
   font-size: var(--ec-menu-item-font-size);
-  line-height: var(--ec-menu-item-height);
   white-space: nowrap;
-  color: var(--ec-menu-text-color);
-  cursor: pointer;
-  outline: none;
-  user-select: none;
   transition: var(--ec-transition-all);
 }
 
-.ec-sub-menu__title:hover {
+.ec-sub-menu:hover > .ec-sub-menu__title {
   color: var(--ec-menu-hover-text-color);
   background-color: var(--ec-menu-hover-bg-color);
 }
 
-.ec-sub-menu__title:focus-visible {
+.ec-sub-menu:focus-visible {
   outline: 2px solid var(--ec-color-primary-light-5);
   outline-offset: -2px;
 }
@@ -183,13 +191,13 @@
   color: var(--ec-menu-active-color);
 }
 
-.ec-sub-menu__title.is-disabled {
+.ec-sub-menu.is-disabled {
   color: var(--ec-menu-disabled-color);
   cursor: not-allowed;
   opacity: 0.75;
 }
 
-.ec-sub-menu__title.is-disabled:hover {
+.ec-sub-menu.is-disabled:hover > .ec-sub-menu__title {
   background: none;
   color: var(--ec-menu-disabled-color);
 }
@@ -199,6 +207,7 @@
   align-items: center;
   justify-content: center;
   width: var(--ec-menu-icon-width);
+  height: var(--ec-menu-item-height);
   font-size: 18px;
 }
 
@@ -206,11 +215,14 @@
   flex: 1;
   display: inline-flex;
   align-items: center;
+  height: var(--ec-menu-item-height);
+  line-height: var(--ec-menu-item-height);
 }
 
 .ec-sub-menu__arrow-wrap {
   display: inline-flex;
   align-items: center;
+  height: var(--ec-menu-item-height);
   margin-left: auto;
   transition: transform var(--ec-transition-duration);
 }
@@ -225,26 +237,36 @@
 }
 
 /* ---- Inline (vertical) sub-menu content ---- */
+/* Rendered only while the sub-menu is open (mounted on demand), so no
+   max-height transition is needed; it is a block that stacks below the title. */
 .ec-sub-menu__content {
+  width: 100%;
   margin: 0;
   padding: 0;
-  list-style: none;
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height var(--ec-transition-duration) ease-in-out;
-}
-
-.ec-sub-menu__content.is-opened {
-  max-height: 1000px;
 }
 
 /* Indentation for nested vertical items. */
-.ec-menu--vertical .ec-sub-menu__content .ec-menu-item,
-.ec-menu--vertical .ec-sub-menu__content .ec-sub-menu__title {
+.ec-menu--vertical .ec-sub-menu__content .ec-menu-item {
   height: var(--ec-menu-sub-item-height);
   line-height: var(--ec-menu-sub-item-height);
+}
+
+.ec-menu--vertical .ec-sub-menu__content .ec-menu-item,
+.ec-menu--vertical .ec-sub-menu__content .ec-sub-menu__title {
   padding-left: calc(var(--ec-menu-base-level-padding) + var(--ec-menu-level-padding));
   background-color: var(--ec-fill-color-lighter);
+}
+
+/* Nested sub-menu title rows match the sub-item height. */
+.ec-menu--vertical .ec-sub-menu__content > .ec-sub-menu > .ec-sub-menu__title > .ec-sub-menu__icon,
+.ec-menu--vertical .ec-sub-menu__content > .ec-sub-menu > .ec-sub-menu__title > .ec-sub-menu__label,
+.ec-menu--vertical
+  .ec-sub-menu__content
+  > .ec-sub-menu
+  > .ec-sub-menu__title
+  > .ec-sub-menu__arrow-wrap {
+  height: var(--ec-menu-sub-item-height);
+  line-height: var(--ec-menu-sub-item-height);
 }
 
 .ec-menu--vertical .ec-sub-menu__content .ec-sub-menu__content .ec-menu-item,
@@ -262,14 +284,15 @@
   box-shadow: var(--ec-box-shadow-light);
 }
 
-.ec-sub-menu__popup {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+/* Items render directly inside the floating `role="menu"` box. */
+.ec-menu__popper .ec-menu-item {
+  height: var(--ec-menu-sub-item-height);
+  line-height: var(--ec-menu-sub-item-height);
 }
 
-.ec-sub-menu__popup .ec-menu-item,
-.ec-sub-menu__popup .ec-sub-menu__title {
+.ec-menu__popper .ec-sub-menu__title > .ec-sub-menu__icon,
+.ec-menu__popper .ec-sub-menu__title > .ec-sub-menu__label,
+.ec-menu__popper .ec-sub-menu__title > .ec-sub-menu__arrow-wrap {
   height: var(--ec-menu-sub-item-height);
   line-height: var(--ec-menu-sub-item-height);
 }
@@ -277,7 +300,6 @@
 /* ---- Menu item group ---- */
 .ec-menu-item-group {
   box-sizing: border-box;
-  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -287,10 +309,4 @@
   font-size: var(--ec-font-size-small);
   line-height: 1;
   color: var(--ec-text-color-secondary);
-}
-
-.ec-menu-item-group__content {
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }

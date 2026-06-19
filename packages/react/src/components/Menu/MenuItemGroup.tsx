@@ -1,27 +1,39 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type HTMLAttributes, type ReactNode, useId } from 'react';
 import { cls, useNamespace } from '../../utils';
 
-export interface MenuItemGroupProps extends Omit<HTMLAttributes<HTMLLIElement>, 'title'> {
+export interface MenuItemGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Group label. */
   title?: ReactNode;
   children?: ReactNode;
 }
 
-export const MenuItemGroup = forwardRef<HTMLLIElement, MenuItemGroupProps>(
+export const MenuItemGroup = forwardRef<HTMLDivElement, MenuItemGroupProps>(
   function MenuItemGroup(props, ref) {
     const { title, className, children, ...rest } = props;
 
     const ns = useNamespace('menu-item-group');
+    const titleId = useId();
+    const hasTitle = title !== undefined && title !== null;
 
+    // The `<div>` itself is the `group`. A `group` is an allowed direct child of
+    // a `menu`/`menubar`, so the contained `menuitem`s keep a valid required
+    // parent. The group's children are placed directly inside the `group`, so
+    // no intervening `ul`/`li` is emitted.
     return (
-      <li ref={ref} className={cls(ns.b(), className)} role="presentation" {...rest}>
-        {title !== undefined && title !== null && (
-          <div className={ns.e('title')}>{title}</div>
+      <div
+        ref={ref}
+        role="group"
+        aria-labelledby={hasTitle ? titleId : undefined}
+        className={cls(ns.b(), className)}
+        {...rest}
+      >
+        {hasTitle && (
+          <div id={titleId} className={ns.e('title')} aria-hidden="true">
+            {title}
+          </div>
         )}
-        <ul className={ns.e('content')} role="group">
-          {children}
-        </ul>
-      </li>
+        {children}
+      </div>
     );
   },
 );

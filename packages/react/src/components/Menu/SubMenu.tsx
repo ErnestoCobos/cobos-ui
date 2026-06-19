@@ -4,6 +4,7 @@ import {
   type HTMLAttributes,
   isValidElement,
   type KeyboardEvent,
+  type MouseEvent,
   type ReactNode,
   useEffect,
   useId,
@@ -14,7 +15,7 @@ import { Popper } from '../Overlay';
 import { type SubMenuContextValue, SubMenuContext, useMenuContext, useSubMenuContext } from './Menu';
 import { MenuItem } from './MenuItem';
 
-export interface SubMenuProps extends Omit<HTMLAttributes<HTMLLIElement>, 'title'> {
+export interface SubMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Unique identifier for the sub-menu. */
   index: string;
   /** Title rendered in the sub-menu trigger. */
@@ -62,7 +63,7 @@ function collectItemIndices(children: ReactNode, indices: string[]): void {
   });
 }
 
-export const SubMenu = forwardRef<HTMLLIElement, SubMenuProps>(function SubMenu(props, ref) {
+export const SubMenu = forwardRef<HTMLDivElement, SubMenuProps>(function SubMenu(props, ref) {
   const { index, title, icon, disabled = false, className, style, children, ...rest } = props;
 
   const ns = useNamespace('sub-menu');
@@ -91,10 +92,13 @@ export const SubMenu = forwardRef<HTMLLIElement, SubMenuProps>(function SubMenu(
   // Expose this sub-menu as the parent path for its descendants.
   const subMenuContext = useMemo<SubMenuContextValue>(() => ({ parentIndex: index }), [index]);
 
-  const handleTitleClick = () => {
+  const handleTitleClick = (event: MouseEvent<HTMLDivElement>) => {
     if (disabled) {
       return;
     }
+    // The trigger role lives on the `<div>`; stop the event from bubbling to an
+    // enclosing (ancestor) sub-menu trigger `<div>`.
+    event.stopPropagation();
     menu?.toggleMenu(index);
   };
 
@@ -104,55 +108,64 @@ export const SubMenu = forwardRef<HTMLLIElement, SubMenuProps>(function SubMenu(
     }
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
+      event.stopPropagation();
       menu?.toggleMenu(index);
     } else if (event.key === 'ArrowDown') {
       event.preventDefault();
+      event.stopPropagation();
       menu?.openMenu(index);
     } else if (event.key === 'Escape' && open) {
       event.preventDefault();
+      event.stopPropagation();
       menu?.closeMenu(index);
     }
   };
 
-  const titleClasses = cls(
-    ns.e('title'),
-    ns.is('disabled', disabled),
-  );
-
+  // The title span is the menuitem's direct text content, so it remains the
+  // accessible name of the trigger. The icon and arrow sit inside it; a nested
+  // `role="menu"` (the popup) is a sibling, not part of the name.
   const titleContent = (
-    <>
+    <span className={ns.e('title')}>
       {icon && <span className={ns.e('icon')}>{icon}</span>}
       <span className={ns.e('label')}>{title}</span>
       <span className={cls(ns.e('arrow-wrap'), ns.is('opened', open))}>
         <ChevronIcon />
       </span>
-    </>
+    </span>
+  );
+
+  // The trigger `<div>` carries `role="menuitem"`, so it is a valid direct child
+  // of its `menu`/`menubar`/`group` parent without emitting any `li`.
+  const triggerClasses = cls(
+    ns.b(),
+    ns.is('opened', open),
+    ns.is('active', isActive),
+    ns.is('disabled', disabled),
   );
 
   // Horizontal mode renders the children in a Popper popup. The Popper is
   // controlled by the menu context so the trigger can open it via keyboard and
-  // its expanded state stays in sync with `openedMenus`.
+  // its expanded state stays in sync with `openedMenus`. The floating box
+  // carries `role="menu"`, so its `<div role="menuitem">` children get a valid
+  // required parent without an intervening role.
   if (mode === 'horizontal') {
+    // `aria-controls`/`aria-expanded` are supplied by the Popper's floating
+    // interactions (pointing at the real floating element), so they are not
+    // set explicitly here to avoid a dangling reference.
     const reference = (
-      <li
+      <div
         ref={ref}
-        className={cls(ns.b(), ns.is('opened', open), ns.is('active', isActive), ns.is('disabled', disabled), className)}
+        role="menuitem"
+        className={cls(triggerClasses, className)}
         style={style}
+        tabIndex={disabled ? -1 : 0}
+        aria-haspopup="menu"
+        aria-disabled={disabled || undefined}
+        onKeyDown={handleTitleKeyDown}
         {...rest}
       >
-        <div
-          className={titleClasses}
-          role="menuitem"
-          tabIndex={disabled ? -1 : 0}
-          aria-haspopup="menu"
-          aria-expanded={open}
-          aria-controls={popupId}
-          aria-disabled={disabled || undefined}
-          onKeyDown={handleTitleKeyDown}
-        >
-          {titleContent}
-        </div>
-      </li>
+        {titleContent}
+      </div>
     );
 
     return (
@@ -177,42 +190,42 @@ export const SubMenu = forwardRef<HTMLLIElement, SubMenuProps>(function SubMenu(
           disabled={disabled}
           popperClass="ec-menu__popper"
         >
-          <ul id={popupId} className={ns.e('popup')} role="menu">
-            {children}
-          </ul>
+          {/* The Popper floating box is the single `role="menu"`; the items
+              render directly as its `<div role="menuitem">` children, so the
+              menu owns only menuitems and introduces no stray role. */}
+          {children}
         </Popper>
       </SubMenuContext.Provider>
     );
   }
 
-  // Vertical mode expands and collapses inline.
+  // Vertical mode expands and collapses inline. The `<div>` is the trigger
+  // (`role="menuitem"`) and owns an inline `<div role="menu">` that it renders
+  // as a child, so the submenu's menuitems get a valid `menu` parent and that
+  // `menu` is owned by the menuitem.
   return (
-    <li
+    <div
       ref={ref}
-      className={cls(ns.b(), ns.is('opened', open), ns.is('active', isActive), ns.is('disabled', disabled), className)}
+      role="menuitem"
+      className={cls(triggerClasses, className)}
       style={style}
+      tabIndex={disabled ? -1 : 0}
+      aria-haspopup="menu"
+      aria-expanded={open}
+      // Only reference the inline menu while it is mounted (it renders on open),
+      // so `aria-controls` never points at a missing element.
+      aria-controls={open ? popupId : undefined}
+      aria-disabled={disabled || undefined}
+      onClick={handleTitleClick}
+      onKeyDown={handleTitleKeyDown}
       {...rest}
     >
-      <div
-        className={titleClasses}
-        role="menuitem"
-        tabIndex={disabled ? -1 : 0}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-controls={popupId}
-        aria-disabled={disabled || undefined}
-        onClick={handleTitleClick}
-        onKeyDown={handleTitleKeyDown}
-      >
-        {titleContent}
-      </div>
-      <ul
-        id={popupId}
-        role="menu"
-        className={cls(ns.e('content'), ns.is('opened', open))}
-      >
-        <SubMenuContext.Provider value={subMenuContext}>{children}</SubMenuContext.Provider>
-      </ul>
-    </li>
+      {titleContent}
+      {open && (
+        <div id={popupId} role="menu" className={ns.e('content')}>
+          <SubMenuContext.Provider value={subMenuContext}>{children}</SubMenuContext.Provider>
+        </div>
+      )}
+    </div>
   );
 });

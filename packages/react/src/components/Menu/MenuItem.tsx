@@ -1,8 +1,14 @@
-import { forwardRef, type LiHTMLAttributes, type ReactNode } from 'react';
+import {
+  forwardRef,
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactNode,
+} from 'react';
 import { cls, useNamespace } from '../../utils';
 import { useMenuContext, useSubMenuContext } from './Menu';
 
-export interface MenuItemProps extends Omit<LiHTMLAttributes<HTMLLIElement>, 'onClick'> {
+export interface MenuItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> {
   /** Unique identifier used to mark the item active. */
   index: string;
   /** Disable interaction. */
@@ -12,7 +18,7 @@ export interface MenuItemProps extends Omit<LiHTMLAttributes<HTMLLIElement>, 'on
   children?: ReactNode;
 }
 
-export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(function MenuItem(props, ref) {
+export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(function MenuItem(props, ref) {
   const { index, disabled = false, icon, className, style, children, ...rest } = props;
 
   const ns = useNamespace('menu-item');
@@ -21,10 +27,13 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(function MenuIt
 
   const isActive = menu?.activeIndex === index;
 
-  const handleClick = () => {
+  const handleClick = (event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => {
     if (disabled) {
       return;
     }
+    // The role now lives on the `<div>`, so stop the event from bubbling to an
+    // enclosing sub-menu trigger `<div>` (which would toggle it).
+    event.stopPropagation();
     menu?.setActive(index);
     // Selecting an item inside a horizontal popup collapses the open sub-menu
     // chain, mirroring Element Plus. Inline (vertical) sub-menus stay expanded.
@@ -40,8 +49,12 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(function MenuIt
     className,
   );
 
+  // The `<div>` carries the `menuitem` role required by the WAI-ARIA
+  // menu/menubar pattern. Using a `<div>` (with no implicit `listitem` role)
+  // keeps the item a valid direct `menuitem` child of its
+  // `menu`/`menubar`/`group` parent without ever emitting `ul`/`li`.
   return (
-    <li
+    <div
       ref={ref}
       role="menuitem"
       tabIndex={disabled ? -1 : 0}
@@ -52,13 +65,13 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(function MenuIt
       onKeyDown={(event) => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
-          handleClick();
+          handleClick(event);
         }
       }}
       {...rest}
     >
       {icon && <span className={ns.e('icon')}>{icon}</span>}
       <span className={ns.e('title')}>{children}</span>
-    </li>
+    </div>
   );
 });

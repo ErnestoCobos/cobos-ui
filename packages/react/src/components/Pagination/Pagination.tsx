@@ -253,49 +253,41 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(function P
     return (
       <ul key="pager" className={cls(pagerNs.b(), ns.is('disabled', disabled))}>
         {pagers.map((pager, index) => {
+          // The interactive control lives on an inner <button> rather than the
+          // <li> itself: a <ul> must only directly contain <li> elements, and
+          // putting role="button" on the <li> strips its implicit listitem role
+          // (an axe-core `list` violation).
           if (pager === 'prev-more' || pager === 'next-more') {
             const jump = pager === 'prev-more' ? current - ELLIPSIS_OFFSET : current + ELLIPSIS_OFFSET;
             return (
-              <li
-                key={`${pager}-${index}`}
-                className={cls(pagerNs.e('item'), pagerNs.is('more'))}
-                role="button"
-                aria-label={pager === 'prev-more' ? 'Previous pages' : 'Next pages'}
-                aria-disabled={disabled || undefined}
-                tabIndex={disabled ? -1 : 0}
-                onClick={() => goToPage(jump)}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    goToPage(jump);
-                  }
-                }}
-              >
-                <Icon>
-                  <MoreIcon />
-                </Icon>
+              <li key={`${pager}-${index}`} className={pagerNs.e('item')}>
+                <button
+                  type="button"
+                  className={cls(pagerNs.e('button'), pagerNs.is('more'))}
+                  aria-label={pager === 'prev-more' ? 'Previous pages' : 'Next pages'}
+                  disabled={disabled}
+                  onClick={() => goToPage(jump)}
+                >
+                  <Icon>
+                    <MoreIcon />
+                  </Icon>
+                </button>
               </li>
             );
           }
           const isActive = pager === current;
           return (
-            <li
-              key={pager}
-              className={cls(pagerNs.e('item'), pagerNs.is('active', isActive))}
-              role="button"
-              aria-label={`Page ${pager}`}
-              aria-current={isActive ? 'page' : undefined}
-              aria-disabled={disabled || undefined}
-              tabIndex={disabled ? -1 : 0}
-              onClick={() => goToPage(pager)}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                  event.preventDefault();
-                  goToPage(pager);
-                }
-              }}
-            >
-              {pager}
+            <li key={pager} className={pagerNs.e('item')}>
+              <button
+                type="button"
+                className={cls(pagerNs.e('button'), pagerNs.is('active', isActive))}
+                aria-label={`Page ${pager}`}
+                aria-current={isActive ? 'page' : undefined}
+                disabled={disabled}
+                onClick={() => goToPage(pager)}
+              >
+                {pager}
+              </button>
             </li>
           );
         })}

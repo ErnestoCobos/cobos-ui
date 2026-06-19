@@ -42,6 +42,10 @@ export interface SelectProps {
   noMatchText?: string;
   /** Native `name` attribute, mirrored to a hidden input. */
   name?: string;
+  /** Accessible name for the `combobox` role. */
+  'aria-label'?: string;
+  /** ID of the element labelling the `combobox` role. */
+  'aria-labelledby'?: string;
   /** Fired when the dropdown opens or closes. */
   onVisibleChange?: (visible: boolean) => void;
   /** Fired when the clear button is pressed. */
@@ -131,6 +135,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(pr
     noDataText = 'No data',
     noMatchText = 'No matching data',
     name,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledby,
     onVisibleChange,
     onClear,
     onRemoveTag,
@@ -424,6 +430,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(pr
       className={rootClasses}
       style={style}
       role="combobox"
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledby}
       aria-expanded={open}
       aria-haspopup="listbox"
       aria-controls={open ? listboxId : undefined}

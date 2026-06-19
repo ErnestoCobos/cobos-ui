@@ -189,4 +189,25 @@ describe('Pagination', () => {
     expect(root).toHaveClass('is-background');
     expect(root).toHaveClass('is-small');
   });
+
+  it('renders every <ul> with only <li> element children (axe-core list rule)', () => {
+    // A <ul>/<ol> must directly contain only <li> elements; otherwise axe-core
+    // raises a serious `list` violation. Exercise a large page count so the
+    // pager renders numbers and both ellipsis "more" buttons, then assert every
+    // direct element child of every <ul> is an <li>.
+    const { container } = render(
+      <Pagination
+        total={1000}
+        defaultCurrentPage={50}
+        layout="total, sizes, prev, pager, next, jumper"
+      />,
+    );
+    const lists = container.querySelectorAll('ul');
+    expect(lists.length).toBeGreaterThan(0);
+    for (const list of lists) {
+      for (const child of Array.from(list.children)) {
+        expect(child.tagName).toBe('LI');
+      }
+    }
+  });
 });

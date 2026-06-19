@@ -60,7 +60,7 @@ export function useMenuContext(): MenuContextValue | null {
   return useContext(MenuContext);
 }
 
-export interface MenuProps extends Omit<HTMLAttributes<HTMLUListElement>, 'onChange' | 'onSelect'> {
+export interface MenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'onSelect'> {
   /** Layout mode. */
   mode?: MenuMode;
   /** Active item index (controlled). */
@@ -84,7 +84,7 @@ export interface MenuProps extends Omit<HTMLAttributes<HTMLUListElement>, 'onCha
   children?: ReactNode;
 }
 
-export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(props, ref) {
+export const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu(props, ref) {
   const {
     mode = 'vertical',
     value,
@@ -249,15 +249,15 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(props,
 
   return (
     <MenuContext.Provider value={context}>
-      <ul
+      <div
         ref={ref}
         className={classes}
-        role="menu"
+        role={mode === 'horizontal' ? 'menubar' : 'menu'}
         aria-orientation={mode === 'horizontal' ? 'horizontal' : 'vertical'}
         {...rest}
       >
         {children}
-      </ul>
+      </div>
     </MenuContext.Provider>
   );
 });

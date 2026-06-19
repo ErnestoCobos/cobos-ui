@@ -5,6 +5,9 @@ import { describe, expect, it } from 'vitest';
 import { Form, type FormInstance, type FormRule } from './Form';
 import { FormItem } from './FormItem';
 import { Input } from '../Input/Input';
+import { Select } from '../Select/Select';
+import { Option } from '../Select/Option';
+import { Switch } from '../Switch/Switch';
 
 describe('Form', () => {
   it('renders a label and marks required items with an asterisk', () => {
@@ -178,6 +181,46 @@ describe('Form', () => {
     const label = screen.getByText('Name');
     expect(input.id).not.toBe('');
     expect(label).toHaveAttribute('for', input.id);
+  });
+
+  it('names a Select combobox from its FormItem label', () => {
+    render(
+      <Form>
+        <FormItem label="Fruit" prop="fruit">
+          <Select>
+            <Option value="apple">Apple</Option>
+            <Option value="banana">Banana</Option>
+          </Select>
+        </FormItem>
+      </Form>,
+    );
+    expect(screen.getByRole('combobox', { name: 'Fruit' })).toBeInTheDocument();
+  });
+
+  it('names a Switch from its FormItem label', () => {
+    render(
+      <Form>
+        <FormItem label="Notifications" prop="notifications">
+          <Switch />
+        </FormItem>
+      </Form>,
+    );
+    expect(screen.getByRole('switch', { name: 'Notifications' })).toBeInTheDocument();
+  });
+
+  it('preserves a control\'s own aria-labelledby while adding the FormItem label', () => {
+    render(
+      <>
+        <span id="external-lbl">External</span>
+        <Form>
+          <FormItem label="Mode" prop="mode">
+            <Switch aria-labelledby="external-lbl" />
+          </FormItem>
+        </Form>
+      </>,
+    );
+    // The accessible name composes the external label and the FormItem label.
+    expect(screen.getByRole('switch', { name: 'External Mode' })).toBeInTheDocument();
   });
 
   it('exposes validation errors to assistive technology', async () => {

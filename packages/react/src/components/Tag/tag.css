@@ -92,35 +92,48 @@
 }
 
 /* =========================================================
-   Light effect (default): light-9 bg + color text + light-8 border
+   Light effect (default): light-9 bg + accessible text + light-8 border
+
+   The brand base color (e.g. var(--ec-color-success)) does not reach the
+   WCAG 2.1 AA 4.5:1 contrast ratio against its own light-9 background, and
+   neither does dark-2. The component-scoped text tokens below are computed
+   as mix(black, base, 0.4) (i.e. base channels * 0.4) and clear 4.5:1 on the
+   corresponding light-9 background for every type (range 5.13:1 to 6.48:1).
    ========================================================= */
+.ec-tag--light {
+  --ec-tag-light-text-primary: #265f99;
+  --ec-tag-light-text-success: #3e7423;
+  --ec-tag-light-text-info: #56585c;
+  --ec-tag-light-text-warning: #8a6124;
+  --ec-tag-light-text-danger: #934141;
+}
 .ec-tag--primary.ec-tag--light {
   --ec-tag-bg-color: var(--ec-color-primary-light-9);
-  --ec-tag-text-color: var(--ec-color-primary);
+  --ec-tag-text-color: var(--ec-tag-light-text-primary);
   --ec-tag-border-color: var(--ec-color-primary-light-8);
   --ec-tag-hover-color: var(--ec-color-primary);
 }
 .ec-tag--success.ec-tag--light {
   --ec-tag-bg-color: var(--ec-color-success-light-9);
-  --ec-tag-text-color: var(--ec-color-success);
+  --ec-tag-text-color: var(--ec-tag-light-text-success);
   --ec-tag-border-color: var(--ec-color-success-light-8);
   --ec-tag-hover-color: var(--ec-color-success);
 }
 .ec-tag--info.ec-tag--light {
   --ec-tag-bg-color: var(--ec-color-info-light-9);
-  --ec-tag-text-color: var(--ec-color-info);
+  --ec-tag-text-color: var(--ec-tag-light-text-info);
   --ec-tag-border-color: var(--ec-color-info-light-8);
   --ec-tag-hover-color: var(--ec-color-info);
 }
 .ec-tag--warning.ec-tag--light {
   --ec-tag-bg-color: var(--ec-color-warning-light-9);
-  --ec-tag-text-color: var(--ec-color-warning);
+  --ec-tag-text-color: var(--ec-tag-light-text-warning);
   --ec-tag-border-color: var(--ec-color-warning-light-8);
   --ec-tag-hover-color: var(--ec-color-warning);
 }
 .ec-tag--danger.ec-tag--light {
   --ec-tag-bg-color: var(--ec-color-danger-light-9);
-  --ec-tag-text-color: var(--ec-color-danger);
+  --ec-tag-text-color: var(--ec-tag-light-text-danger);
   --ec-tag-border-color: var(--ec-color-danger-light-8);
   --ec-tag-hover-color: var(--ec-color-danger);
 }
