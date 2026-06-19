@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { themeNames, themeSeeds, themes } from './themes';
 
 describe('theme seeds', () => {
-  it('picks white contrast text for the voltaflow navy primary', () => {
+  it('picks white contrast text for the voltaflow violet primary', () => {
     expect(createTheme(themeSeeds.voltaflow)['--ec-color-primary-contrast']).toBe('#ffffff');
   });
 
@@ -25,6 +25,6 @@ describe('theme metadata', () => {
 
   it('keeps the cobos and voltaflow info accents alongside their primaries', () => {
     expect(themeSeeds.cobos.info).toBe('#7c3aed');
-    expect(themeSeeds.voltaflow.info).toBe('#4ea5d9');
+    expect(themeSeeds.voltaflow.info).toBe('#f4a07a');
   });
 });
