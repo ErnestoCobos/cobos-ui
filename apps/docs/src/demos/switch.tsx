@@ -11,7 +11,7 @@ export default function SwitchDemo() {
     <DemoStack>
       <Example title="Basic">
         <Space align="center">
-          <Switch value={on} onChange={setOn} />
+          <Switch value={on} onChange={setOn} aria-label="Toggle basic switch" />
           <Text type="info" size="small">
             {on ? 'On' : 'Off'}
           </Text>
@@ -20,23 +20,34 @@ export default function SwitchDemo() {
 
       <Example title="With text" description="Describe each state.">
         <Space align="center">
-          <Switch value={notify} onChange={setNotify} activeText="On" inactiveText="Off" />
-          <Switch defaultValue inlinePrompt activeText="Y" inactiveText="N" />
+          <Switch
+            value={notify}
+            onChange={setNotify}
+            activeText="On"
+            inactiveText="Off"
+            aria-label="Notifications"
+          />
+          <Switch defaultValue inlinePrompt activeText="Y" inactiveText="N" aria-label="Inline prompt switch" />
         </Space>
       </Example>
 
       <Example title="With icons">
-        <Switch defaultValue activeIcon={CheckGlyph} inactiveIcon={CloseGlyph} />
+        <Switch
+          defaultValue
+          activeIcon={CheckGlyph}
+          inactiveIcon={CloseGlyph}
+          aria-label="Switch with icons"
+        />
       </Example>
 
       <Example title="Sizes, loading and disabled">
         <Space align="center" wrap>
-          <Switch defaultValue size="large" />
-          <Switch defaultValue />
-          <Switch defaultValue size="small" />
-          <Switch defaultValue loading />
-          <Switch disabled />
-          <Switch disabled defaultValue />
+          <Switch defaultValue size="large" aria-label="Large switch" />
+          <Switch defaultValue aria-label="Default switch" />
+          <Switch defaultValue size="small" aria-label="Small switch" />
+          <Switch defaultValue loading aria-label="Loading switch" />
+          <Switch disabled aria-label="Disabled switch (off)" />
+          <Switch disabled defaultValue aria-label="Disabled switch (on)" />
         </Space>
       </Example>
     </DemoStack>

@@ -50,7 +50,7 @@ export default function DialogDemo() {
             </Space>
           }
         >
-          <Input value={name} onChange={setName} placeholder="New project name" clearable />
+          <Input value={name} onChange={setName} placeholder="New project name" aria-label="New project name" clearable />
         </Dialog>
       </Example>
 

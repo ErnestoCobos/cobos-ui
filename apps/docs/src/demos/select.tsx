@@ -20,7 +20,14 @@ export default function SelectDemo() {
     <DemoStack>
       <Example title="Single" description="Pick one option.">
         <Space align="center">
-          <Select value={single} onChange={setSingle} clearable style={{ width: 220 }} placeholder="Framework">
+          <Select
+            value={single}
+            onChange={setSingle}
+            clearable
+            style={{ width: 220 }}
+            placeholder="Framework"
+            aria-label="Framework (single select)"
+          >
             {FRAMEWORKS.map((f) => (
               <Option key={f.value} value={f.value} label={f.label} disabled={f.disabled}>
                 {f.label}
@@ -34,7 +41,15 @@ export default function SelectDemo() {
       </Example>
 
       <Example title="Multiple" description="Selections render as removable tags.">
-        <Select value={multiple} onChange={setMultiple} multiple clearable style={{ width: 320 }} placeholder="Frameworks">
+        <Select
+          value={multiple}
+          onChange={setMultiple}
+          multiple
+          clearable
+          style={{ width: 320 }}
+          placeholder="Frameworks"
+          aria-label="Frameworks (multiple select)"
+        >
           {FRAMEWORKS.map((f) => (
             <Option key={f.value} value={f.value} label={f.label} disabled={f.disabled}>
               {f.label}
@@ -51,6 +66,7 @@ export default function SelectDemo() {
           clearable
           style={{ width: 220 }}
           placeholder="Search framework"
+          aria-label="Search framework (filterable select)"
         >
           {FRAMEWORKS.map((f) => (
             <Option key={f.value} value={f.value} label={f.label} disabled={f.disabled}>
