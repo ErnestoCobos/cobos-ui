@@ -66,76 +66,76 @@
 
 /* ---- Solid type variants ---- */
 .ec-button--primary {
-  --ec-button-text-color: var(--ec-color-white);
+  --ec-button-text-color: var(--ec-color-primary-contrast);
   --ec-button-bg-color: var(--ec-color-primary);
   --ec-button-border-color: var(--ec-color-primary);
-  --ec-button-hover-text-color: var(--ec-color-white);
+  --ec-button-hover-text-color: var(--ec-color-primary-contrast);
   --ec-button-hover-bg-color: var(--ec-color-primary-light-3);
   --ec-button-hover-border-color: var(--ec-color-primary-light-3);
-  --ec-button-active-text-color: var(--ec-color-white);
+  --ec-button-active-text-color: var(--ec-color-primary-contrast);
   --ec-button-active-bg-color: var(--ec-color-primary-dark-2);
   --ec-button-active-border-color: var(--ec-color-primary-dark-2);
-  --ec-button-disabled-text-color: var(--ec-color-white);
+  --ec-button-disabled-text-color: var(--ec-color-primary-contrast);
   --ec-button-disabled-bg-color: var(--ec-color-primary-light-5);
   --ec-button-disabled-border-color: var(--ec-color-primary-light-5);
 }
 
 .ec-button--success {
-  --ec-button-text-color: var(--ec-color-white);
+  --ec-button-text-color: var(--ec-color-success-contrast);
   --ec-button-bg-color: var(--ec-color-success);
   --ec-button-border-color: var(--ec-color-success);
-  --ec-button-hover-text-color: var(--ec-color-white);
+  --ec-button-hover-text-color: var(--ec-color-success-contrast);
   --ec-button-hover-bg-color: var(--ec-color-success-light-3);
   --ec-button-hover-border-color: var(--ec-color-success-light-3);
-  --ec-button-active-text-color: var(--ec-color-white);
+  --ec-button-active-text-color: var(--ec-color-success-contrast);
   --ec-button-active-bg-color: var(--ec-color-success-dark-2);
   --ec-button-active-border-color: var(--ec-color-success-dark-2);
-  --ec-button-disabled-text-color: var(--ec-color-white);
+  --ec-button-disabled-text-color: var(--ec-color-success-contrast);
   --ec-button-disabled-bg-color: var(--ec-color-success-light-5);
   --ec-button-disabled-border-color: var(--ec-color-success-light-5);
 }
 
 .ec-button--warning {
-  --ec-button-text-color: var(--ec-color-white);
+  --ec-button-text-color: var(--ec-color-warning-contrast);
   --ec-button-bg-color: var(--ec-color-warning);
   --ec-button-border-color: var(--ec-color-warning);
-  --ec-button-hover-text-color: var(--ec-color-white);
+  --ec-button-hover-text-color: var(--ec-color-warning-contrast);
   --ec-button-hover-bg-color: var(--ec-color-warning-light-3);
   --ec-button-hover-border-color: var(--ec-color-warning-light-3);
-  --ec-button-active-text-color: var(--ec-color-white);
+  --ec-button-active-text-color: var(--ec-color-warning-contrast);
   --ec-button-active-bg-color: var(--ec-color-warning-dark-2);
   --ec-button-active-border-color: var(--ec-color-warning-dark-2);
-  --ec-button-disabled-text-color: var(--ec-color-white);
+  --ec-button-disabled-text-color: var(--ec-color-warning-contrast);
   --ec-button-disabled-bg-color: var(--ec-color-warning-light-5);
   --ec-button-disabled-border-color: var(--ec-color-warning-light-5);
 }
 
 .ec-button--danger {
-  --ec-button-text-color: var(--ec-color-white);
+  --ec-button-text-color: var(--ec-color-danger-contrast);
   --ec-button-bg-color: var(--ec-color-danger);
   --ec-button-border-color: var(--ec-color-danger);
-  --ec-button-hover-text-color: var(--ec-color-white);
+  --ec-button-hover-text-color: var(--ec-color-danger-contrast);
   --ec-button-hover-bg-color: var(--ec-color-danger-light-3);
   --ec-button-hover-border-color: var(--ec-color-danger-light-3);
-  --ec-button-active-text-color: var(--ec-color-white);
+  --ec-button-active-text-color: var(--ec-color-danger-contrast);
   --ec-button-active-bg-color: var(--ec-color-danger-dark-2);
   --ec-button-active-border-color: var(--ec-color-danger-dark-2);
-  --ec-button-disabled-text-color: var(--ec-color-white);
+  --ec-button-disabled-text-color: var(--ec-color-danger-contrast);
   --ec-button-disabled-bg-color: var(--ec-color-danger-light-5);
   --ec-button-disabled-border-color: var(--ec-color-danger-light-5);
 }
 
 .ec-button--info {
-  --ec-button-text-color: var(--ec-color-white);
+  --ec-button-text-color: var(--ec-color-info-contrast);
   --ec-button-bg-color: var(--ec-color-info);
   --ec-button-border-color: var(--ec-color-info);
-  --ec-button-hover-text-color: var(--ec-color-white);
+  --ec-button-hover-text-color: var(--ec-color-info-contrast);
   --ec-button-hover-bg-color: var(--ec-color-info-light-3);
   --ec-button-hover-border-color: var(--ec-color-info-light-3);
-  --ec-button-active-text-color: var(--ec-color-white);
+  --ec-button-active-text-color: var(--ec-color-info-contrast);
   --ec-button-active-bg-color: var(--ec-color-info-dark-2);
   --ec-button-active-border-color: var(--ec-color-info-dark-2);
-  --ec-button-disabled-text-color: var(--ec-color-white);
+  --ec-button-disabled-text-color: var(--ec-color-info-contrast);
   --ec-button-disabled-bg-color: var(--ec-color-info-light-5);
   --ec-button-disabled-border-color: var(--ec-color-info-light-5);
 }
@@ -145,10 +145,10 @@
   --ec-button-text-color: var(--ec-color-primary);
   --ec-button-bg-color: var(--ec-color-primary-light-9);
   --ec-button-border-color: var(--ec-color-primary-light-5);
-  --ec-button-hover-text-color: var(--ec-color-white);
+  --ec-button-hover-text-color: var(--ec-color-primary-contrast);
   --ec-button-hover-bg-color: var(--ec-color-primary);
   --ec-button-hover-border-color: var(--ec-color-primary);
-  --ec-button-active-text-color: var(--ec-color-white);
+  --ec-button-active-text-color: var(--ec-color-primary-contrast);
   --ec-button-active-bg-color: var(--ec-color-primary-dark-2);
   --ec-button-active-border-color: var(--ec-color-primary-dark-2);
 }
@@ -157,10 +157,10 @@
   --ec-button-text-color: var(--ec-color-success);
   --ec-button-bg-color: var(--ec-color-success-light-9);
   --ec-button-border-color: var(--ec-color-success-light-5);
-  --ec-button-hover-text-color: var(--ec-color-white);
+  --ec-button-hover-text-color: var(--ec-color-success-contrast);
   --ec-button-hover-bg-color: var(--ec-color-success);
   --ec-button-hover-border-color: var(--ec-color-success);
-  --ec-button-active-text-color: var(--ec-color-white);
+  --ec-button-active-text-color: var(--ec-color-success-contrast);
   --ec-button-active-bg-color: var(--ec-color-success-dark-2);
   --ec-button-active-border-color: var(--ec-color-success-dark-2);
 }
@@ -169,10 +169,10 @@
   --ec-button-text-color: var(--ec-color-warning);
   --ec-button-bg-color: var(--ec-color-warning-light-9);
   --ec-button-border-color: var(--ec-color-warning-light-5);
-  --ec-button-hover-text-color: var(--ec-color-white);
+  --ec-button-hover-text-color: var(--ec-color-warning-contrast);
   --ec-button-hover-bg-color: var(--ec-color-warning);
   --ec-button-hover-border-color: var(--ec-color-warning);
-  --ec-button-active-text-color: var(--ec-color-white);
+  --ec-button-active-text-color: var(--ec-color-warning-contrast);
   --ec-button-active-bg-color: var(--ec-color-warning-dark-2);
   --ec-button-active-border-color: var(--ec-color-warning-dark-2);
 }
@@ -181,10 +181,10 @@
   --ec-button-text-color: var(--ec-color-danger);
   --ec-button-bg-color: var(--ec-color-danger-light-9);
   --ec-button-border-color: var(--ec-color-danger-light-5);
-  --ec-button-hover-text-color: var(--ec-color-white);
+  --ec-button-hover-text-color: var(--ec-color-danger-contrast);
   --ec-button-hover-bg-color: var(--ec-color-danger);
   --ec-button-hover-border-color: var(--ec-color-danger);
-  --ec-button-active-text-color: var(--ec-color-white);
+  --ec-button-active-text-color: var(--ec-color-danger-contrast);
   --ec-button-active-bg-color: var(--ec-color-danger-dark-2);
   --ec-button-active-border-color: var(--ec-color-danger-dark-2);
 }
@@ -193,10 +193,10 @@
   --ec-button-text-color: var(--ec-color-info);
   --ec-button-bg-color: var(--ec-color-info-light-9);
   --ec-button-border-color: var(--ec-color-info-light-5);
-  --ec-button-hover-text-color: var(--ec-color-white);
+  --ec-button-hover-text-color: var(--ec-color-info-contrast);
   --ec-button-hover-bg-color: var(--ec-color-info);
   --ec-button-hover-border-color: var(--ec-color-info);
-  --ec-button-active-text-color: var(--ec-color-white);
+  --ec-button-active-text-color: var(--ec-color-info-contrast);
   --ec-button-active-bg-color: var(--ec-color-info-dark-2);
   --ec-button-active-border-color: var(--ec-color-info-dark-2);
 }

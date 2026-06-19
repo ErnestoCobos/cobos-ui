@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ConfigProvider, Tag, Button, Icon, Link } from '@cobos/react';
 import type { ComponentSize } from '@cobos/react';
+import { themes } from '@cobos/themes';
+import type { ThemeName } from '@cobos/themes';
 
 import { COMPONENTS, STABLE_COMPONENTS, groupByCategory, findComponent, elementPlusUrl } from './catalog';
 import { demos } from './demos';
@@ -12,11 +14,18 @@ import {
   CopyGlyph,
   SparkGlyph,
   StorybookGlyph,
+  ChevronDownGlyph,
 } from './icons';
 
 const THEME_KEY = 'cobos-docs-theme';
 const SIZE_KEY = 'cobos-docs-size';
+const BRAND_KEY = 'cobos-docs-brand';
 const SIZES: ComponentSize[] = ['large', 'default', 'small'];
+
+/** Default brand on first load — showcase Ernesto's own brand (cyan accent). */
+const DEFAULT_BRAND: ThemeName = 'cobos';
+const BRAND_NAMES = themes.map((t) => t.name);
+const BRAND_BY_NAME = new Map(themes.map((t) => [t.name, t]));
 
 const GITHUB_URL = 'https://github.com/ErnestoCobos/cobos-ui';
 const STORYBOOK_URL = '/storybook';
@@ -71,6 +80,13 @@ function getInitialSize(): ComponentSize {
   const stored = localStorage.getItem(SIZE_KEY);
   if (stored === 'large' || stored === 'default' || stored === 'small') return stored;
   return 'default';
+}
+
+function getInitialBrand(): ThemeName {
+  const stored = localStorage.getItem(BRAND_KEY);
+  if (stored && (BRAND_NAMES as string[]).includes(stored)) return stored as ThemeName;
+  // First load: default to the Cobos brand so the docs showcase the cyan accent.
+  return DEFAULT_BRAND;
 }
 
 /** A monospace command line with a copy affordance. */
@@ -269,6 +285,7 @@ export default function App() {
   const [route, navigate] = useHashRoute();
   const [theme, setTheme] = useState<'light' | 'dark'>(getInitialTheme);
   const [size, setSize] = useState<ComponentSize>(getInitialSize);
+  const [brand, setBrand] = useState<ThemeName>(getInitialBrand);
   const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
@@ -279,6 +296,16 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(SIZE_KEY, size);
   }, [size]);
+
+  // Brand theme: set data-theme on <html> so the per-brand --ec-* vars apply to
+  // every live demo and the landing alike (they all live under documentElement),
+  // composing with the `dark` class above. Persist the choice for return visits.
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', brand);
+    localStorage.setItem(BRAND_KEY, brand);
+  }, [brand]);
+
+  const activeBrand = BRAND_BY_NAME.get(brand) ?? themes[0];
 
   // Close the mobile drawer whenever the route changes.
   useEffect(() => {
@@ -346,6 +373,36 @@ export default function App() {
         </div>
 
         <div className="topbar__right">
+          <div className="brand-switch">
+            <span className="brand-switch__caption" aria-hidden>
+              <span
+                className="brand-switch__swatch"
+                style={{ background: activeBrand.seeds.primary }}
+              />
+              <span className="brand-switch__label">Theme: {activeBrand.label}</span>
+            </span>
+            <div className="brand-switch__field">
+              <label className="visually-hidden" htmlFor="brand-theme">
+                Brand theme
+              </label>
+              <select
+                id="brand-theme"
+                className="brand-switch__select"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value as ThemeName)}
+                title={activeBrand.description}
+              >
+                {themes.map((t) => (
+                  <option key={t.name} value={t.name}>
+                    {t.label}
+                  </option>
+                ))}
+              </select>
+              <Icon size={14} className="brand-switch__chevron" aria-hidden>
+                {ChevronDownGlyph}
+              </Icon>
+            </div>
+          </div>
           {!isHome ? (
             <div className="size-toggle" role="group" aria-label="Component size">
               {SIZES.map((s) => (

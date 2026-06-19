@@ -9,12 +9,19 @@ export interface ConfigContextValue {
   disabled: boolean;
   /** Text direction. */
   dir: 'ltr' | 'rtl';
+  /**
+   * Active theme name applied to descendants. When set, the wrapper element
+   * exposes a `data-theme` attribute so theme CSS scoped to
+   * `[data-theme="..."]` / `.theme-...` applies to the subtree.
+   */
+  theme?: string;
 }
 
 const defaultConfig: ConfigContextValue = {
   size: 'default',
   disabled: false,
   dir: 'ltr',
+  theme: undefined,
 };
 
 export const ConfigContext = createContext<ConfigContextValue>(defaultConfig);
@@ -27,7 +34,7 @@ export interface ConfigProviderProps extends Partial<ConfigContextValue> {
   children?: ReactNode;
 }
 
-export function ConfigProvider({ size, disabled, dir, children }: ConfigProviderProps) {
+export function ConfigProvider({ size, disabled, dir, theme, children }: ConfigProviderProps) {
   const parent = useConfig();
   const value = useMemo<ConfigContextValue>(
     () => ({
@@ -36,12 +43,19 @@ export function ConfigProvider({ size, disabled, dir, children }: ConfigProvider
       // Disabling composes: once a subtree is disabled it cannot be re-enabled below.
       disabled: (disabled ?? false) || parent.disabled,
       dir: dir ?? parent.dir,
+      theme: theme ?? parent.theme,
     }),
-    [size, disabled, dir, parent.size, parent.disabled, parent.dir],
+    [size, disabled, dir, theme, parent.size, parent.disabled, parent.dir, parent.theme],
   );
   return (
     <ConfigContext.Provider value={value}>
-      <div className="ec-config-provider" style={{ display: 'contents' }} dir={value.dir}>
+      <div
+        className="ec-config-provider"
+        style={{ display: 'contents' }}
+        dir={value.dir}
+        // Only emit the attribute when a theme is active so unset stays clean.
+        data-theme={value.theme ?? undefined}
+      >
         {children}
       </div>
     </ConfigContext.Provider>

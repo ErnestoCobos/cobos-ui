@@ -5,6 +5,15 @@ import { createRoot } from 'react-dom/client';
 import '@cobos/tokens/tokens.css';
 import '@cobos/react/styles.css';
 
+// Per-brand theme palettes. Each scopes its --ec-* vars to
+// :root[data-theme="<name>"] (light) and html.dark[data-theme="<name>"] (dark),
+// so the active brand is selected via data-theme on <html> and composes with
+// the existing `dark` class.
+import '@cobos/themes/cobos.css';
+import '@cobos/themes/enkiflow.css';
+import '@cobos/themes/getdecant.css';
+import '@cobos/themes/voltaflow.css';
+
 // Documentation site styles.
 import './styles.css';
 

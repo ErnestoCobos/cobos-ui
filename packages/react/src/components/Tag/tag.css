@@ -143,31 +143,31 @@
    ========================================================= */
 .ec-tag--primary.ec-tag--dark {
   --ec-tag-bg-color: var(--ec-color-primary);
-  --ec-tag-text-color: var(--ec-color-white);
+  --ec-tag-text-color: var(--ec-color-primary-contrast);
   --ec-tag-border-color: var(--ec-color-primary);
   --ec-tag-hover-color: var(--ec-color-primary-light-3);
 }
 .ec-tag--success.ec-tag--dark {
   --ec-tag-bg-color: var(--ec-color-success);
-  --ec-tag-text-color: var(--ec-color-white);
+  --ec-tag-text-color: var(--ec-color-success-contrast);
   --ec-tag-border-color: var(--ec-color-success);
   --ec-tag-hover-color: var(--ec-color-success-light-3);
 }
 .ec-tag--info.ec-tag--dark {
   --ec-tag-bg-color: var(--ec-color-info);
-  --ec-tag-text-color: var(--ec-color-white);
+  --ec-tag-text-color: var(--ec-color-info-contrast);
   --ec-tag-border-color: var(--ec-color-info);
   --ec-tag-hover-color: var(--ec-color-info-light-3);
 }
 .ec-tag--warning.ec-tag--dark {
   --ec-tag-bg-color: var(--ec-color-warning);
-  --ec-tag-text-color: var(--ec-color-white);
+  --ec-tag-text-color: var(--ec-color-warning-contrast);
   --ec-tag-border-color: var(--ec-color-warning);
   --ec-tag-hover-color: var(--ec-color-warning-light-3);
 }
 .ec-tag--danger.ec-tag--dark {
   --ec-tag-bg-color: var(--ec-color-danger);
-  --ec-tag-text-color: var(--ec-color-white);
+  --ec-tag-text-color: var(--ec-color-danger-contrast);
   --ec-tag-border-color: var(--ec-color-danger);
   --ec-tag-hover-color: var(--ec-color-danger-light-3);
 }

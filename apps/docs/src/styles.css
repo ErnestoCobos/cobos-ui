@@ -292,6 +292,98 @@ html.dark .app::after {
   color: #fff;
 }
 
+/* Brand theme switcher — pairs a "Theme: <label>" caption + accent swatch with
+   an accessible native <select>. The swatch reads the live brand seed, so it
+   tracks whichever theme is active. */
+.brand-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-switch__caption {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.brand-switch__swatch {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.brand-switch__field {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-switch__select {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 36px;
+  padding: 0 30px 0 12px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 9px;
+  background: var(--paper-raised);
+  color: var(--ink-2);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.16s var(--ease), color 0.16s var(--ease);
+}
+
+.brand-switch__select:hover {
+  color: var(--ink);
+  border-color: var(--ink-3);
+}
+
+.brand-switch__select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.brand-switch__chevron {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+  color: var(--ink-3);
+}
+
+/* Visually hide a label while keeping it available to assistive tech. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* On narrow viewports the caption text is dropped to save room; the swatch
+   plus the labelled <select> keep the active brand legible and accessible. */
+@media (max-width: 720px) {
+  .brand-switch__label {
+    display: none;
+  }
+}
+
 /* ================= LANDING ================= */
 
 .home-main {

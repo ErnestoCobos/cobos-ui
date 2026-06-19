@@ -1,0 +1,55 @@
+{
+  "name": "@cobos/themes",
+  "version": "0.0.0",
+  "description": "Per-brand themes for Cobos UI, generated from @cobos/tokens createTheme.",
+  "author": "Ernesto Cobos <ernesto@cobos.io>",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./all.css": "./dist/all.css",
+    "./themes.json": "./dist/themes.json",
+    "./cobos.css": "./dist/cobos.css",
+    "./cobos.json": "./dist/cobos.json",
+    "./enkiflow.css": "./dist/enkiflow.css",
+    "./enkiflow.json": "./dist/enkiflow.json",
+    "./getdecant.css": "./dist/getdecant.css",
+    "./getdecant.json": "./dist/getdecant.json",
+    "./voltaflow.css": "./dist/voltaflow.css",
+    "./voltaflow.json": "./dist/voltaflow.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ErnestoCobos/cobos-ui.git",
+    "directory": "packages/themes"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean && node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@cobos/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
+  }
+}

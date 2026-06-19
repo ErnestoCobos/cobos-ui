@@ -1,7 +1,11 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { Tag } from './Tag';
+
+const tagCss = readFileSync(resolve(process.cwd(), 'src/components/Tag/tag.css'), 'utf8');
 
 describe('Tag', () => {
   it('renders its children', () => {
@@ -148,5 +152,25 @@ describe('Tag light-effect contrast (WCAG 2.1 AA)', () => {
       const ratio = contrastRatio(hexToRgb(LIGHT_TEXT[type]), light9(type));
       expect(ratio, `${type} light-effect contrast`).toBeGreaterThanOrEqual(AA_NORMAL);
     }
+  });
+});
+
+describe('Tag dark-effect on-color tokens', () => {
+  // The dark effect (solid bg) must drive its text from the accessible
+  // per-type --ec-color-{type}-contrast token rather than hardcoded white.
+  const TYPES = ['primary', 'success', 'info', 'warning', 'danger'] as const;
+
+  function block(selector: string): string {
+    const start = tagCss.indexOf(selector);
+    expect(start, `${selector} block not found`).toBeGreaterThanOrEqual(0);
+    const open = tagCss.indexOf('{', start);
+    const close = tagCss.indexOf('}', open);
+    return tagCss.slice(open, close);
+  }
+
+  it.each(TYPES)('dark %s block uses the contrast token for its text', (type) => {
+    const css = block(`.ec-tag--${type}.ec-tag--dark {`);
+    expect(css).toContain(`--ec-tag-text-color: var(--ec-color-${type}-contrast)`);
+    expect(css).not.toContain('var(--ec-color-white)');
   });
 });

@@ -30,7 +30,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Build library + registry
-        run: pnpm -F @cobos/tokens build && pnpm -F @cobos/react build && pnpm build:registry
+        run: pnpm -F @cobos/tokens build && pnpm -F @cobos/themes build && pnpm -F @cobos/react build && pnpm build:registry
 
       - name: Build docs site
         run: pnpm -F docs build

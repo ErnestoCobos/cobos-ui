@@ -1,4 +1,4 @@
-import { mix } from './color';
+import { mix, readableText } from './color';
 
 /** Brand colors (faithful to Element Plus base palette). */
 export const BRAND_COLORS = {
@@ -34,6 +34,7 @@ function colorVars(mixLight: string, mixDark2: string, dark2Weight: number): Var
       vars[`--ec-color-${name}-light-${i}`] = mix(mixLight, base, i / 10);
     }
     vars[`--ec-color-${name}-dark-2`] = mix(mixDark2, base, dark2Weight);
+    vars[`--ec-color-${name}-contrast`] = readableText(base);
   }
   return vars;
 }
@@ -152,5 +153,52 @@ export const tokens = {
   light: lightVars,
   dark: darkVars,
 } as const;
+
+/** Seed colors accepted by {@link createTheme}. */
+export interface ThemeSeeds {
+  primary?: string;
+  success?: string;
+  warning?: string;
+  danger?: string;
+  info?: string;
+}
+
+/** Order in which seeded color ramps are emitted. */
+const SEED_ORDER: (keyof ThemeSeeds)[] = ['primary', 'success', 'warning', 'danger', 'info'];
+
+/** Emit the override vars (base + light-1..9 + dark-2 + contrast) for one seeded color. */
+function seedVars(name: string, seed: string): Vars {
+  const vars: Vars = {};
+  vars[`--ec-color-${name}`] = seed;
+  for (let i = 1; i <= 9; i++) {
+    vars[`--ec-color-${name}-light-${i}`] = mix(WHITE, seed, i / 10);
+  }
+  vars[`--ec-color-${name}-dark-2`] = mix(BLACK, seed, 0.2);
+  vars[`--ec-color-${name}-contrast`] = readableText(seed);
+  return vars;
+}
+
+/**
+ * Build a set of CSS variable overrides from a partial palette of seed colors.
+ *
+ * For every provided seed it derives the base, the `light-1..9` ramp, `dark-2`,
+ * and an accessible `-contrast` text color. Types that are not provided are
+ * omitted, so the consumer keeps the base palette value for those. When only
+ * `danger` is given, `error` is mirrored from it (matching the base palette,
+ * where `error === danger`). Pure: no side effects, returns a fresh object.
+ */
+export function createTheme(seeds: ThemeSeeds): Vars {
+  const vars: Vars = {};
+  for (const name of SEED_ORDER) {
+    const seed = seeds[name];
+    if (!seed) continue;
+    Object.assign(vars, seedVars(name, seed));
+    // Mirror `error` from `danger` when only `danger` is supplied.
+    if (name === 'danger') {
+      Object.assign(vars, seedVars('error', seed));
+    }
+  }
+  return vars;
+}
 
 export default tokens;

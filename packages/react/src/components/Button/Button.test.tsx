@@ -1,7 +1,14 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { Button } from './Button';
+
+const buttonCss = readFileSync(
+  resolve(process.cwd(), 'src/components/Button/button.css'),
+  'utf8',
+);
 
 describe('Button', () => {
   it('renders its children', () => {
@@ -81,5 +88,36 @@ describe('Button', () => {
     expect(style).not.toContain('--ec-button-bg-color');
     expect(style).not.toContain('--ec-button-border-color');
     expect(style).toContain('--ec-button-text-color: #409eff');
+  });
+});
+
+describe('Button solid-fill on-color tokens', () => {
+  // The solid type blocks must drive their text from the accessible
+  // per-type --ec-color-{type}-contrast token rather than hardcoded white,
+  // so light accents (lime, cyan) get dark text automatically (WCAG AA).
+  const TYPES = ['primary', 'success', 'warning', 'danger', 'info'] as const;
+
+  function block(selector: string): string {
+    const start = buttonCss.indexOf(selector);
+    expect(start, `${selector} block not found`).toBeGreaterThanOrEqual(0);
+    const open = buttonCss.indexOf('{', start);
+    const close = buttonCss.indexOf('}', open);
+    return buttonCss.slice(open, close);
+  }
+
+  it.each(TYPES)('solid %s block uses the contrast token for every text state', (type) => {
+    const css = block(`.ec-button--${type} {`);
+    expect(css).toContain(`--ec-button-text-color: var(--ec-color-${type}-contrast)`);
+    expect(css).toContain(`--ec-button-hover-text-color: var(--ec-color-${type}-contrast)`);
+    expect(css).toContain(`--ec-button-active-text-color: var(--ec-color-${type}-contrast)`);
+    expect(css).toContain(`--ec-button-disabled-text-color: var(--ec-color-${type}-contrast)`);
+    expect(css).not.toContain('var(--ec-color-white)');
+  });
+
+  it.each(TYPES)('plain %s hover/active swaps to the contrast token', (type) => {
+    const css = block(`.ec-button--${type}.is-plain {`);
+    expect(css).toContain(`--ec-button-hover-text-color: var(--ec-color-${type}-contrast)`);
+    expect(css).toContain(`--ec-button-active-text-color: var(--ec-color-${type}-contrast)`);
+    expect(css).not.toContain('var(--ec-color-white)');
   });
 });
